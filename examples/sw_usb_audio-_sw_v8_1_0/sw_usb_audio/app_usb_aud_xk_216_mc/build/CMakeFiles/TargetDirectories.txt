@@ -1,0 +1,16 @@
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_1AMi2o2xxxxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/1AMi2o2xxxxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_2AMi10o10xssxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/2AMi10o10xssxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_2AMi16o16xxxaax.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/2AMi16o16xxxaax.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_2AMi18o18mssaax.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/2AMi18o18mssaax.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_2AMi8o10mxsxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/2AMi8o10mxsxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_2ASi10o10xssxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/2ASi10o10xssxxx.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/app_usb_aud_xk_216_mc_2ASi16o16xxxxxx_tdm8.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/2ASi16o16xxxxxx_tdm8.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/edit_cache.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build/CMakeFiles/rebuild_cache.dir

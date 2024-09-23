@@ -1,0 +1,759 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Add support for a new flash device" href="../add-flash-support/flash.html" /><link rel="prev" title="Design and manufacture systems with flash memory" href="../design-with-flash/flash.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Safeguard IP and device authenticity - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Tools and target features</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tools-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tools-ref/xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tools-ref/transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="safeguard-ip-and-device-authenticity">
+<span id="safeguard-ip"></span><h1>Safeguard IP and device authenticity<a class="headerlink" href="#safeguard-ip-and-device-authenticity" title="Permalink to this heading">#</a></h1>
+<p>xCORE devices contain on-chip one-time programmable (OTP) memory that can
+be blown during or after device manufacture testing. You can program the
+xCORE AES Module into the OTP of a device, allowing programs to be stored
+encrypted on flash memory. This helps provide:</p>
+<blockquote>
+<div><ul>
+<li><p>Secrecy</p>
+<p>Encrypted programs are hard to reverse engineer.</p>
+</li>
+<li><p>Program Authenticity</p>
+<p>The AES loader will not load programs that have been tampered with or
+other third-party programs.</p>
+</li>
+<li><p>Device Authenticity</p>
+<p>Programs encrypted with your secret keys cannot be cloned using xCORE
+devices provided by third parties.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Once the AES Module is programmed, the OTP security bits are blown,
+transforming each tile into a “secure island” in which all computation,
+memory access, I/O and communication are under exclusive control of the
+code running on the tile. When set, these bits:</p>
+<ul class="simple">
+<li><p>force boot from OTP to prevent bypassing,</p></li>
+<li><p>disable JTAG access to the tile to prevent the keys being read, and</p></li>
+<li><p>stop further writes to OTP to prevent updates.</p></li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>The AES module provides a strong level of protection from casual
+hackers. It is important to realize, however, that there is no such
+thing as unbreakable security and there is nothing you can do to
+completely prevent a determined and resourceful attacker from extracting
+your keys.</p>
+</div>
+<section id="the-xcore-aes-module">
+<span id="safeguard-ip-aes-module"></span><h2>The xCORE AES module<a class="headerlink" href="#the-xcore-aes-module" title="Permalink to this heading">#</a></h2>
+<p>The xCORE AES Module authenticates and decrypts programs from SPI flash
+devices. When programmed into a device, it enables the following secure
+boot procedure, as illustrated in <a class="reference internal" href="#safeguard-ip-secure-boot-procedure"><span class="std std-ref">Secure boot procedure used with the AES Module</span></a>.</p>
+<figure class="align-default" id="id1">
+<span id="safeguard-ip-secure-boot-procedure"></span><img alt="../../../_images/aes-boot.png" src="../../../_images/aes-boot.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Secure boot procedure used with the AES Module</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>The device loads the primary bootloader from its ROM, which detects
+that the secure boot bit is set in the OTP and then loads and
+executes the AES Module from OTP.</p></li>
+<li><p>The AES Module loads the flash loader into RAM over SPI.</p></li>
+<li><p>The AES Module authenticates the flash loader using the CMAC-AES-128
+algorithm and the 128-bit authentication key. If authentication
+fails, boot is halted.</p></li>
+<li><p>The AES Module places the authentication key and decryption key in
+registers and jumps to the flash loader.</p></li>
+</ol>
+<p>The flash loader performs the following operations:</p>
+<ol class="arabic simple">
+<li><p>Selects the image with the highest number that validates against its
+CRC.</p></li>
+<li><p>Authenticates the selected image header using its CMAC tag and
+authentication key. If the authentication fails, boot is halted.</p></li>
+<li><p>Authenticates, decrypts and loads the table of program/data segments
+into memory. If any images fail authentication, the boot halts.</p></li>
+<li><p>Starts executing the program.</p></li>
+</ol>
+<p>For multi-node systems, the AES Module is written to the OTP of one
+tile, and a secure boot-from-xCONNECT Link protocol is programmed into all
+other tiles.</p>
+</section>
+<section id="develop-with-the-aes-module-enabled">
+<span id="safeguard-ip-develop-with-aes-module-enabled"></span><h2>Develop with the AES module enabled<a class="headerlink" href="#develop-with-the-aes-module-enabled" title="Permalink to this heading">#</a></h2>
+<p>You can activate the AES Module at any time during development or device
+manufacture. In a development environment, you can activate the module
+but leave the security bits unset, enabling:</p>
+<ul class="simple">
+<li><p>XFLASH to use the device to load programs onto flash memory,</p></li>
+<li><p>XGDB to debug programs running on the device, and</p></li>
+<li><p>XBURN to later write additional OTP bits to protect the device.</p></li>
+</ul>
+<p>In a production environment, you must protect the device to prevent the
+keys from being read out of OTP by the end user.</p>
+<p>To program the AES Module into the xCORE device on your development
+board, <a class="reference internal" href="../../../installation/install-configure/getting-started.html#get-started-start-the-command-line-tools"><span class="std std-ref">start the tools</span></a>
+and enter the following commands:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>--genkey<span class="w"> </span>keyfile
+</pre></div>
+</div>
+<p>XBURN writes two random 128-bit keys to <em>keyfile</em>. The first line is
+the authentication key, the second line the decryption key.</p>
+<p>The keys are generated using the open-source library crypto++. If you
+prefer, you can create this file and provide your own keys.</p>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>XBURN prints an enumerated list of all JTAG adapters connected to
+your PC and the devices on each JTAG chain, in the form:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Name</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Adapter</span> <span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Devices</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">--</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----------</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-------</span></code></div>
+</div>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>--id<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--lock<span class="w"> </span>keyfile<span class="w"> </span>--target-file<span class="w"> </span>target.xn<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--enable-jtag<span class="w"> </span>--disable-master-lock
+</pre></div>
+</div>
+<p>XBURN writes the AES Module and security keys to the OTP memory of
+the target device and sets its secure boot bit. The SPI ports used
+for booting are taken from the XN file.</p>
+</li>
+</ol>
+</div></blockquote>
+<p>To encrypt your program and write it to flash memory, enter the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xflash<span class="w"> </span>--id<span class="w"> </span>&lt;id&gt;<span class="w"> </span>a.xe<span class="w"> </span>--key<span class="w"> </span>keyfile
+</pre></div>
+</div>
+<p>To protect the xCORE device, preventing any further development, enter the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>--id<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--target-file<span class="w"> </span>target.xn<span class="w"> </span>--disable-jtag<span class="w"> </span>--enable-master-lock
+</pre></div>
+</div>
+</section>
+<section id="production-flash-programming-flow">
+<span id="safeguard-ip-production-flash-programming-flow"></span><h2>Production flash programming flow<a class="headerlink" href="#production-flash-programming-flow" title="Permalink to this heading">#</a></h2>
+<p>In production manufacturing environments, the same program is typically
+programmed into multiple SPI devices.</p>
+<p>To generate an encrypted image in the xCORE flash format,
+<a class="reference internal" href="../../../installation/install-configure/getting-started.html#get-started-start-the-command-line-tools"><span class="std std-ref">start the tools</span></a>
+and enter the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xflash<span class="w"> </span>a.xe<span class="w"> </span>-key<span class="w"> </span>keyfile<span class="w"> </span>-o<span class="w"> </span>image-file
+</pre></div>
+</div>
+<p>This image can be programmed directly into flash memory using a
+third-party flash programmer, or it can be programmed using XFLASH (via
+an xCORE device). To program using XFLASH, enter the following commands:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xflash<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>XFLASH prints an enumerated list of all JTAG adapters connected to
+your PC and the devices on each JTAG chain, in the form:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Name</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Adapter</span> <span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Devices</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">--</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----------</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-------</span></code></div>
+</div>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xflash<span class="w"> </span>--id<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--target-file<span class="w"> </span>target.xn<span class="w"> </span>--write-all<span class="w"> </span>image-file
+</pre></div>
+</div>
+<p>XFLASH generates an image in the xCORE flash format that contains a
+first stage loader and factory image comprising the binary and data
+segments from your compiled program. It then writes this image to
+flash memory using the xCORE device.</p>
+</li>
+</ol>
+</div></blockquote>
+<p>The XN file must define an SPI flash device and specify the four ports
+of the xCORE device to which it is connected.</p>
+</section>
+<section id="production-otp-programming-flow">
+<span id="safeguard-ip-production-otp-programming-flow"></span><h2>Production OTP programming flow<a class="headerlink" href="#production-otp-programming-flow" title="Permalink to this heading">#</a></h2>
+<p>In production manufacturing environments, the same keys are typically
+programmed into multiple xCORE devices.</p>
+<p>To generate an image that contains the AES Module and security keys to
+be written to the OTP, <a class="reference internal" href="../../../installation/install-configure/getting-started.html#get-started-start-the-command-line-tools"><span class="std std-ref">start the tools</span></a>
+and enter the following commands:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>--genkey<span class="w"> </span>keyfile
+</pre></div>
+</div>
+<p>XBURN writes two random 128-bit keys to keyfile. The first line is
+the authentication key, the second line the decryption key.</p>
+<p>The keys are generated using the open-source library crypto++. If you
+prefer, you can create this file and provide your own keys.</p>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>--target-file<span class="w"> </span>target.xn<span class="w"> </span>--lock<span class="w"> </span>keyfile<span class="w"> </span>-o<span class="w"> </span>aes-image.otp
+</pre></div>
+</div>
+<p>XBURN generates an image that contains the AES Module, security keys
+and the values for the security bits.</p>
+</li>
+</ol>
+</div></blockquote>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><strong>The image contains the keys and must be kept secret.</strong></p>
+</div>
+<p>To write the AES Module and security bits to a device in a production
+environment, enter the following commands:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>XBURN prints an enumerated list of all JTAG adapters connected to the
+host and the devices on each JTAG chain, in the form:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Name</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Adapter</span> <span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Devices</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">--</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----------</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-------</span></code></div>
+</div>
+</li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xburn<span class="w"> </span>--id<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--target-file<span class="w"> </span>target.xn<span class="w"> </span>aes-image.otp
+</pre></div>
+</div>
+<p>XBURN loads a program onto the device that writes the AES Module
+and security keys to the OTP, and sets its secure boot bits. XBURN
+returns 0 for success or non-zero for failure.</p>
+</li>
+</ol>
+</div></blockquote>
+</section>
+<section id="security-implications-of-application-design">
+<span id="safeguard-ip-security-implications-application-design"></span><h2>Security implications of application design<a class="headerlink" href="#security-implications-of-application-design" title="Permalink to this heading">#</a></h2>
+<p>The use of various software and hardware features by the program and their
+security implications must be carefully considered:</p>
+<blockquote>
+<div><ul>
+<li><p>Data partition</p>
+<p>The data partition is not encrypted or signed, so must be considered
+untrusted by a secure application. A strong security scheme can be
+implemented for the data partition but this lives within the domain
+of the application, and is not provided by XFLASH.</p>
+</li>
+<li><p><a class="reference internal" href="../swmem.html#using-swmem"><span class="std std-ref">Software-defined memory</span></a></p>
+<p>Use of software memory is supported for secure applications, but
+no signing or encryption of the data in “.SwMem” sections is performed.
+The application should consider the data placed in those sections
+and subsequently read from flash at runtime to be untrusted.</p>
+<p>Secure schemes can be implemented within the application in a similar
+manner to the data partition but this may come at the cost of software
+memory performance.</p>
+</li>
+<li><p><a class="reference internal" href="../lpddr.html#id1"><span class="std std-ref">LPDDR</span></a></p>
+<p>Data placed in “.ExtMem” sections is loaded from flash by the secure
+bootloader and is encrypted and signed using the secret keys provided
+to XFLASH.</p>
+<p>This provides a basic level of security for the data placed in LPDDR
+memory, though it is important to note that LPDDR is external off-chip
+memory that can be sniffed and tampered with during the run time of your
+application using a hardware attack.</p>
+<p>Use of LPDDR by a secure application should therefore be carefully
+implemented, following secure programming practices.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>If the above features are required for your application and a strong level
+of security is desired, it is important to ensure the application does not
+trust any data residing in any external memory.</p>
+<p>Practically, this will consist of:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Verifying authenticity of external data using modern cryptography standards</p>
+<p>The data must be authenticated each time it is read to prevent attacks
+where the external data is changed following an initial authentication.</p>
+<p>For large amounts of data, consider structures such as a hash tree
+to enable performant, authenticated accesses.</p>
+<p>Encryption should be additionally considered if the external data must
+be kept secret.</p>
+<p>It is safe to embed key material in your application code for these purposes
+as it will be protected by the xCORE AES module, though it is strongly
+recommended that you do not reuse the secure boot keys provided to XBURN
+and XFLASH within your application and instead use different keys. This
+will prevent leaking the secure boot keys in the event that the application
+is compromised.</p>
+</li>
+<li><p>Defensive programming of the application</p>
+<p>Authentication is the first line of defence - the second is to design the
+application such that it cannot be compromised if external data was to
+be modified by an attacker.</p>
+<p>This consists of thoroughly verifying your code to ensure it behaves
+predictably and safely upon receipt of unexpected external data.</p>
+<p>Unpredictable behaviour may manifest as buffer overflows or similar bugs
+that can be exploited by an attacker to gain control over the device
+and reveal IP.</p>
+</li>
+</ol>
+</div></blockquote>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../add-flash-support/flash.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Add support for a new flash device</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../design-with-flash/flash.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Design and manufacture systems with flash memory</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Safeguard IP and device authenticity</a><ul>
+<li><a class="reference internal" href="#the-xcore-aes-module">The xCORE AES module</a></li>
+<li><a class="reference internal" href="#develop-with-the-aes-module-enabled">Develop with the AES module enabled</a></li>
+<li><a class="reference internal" href="#production-flash-programming-flow">Production flash programming flow</a></li>
+<li><a class="reference internal" href="#production-otp-programming-flow">Production OTP programming flow</a></li>
+<li><a class="reference internal" href="#security-implications-of-application-design">Security implications of application design</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

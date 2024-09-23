@@ -1,0 +1,1005 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Reference" href="../../prog-ref/index.html" /><link rel="prev" title="The multicore programming model" href="../prog-model.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Programming an XCORE tile with C and lib_xcore - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools-guide/index.html">Tools guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tools-ref/transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Programming guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Quick start</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="programming-an-xcore-tile-with-c-and-lib-xcore">
+<span id="lib-xcore-prog-guide"></span><h1>Programming an XCORE tile with C and lib_xcore<a class="headerlink" href="#programming-an-xcore-tile-with-c-and-lib-xcore" title="Permalink to this heading">#</a></h1>
+<p>The XCORE compiler (<code class="docutils literal notranslate"><span class="pre">xcc</span></code>) supports targeting the XCORE using GNU C or C++. A
+C platform library <a class="reference internal" href="../../../tools-guide/tools-ref/libraries/lib-xcore-api/lib-xcore-api.html#lib-xcore-api"><span class="std std-ref">lib_xcore</span></a> provides access to XCORE-specific hardware
+features. <em>Lib_xcore</em> is available as a collection of system headers when using
+the XCC C compiler; the names of the headers all begin <code class="docutils literal notranslate"><span class="pre">xcore/</span></code>.</p>
+<section id="parallel-execution">
+<h2>Parallel execution<a class="headerlink" href="#parallel-execution" title="Permalink to this heading">#</a></h2>
+<p>The following code listing shows a multicore “hello world” application using
+lib_xcore. Note that, as usual, the program has a single <code class="docutils literal notranslate"><span class="pre">main</span></code> function as
+its entrypoint - <code class="docutils literal notranslate"><span class="pre">main</span></code> starts on a single core and lib_xcore must be used to
+start tasks on other cores.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/parallel.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">DECLARE_JOB</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="linenos"> 5</span><span class="kt">void</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">my_id</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="p">{</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world from %d!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_id</span><span class="p">);</span>
+<span class="linenos"> 8</span><span class="p">}</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos">11</span><span class="p">{</span>
+<span class="linenos">12</span><span class="w">  </span><span class="n">PAR_JOBS</span><span class="p">(</span>
+<span class="linenos">13</span><span class="w">    </span><span class="n">PJOB</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+<span class="linenos">14</span><span class="w">    </span><span class="n">PJOB</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+<span class="linenos">15</span><span class="p">}</span>
+</pre></div>
+</div>
+<section id="par-jobs">
+<h3><code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code><a class="headerlink" href="#par-jobs" title="Permalink to this heading">#</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos">2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/parallel.h&gt;</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">DECLARE_JOB</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="linenos">5</span><span class="kt">void</span><span class="w"> </span><span class="n">say_hello</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">my_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> macro, from <code class="docutils literal notranslate"><span class="pre">xcore/parallel.h</span></code>, is a lib_xcore construct
+which makes two or more function calls, each on its own core. Each invocation of
+the <code class="docutils literal notranslate"><span class="pre">PJOB</span></code> macro represents a task - the first argument is the function to
+call, the second the argument pack to call it with. Note that a function called
+by <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> must be declared using <code class="docutils literal notranslate"><span class="pre">DECLARE_JOB</span></code> in the same translation unit
+as the <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> - the parameters are the name of the function and a pack of
+typenames which represent the argument signature. Tasks always have a <code class="docutils literal notranslate"><span class="pre">void</span></code>
+return type.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">  </span><span class="n">PAR_JOBS</span><span class="p">(</span>
+<span class="linenos">2</span><span class="w">    </span><span class="n">PJOB</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+<span class="linenos">3</span><span class="w">    </span><span class="n">PJOB</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> is executed, each of the ‘PJobs’ is executed in parallel, with
+each one executing on a different core of the current tile. There is an implicit
+‘join’ at the end of this, meaning that execution does not continue beyond
+<code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> until all the launched tasks have returned. Due to each PJob
+running on its own core, at the point the <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> executes there must be
+enough free cores available to run all its jobs - this means that there is a
+hard limit on the number of jobs which may run, which is the number of cores on
+the tile. In the case that some cores are already busy running tasks, the number
+of jobs which can run will be fewer. In the case that there are not enough cores
+available, the <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> will cause a trap at runtime.</p>
+</section>
+<section id="stack-size-calculation">
+<h3>Stack size calculation<a class="headerlink" href="#stack-size-calculation" title="Permalink to this heading">#</a></h3>
+<p>In the previous examples, multiple tasks were launched by a single thread, and
+yet it was not necessary to specify where the stacks for those threads should be
+located. This is because the <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code> macro allocates a stack for each
+thread launched, as a ‘sub stack’ of the launching thread’s stack. The size of
+the stack allocated is calculated by the XMOS tools, which also ensure that the
+stack allocated to the calling thread is sufficient for all its launched threads
+and callees.</p>
+<p>It is possible to view the amount of RAM which has been allocated to stacks
+using the <code class="docutils literal notranslate"><span class="pre">-report</span></code> flag to the compiler:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>xcc<span class="w"> </span>-target<span class="o">=</span>XCORE-AI-EXPLORER<span class="w"> </span>hello_world.c<span class="w"> </span>-report
+<span class="go">Constraint check for tile[0]:</span>
+<span class="go">  Memory available:       524288,   used:      22408 .  OKAY</span>
+<span class="go">    (Stack: 1620, Code: 19528, Data: 1260)</span>
+<span class="go">Constraints checks PASSED.</span>
+</pre></div>
+</div>
+<p>To enable this calculation, the compiler adds special symbols for each function
+which describe their stack requirements. These symbols are detailed in the XCore
+ABI document. The tools are not always able to determine the stack requirement
+of a function - such as when it calls a function through a pointer, or when it
+is recursive. In the case that the compiler cannot deduce the stack size
+requirement of a function, it is necessary to provide a worst-case requirement
+manually. This is possible either by defining the symbols manually, or by
+annotating the code (this is discussed later in this document).</p>
+</section>
+</section>
+<section id="hardware-timers">
+<h2>Hardware timers<a class="headerlink" href="#hardware-timers" title="Permalink to this heading">#</a></h2>
+<p>Timers are a simple resource which can be read to retrieve a timestamp. Timers
+can be configured with a trigger time, which causes the read operation to block
+until that timestamp has been reached. This makes timers suitable for measuring
+time as well as delaying by a known period. Timers can be accessed using
+lib_xccore’s <code class="docutils literal notranslate"><span class="pre">xcore/hwtimer.h</span></code> - this provides a number of functions for
+interacting with timer resources. Like all resource-related functions,
+lib_xcore’s timers work on a resource handle. As timers are a pooled resource,
+the XCore keeps track of available timers and allocates handles as required.
+<code class="docutils literal notranslate"><span class="pre">hwtimer_alloc</span></code> allocates a timer from the pool and returns its handle. As
+there is a limited number of timers available, the allocation can fail - in
+which case it will return 0.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/hwtimer.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="n">hwtimer_t</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hwtimer_alloc</span><span class="p">();</span>
+<span class="linenos"> 7</span><span class="w">  </span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Timer value is: %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hwtimer_get_time</span><span class="p">(</span><span class="n">timer</span><span class="p">));</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="n">hwtimer_delay</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="mi">100000000</span><span class="p">);</span>
+<span class="linenos">10</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Timer value is now: %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hwtimer_get_time</span><span class="p">(</span><span class="n">timer</span><span class="p">));</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">  </span><span class="n">hwtimer_free</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span>
+<span class="linenos">13</span><span class="p">}</span>
+<span class="linenos">14</span>
+</pre></div>
+</div>
+</section>
+<section id="channel-communications">
+<h2>Channel communications<a class="headerlink" href="#channel-communications" title="Permalink to this heading">#</a></h2>
+<p>The standard way of allowing tasks to communicate is to use the XCORE’s
+‘chanend’ resources to send data through the communication fabric. This has the
+advantage of allowing synchronised transactions even with tasks running on a
+different tile or package.</p>
+<section id="channels">
+<h3>Channels<a class="headerlink" href="#channels" title="Permalink to this heading">#</a></h3>
+<p>Lib_xcore provides a channel type in <code class="docutils literal notranslate"><span class="pre">xcore/channel.h</span></code> which is used to
+establish a channel between two tasks on the current tile. The following code
+listing is a program where the <code class="docutils literal notranslate"><span class="pre">sends_first</span></code> task sends one word of data to
+<code class="docutils literal notranslate"><span class="pre">receives_first</span></code>, which responds with a single byte. In this program,
+<code class="docutils literal notranslate"><span class="pre">channel_alloc</span></code> is called to establish a channel which can be used by two
+tasks to communicate. Notice that the returned <code class="docutils literal notranslate"><span class="pre">channel_t</span></code> is simply a
+structure containing the two ends of the channel. The channel is created before
+the tasks are started, and each task is passed a different end of the channel.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/channel.h&gt;</span>
+<span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/parallel.h&gt;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="n">DECLARE_JOB</span><span class="p">(</span><span class="n">sends_first</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">chanend_t</span><span class="p">));</span>
+<span class="linenos"> 6</span><span class="kt">void</span><span class="w"> </span><span class="nf">sends_first</span><span class="p">(</span><span class="n">chanend_t</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">chan_out_word</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="mh">0x12345678</span><span class="p">);</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Received byte: &#39;%c&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">chan_in_byte</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="linenos">10</span><span class="p">}</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">DECLARE_JOB</span><span class="p">(</span><span class="n">receives_first</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">chanend_t</span><span class="p">));</span>
+<span class="linenos">13</span><span class="kt">void</span><span class="w"> </span><span class="nf">receives_first</span><span class="p">(</span><span class="n">chanend_t</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="linenos">14</span><span class="p">{</span>
+<span class="linenos">15</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Received word: 0x%lx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">chan_in_word</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="linenos">16</span><span class="w">  </span><span class="n">chan_out_byte</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">);</span>
+<span class="linenos">17</span><span class="p">}</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos">20</span><span class="p">{</span>
+<span class="linenos">21</span><span class="w">  </span><span class="n">channel_t</span><span class="w"> </span><span class="n">chan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chan_alloc</span><span class="p">();</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">  </span><span class="n">PAR_JOBS</span><span class="p">(</span>
+<span class="linenos">24</span><span class="w">    </span><span class="n">PJOB</span><span class="p">(</span><span class="n">sends_first</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">chan</span><span class="p">.</span><span class="n">end_a</span><span class="p">)),</span>
+<span class="linenos">25</span><span class="w">    </span><span class="n">PJOB</span><span class="p">(</span><span class="n">receives_first</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">chan</span><span class="p">.</span><span class="n">end_b</span><span class="p">)));</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">  </span><span class="n">chan_free</span><span class="p">(</span><span class="n">chan</span><span class="p">);</span>
+<span class="linenos">28</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This approach has the advantage that the two tasks are decoupled - as long as
+they implement the same application-level protocol, neither one needs knowledge
+of what it is communicating with or where the other end of the channel is
+executing within the network.</p>
+<p>Within the tasks, <code class="docutils literal notranslate"><span class="pre">chan_</span></code> functions are used to send and receive data. These
+functions synchronise the tasks since <code class="docutils literal notranslate"><span class="pre">chan_out_word</span></code> will block until
+<code class="docutils literal notranslate"><span class="pre">chan_in_word</span></code> is called in the other task, and vice versa. It is imperative
+that the correct corresponding ‘receive’ function is called for each ‘send’
+function invocation, otherwise the tasks will usually deadlock or raise a
+hardware exception.</p>
+</section>
+<section id="streaming-channels">
+<h3>Streaming channels<a class="headerlink" href="#streaming-channels" title="Permalink to this heading">#</a></h3>
+<p>Regular channels implement handshaking for each send/receive pair. This has the
+advantage that it synchronises the participating threads, and additionally
+prevents tasks progressing if more or less data is sent than was expected by the
+receiving end. Whilst handshaking is desirable in most cases, it does incur a
+runtime penalty - in the time taken to perform the actual handshake, and often
+by the sending task being held up by synchronisation.</p>
+<p>Streaming channels are provided to address this. For each <code class="docutils literal notranslate"><span class="pre">chan_</span></code> function in
+<code class="docutils literal notranslate"><span class="pre">xcore/channel.h</span></code>, there is a corresponding <code class="docutils literal notranslate"><span class="pre">s_chan_</span></code> function in
+<code class="docutils literal notranslate"><span class="pre">xcore/channel_streaming.h</span></code>. These have the same functionality as their
+non-streaming counterparts, except that handshaking is not performed. Each
+chanend has a buffer which can hold at least one word of data. Sending data over
+a steaming channel only blocks when there is insufficient space in the buffer
+for the outgoing data.</p>
+<section id="routing-capacity">
+<h4>Routing capacity<a class="headerlink" href="#routing-capacity" title="Permalink to this heading">#</a></h4>
+<p>The communication fabric within and between XCore packages has a limited
+capacity meaning that there is a limit to the number of routes between channel
+ends which can be in use at any given time. If no capacity is available in the
+network when a task attempts to send data, that task is queued until capacity
+becomes available. Regular channels establish and ‘tear down’ a route through
+the network on each transaction, as a side-effect of the handshake. This means
+that routes remain open for very limited times, and all tasks have an
+opportunity to utilise the network. However, as streaming channels do not
+perform handshaking, their routes remain open for the entire duration between
+their allocation and deallocation. If too many streaming channels are left open,
+this can starve other tasks of access to the network (this includes tasks using
+non-streaming channels). For this reason, it is advisable to leave streaming
+channels allocated for as little time as possible.</p>
+</section>
+</section>
+</section>
+<section id="basic-port-i-o">
+<span id="c-programming-guide-basic-port-io"></span><h2>Basic port I/O<a class="headerlink" href="#basic-port-i-o" title="Permalink to this heading">#</a></h2>
+<p>Ports are a resource which allow interaction with the external pins attached to
+an XCore package. Each tile has a variety of ports of different widths; these
+will often have pins in common, and the actual mapping of ports to pins varies
+by package. Ports are extremely flexible and can be used to implement I/O
+peripherals as software tasks.</p>
+<p>Unlike pooled resources, ports are not allocated by the XCore (as a port mapped
+to the desired pins will always be required). Instead, port handles are
+available from <code class="docutils literal notranslate"><span class="pre">platform.h</span></code> and have the form <code class="docutils literal notranslate"><span class="pre">XS1_PORT_&lt;W&gt;&lt;I&gt;</span></code> where
+<strong>&lt;W&gt;</strong> is the width of the port in bits, and <strong>&lt;I&gt;</strong> is a single letter to
+differentiate the port from others of the same width. E.g. <code class="docutils literal notranslate"><span class="pre">XS1_PORT_16A</span></code> is
+the first 16 bit port. As ports are not managed by a pool, they must be enabled
+explicitly before use, and disabled when no longer required.</p>
+<p>Like timers, Ports have a configurable trigger which, when set, causes reading
+the port to become blocking until the trigger condition is met. For example, it
+is possible to configure a port so that input is blocking until its pins read a
+particular value. By default, this trigger persists so input will be
+non-blocking whilst the condition is met but will become blocking again once the
+trigger condition becomes false. Functions for interacting with ports -
+including input, output and configuring triggers - are available from
+<code class="docutils literal notranslate"><span class="pre">xcore/port.h</span></code>.</p>
+<p>The following program lights an LED while a button is held. Each time the port
+is read, its trigger condition is updated to occur when its value is not equal
+to its current one - this means the port is only read once each time the value
+on its pins changes.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;platform.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/port.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="n">port_t</span><span class="w"> </span><span class="n">button_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4D</span><span class="p">,</span>
+<span class="linenos"> 7</span><span class="w">         </span><span class="n">led_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4C</span><span class="p">;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">10</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">13</span><span class="w">  </span><span class="p">{</span>
+<span class="linenos">14</span><span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">button_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port_in</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">15</span><span class="w">    </span><span class="n">port_set_trigger_in_not_equal</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">button_state</span><span class="p">);</span>
+<span class="linenos">16</span><span class="w">    </span><span class="n">port_out</span><span class="p">(</span><span class="n">led_port</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="n">button_state</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x1</span><span class="p">);</span>
+<span class="linenos">17</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">20</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">21</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="event-handling">
+<h2>Event handling<a class="headerlink" href="#event-handling" title="Permalink to this heading">#</a></h2>
+<p>Events are an important concept in the XCore architecture as they allow
+resources to indicate that they are ready for an input operation. Lib_xore
+provides a <em>select</em> construct for waiting for an event and running handling code
+when it occurs.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;platform.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/port.h&gt;</span>
+<span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/select.h&gt;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="p">{</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="n">port_t</span><span class="w"> </span><span class="n">button_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4D</span><span class="p">,</span>
+<span class="linenos"> 8</span><span class="w">         </span><span class="n">led_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4C</span><span class="p">;</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">  </span><span class="n">SELECT_RES</span><span class="p">(</span>
+<span class="linenos">14</span><span class="w">    </span><span class="n">CASE_THEN</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">on_button_change</span><span class="p">))</span>
+<span class="linenos">15</span><span class="w">  </span><span class="p">{</span>
+<span class="linenos">16</span><span class="w">  </span><span class="nl">on_button_change</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">17</span><span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">button_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port_in</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">18</span><span class="w">    </span><span class="n">port_set_trigger_in_not_equal</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">button_state</span><span class="p">);</span>
+<span class="linenos">19</span><span class="w">    </span><span class="n">port_out</span><span class="p">(</span><span class="n">led_port</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="n">button_state</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x1</span><span class="p">);</span>
+<span class="linenos">20</span><span class="w">    </span><span class="k">continue</span><span class="p">;</span>
+<span class="linenos">21</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">22</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">25</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">26</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The above application shows a lib_xcore <code class="docutils literal notranslate"><span class="pre">SELECT_RES</span></code>, from <code class="docutils literal notranslate"><span class="pre">xcore/select.h</span></code>,
+which handles a single event. This is equivalent the example in
+<a class="reference internal" href="#c-programming-guide-basic-port-io"><span class="std std-ref">Basic port I/O</span></a>, except that the <code class="docutils literal notranslate"><span class="pre">port_in</span></code> will not
+block since it is not executed until the port’s trigger condition is met
+(instead, the thread will block at the start of the <code class="docutils literal notranslate"><span class="pre">SELECT_RES</span></code>).</p>
+<p>In this example, and previous examples in this document, the task blocks waiting
+for a single resource. Conceptually this is often a good design, and is the
+model generally encourage in the programming model. However, this is generally
+not an effective use of the available cores - most tasks will be paused in a
+wait state most of the time. It is also possible that a task needs to be able to
+accept input from multiple resources (e.g. a ‘collector’ task which listens to
+multiple channels).</p>
+<p>For these reasons, the XCore allows a task to configure multiple resources to
+generate events, and then wait for any one of those events to occur. The
+lib_xcore <em>select</em> construct supports this - making it analogous to a Unix
+select. Conceptually, the XCore multiplexes events which are of interest to a
+task, and the <em>select</em> demultiplexes them.</p>
+<figure class="align-default">
+<img alt="../../../_images/multiplexing.png" src="../../../_images/multiplexing.png" />
+</figure>
+<p>The following listing introduces a timer which allows the LED to flash whilst
+the button is held. If an event occurs whilst another is being handled, the
+later event remains available on its respective resource and will be handled
+once the running handler continues.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;platform.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/hwtimer.h&gt;</span>
+<span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/port.h&gt;</span>
+<span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/select.h&gt;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">port_t</span><span class="w"> </span><span class="n">button_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4D</span><span class="p">,</span>
+<span class="linenos"> 9</span><span class="w">         </span><span class="n">led_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4C</span><span class="p">;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">hwtimer_t</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hwtimer_alloc</span><span class="p">();</span>
+<span class="linenos">12</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">13</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">led_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">16</span><span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">button_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port_in</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">17</span><span class="w">  </span><span class="n">port_set_trigger_in_not_equal</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">button_state</span><span class="p">);</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">  </span><span class="n">SELECT_RES</span><span class="p">(</span>
+<span class="linenos">21</span><span class="w">    </span><span class="n">CASE_THEN</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">on_button_change</span><span class="p">),</span>
+<span class="linenos">22</span><span class="w">    </span><span class="n">CASE_THEN</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="n">on_timer</span><span class="p">))</span>
+<span class="linenos">23</span><span class="w">  </span><span class="p">{</span>
+<span class="linenos">24</span><span class="w">  </span><span class="nl">on_button_change</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos">25</span><span class="w">    </span><span class="n">button_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port_in</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">26</span><span class="w">    </span><span class="n">port_set_trigger_value</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">button_state</span><span class="p">);</span>
+<span class="linenos">27</span><span class="w">    </span><span class="k">continue</span><span class="p">;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">  </span><span class="nl">on_timer</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="n">hwtimer_set_trigger_time</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="n">hwtimer_get_time</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20000000</span><span class="p">);</span><span class="w">    </span>
+<span class="linenos">31</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">button_state</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">32</span><span class="w">      </span><span class="n">led_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">led_state</span><span class="p">;</span>
+<span class="linenos">33</span><span class="w">      </span><span class="n">port_out</span><span class="p">(</span><span class="n">led_port</span><span class="p">,</span><span class="w"> </span><span class="n">led_state</span><span class="p">);</span>
+<span class="linenos">34</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">35</span><span class="w">    </span><span class="k">continue</span><span class="p">;</span>
+<span class="linenos">36</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">39</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">40</span><span class="w">  </span><span class="n">hwtimer_free</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span>
+<span class="linenos">41</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">SELECT_RES</span></code> macro takes one or more arguments, which must be expansions
+of ‘case specifiers’ from the same header. The most common case specifier is
+<code class="docutils literal notranslate"><span class="pre">CASE_THEN</span></code>. This takes two parameters: the first being a resource to wait for
+an event on, and the second a label within the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> block to jump to when
+the event occurs. On entry to the <code class="docutils literal notranslate"><span class="pre">SELECT_RES</span></code> the task enters a wait state,
+when an event becomes available on one of the specified resources control is
+transferred to the label specified as the handler. Each handler must end with
+either <code class="docutils literal notranslate"><span class="pre">break</span></code> or <code class="docutils literal notranslate"><span class="pre">continue</span></code>; <code class="docutils literal notranslate"><span class="pre">break</span></code> causes control to jump the point
+after the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> block, whereas <code class="docutils literal notranslate"><span class="pre">continue</span></code> returns to the waiting state to
+handle another event.</p>
+<p>In the preceding example the timer’s trigger is adjusted into the future each
+time it is reached, causing it to trigger indefinitely at regular intervals.
+During the handler for the timer event the LED state is toggled only if the
+button is currently held. This structure means that the task will spend most of
+the time waiting for either of the two possible events. However, the timer event
+still occurs even when the button isn’t held - so the handler runs even though
+it won’t have any effect. The select construct has the facility to conditionally
+mask events which aren’t always of interest - this is called a ‘guard
+expression’. In the following listing, the guard expression prevents the
+<code class="docutils literal notranslate"><span class="pre">on_timer</span></code> event from being handled until its condition is met. The guard
+expression is re-evaluated each time the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> enters its wait state; if an
+event has occurred whilst ‘masked’ by a guard expression, it will be handled
+once its condition is re-evaluated and true.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;platform.h&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/hwtimer.h&gt;</span>
+<span class="linenos"> 3</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/port.h&gt;</span>
+<span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xcore/select.h&gt;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">port_t</span><span class="w"> </span><span class="n">button_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4D</span><span class="p">,</span>
+<span class="linenos"> 9</span><span class="w">         </span><span class="n">led_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XS1_PORT_4C</span><span class="p">;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">hwtimer_t</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hwtimer_alloc</span><span class="p">();</span>
+<span class="linenos">12</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">13</span><span class="w">  </span><span class="n">port_enable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">led_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">16</span><span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">button_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port_in</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">17</span><span class="w">  </span><span class="n">port_set_trigger_in_not_equal</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">button_state</span><span class="p">);</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">  </span><span class="n">SELECT_RES</span><span class="p">(</span>
+<span class="linenos">21</span><span class="w">    </span><span class="n">CASE_THEN</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">on_button_change</span><span class="p">),</span>
+<span class="linenos">22</span><span class="w">    </span><span class="n">CASE_GUARD_THEN</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="n">button_state</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x1</span><span class="p">,</span><span class="w"> </span><span class="n">on_timer</span><span class="p">))</span>
+<span class="linenos">23</span><span class="w">  </span><span class="p">{</span>
+<span class="linenos">24</span><span class="w">  </span><span class="nl">on_button_change</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos">25</span><span class="w">    </span><span class="n">button_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port_in</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">26</span><span class="w">    </span><span class="n">port_set_trigger_value</span><span class="p">(</span><span class="n">button_port</span><span class="p">,</span><span class="w"> </span><span class="n">button_state</span><span class="p">);</span>
+<span class="linenos">27</span><span class="w">    </span><span class="k">continue</span><span class="p">;</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">  </span><span class="nl">on_timer</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="n">hwtimer_set_trigger_time</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="n">hwtimer_get_time</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20000000</span><span class="p">);</span><span class="w">    </span>
+<span class="linenos">31</span><span class="w">    </span><span class="n">led_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">led_state</span><span class="p">;</span>
+<span class="linenos">32</span><span class="w">    </span><span class="n">port_out</span><span class="p">(</span><span class="n">led_port</span><span class="p">,</span><span class="w"> </span><span class="n">led_state</span><span class="p">);</span>
+<span class="linenos">33</span><span class="w">    </span><span class="k">continue</span><span class="p">;</span>
+<span class="linenos">34</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">led_port</span><span class="p">);</span>
+<span class="linenos">37</span><span class="w">  </span><span class="n">port_disable</span><span class="p">(</span><span class="n">button_port</span><span class="p">);</span>
+<span class="linenos">38</span><span class="w">  </span><span class="n">hwtimer_free</span><span class="p">(</span><span class="n">timer</span><span class="p">);</span>
+<span class="linenos">39</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-port-i-o">
+<h2>Advanced port I/O<a class="headerlink" href="#advanced-port-i-o" title="Permalink to this heading">#</a></h2>
+<p>Ports are extremely flexible and ‘soft-peripheral’ implementations can often
+delegate significant portions of their work to them; this can drastically
+improve responsiveness. In particular, ports can be connected to configurable
+<em>Clock Block</em> resources which can be used to drive timings of port operations.
+Documenting the full capabilities and interfaces of ports and clock blocks is
+not within the scope of this document. Further information about these resources
+can be found in the lib_xcore port and clock APIs, and in the in the
+XCore instruction set documentation.</p>
+</section>
+<section id="guiding-stack-size-calculation">
+<h2>Guiding stack size calculation<a class="headerlink" href="#guiding-stack-size-calculation" title="Permalink to this heading">#</a></h2>
+<p>As shown earlier in this document, the XMOS tools are able to calculate stack
+size requirements for many C/C++ functions.</p>
+<p>Generally a function’s stack requirement is calculable when its own frame is a
+fixed size and it only calls functions whose stack sizes are also calculable.</p>
+<section id="function-pointer-groups">
+<h3>Function pointer groups<a class="headerlink" href="#function-pointer-groups" title="Permalink to this heading">#</a></h3>
+<p>One obvious case where it is not possible to determine a function’s stack
+requirement is when it makes a call through a function pointer. It is usually
+impossible to automatically determine all functions which a given pointer may
+point to. For this reason, the XMOS tools allow indirect call sites to be
+annotated with a <em>function pointer group</em>. Functions can also be annotated with
+one or more groups to which they should belong. When the stack size calculator
+encounters an indirect call through an annotated function pointer, it takes the
+stack size requirement to be that of the hungriest callee in pointer’s group.</p>
+<p>The following snippet declares a function pointer <code class="docutils literal notranslate"><span class="pre">fp</span></code> which is a member of
+the group named <code class="docutils literal notranslate"><span class="pre">my_functions</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">__attribute__</span><span class="p">((</span><span class="w"> </span><span class="n">fptrgroup</span><span class="p">(</span><span class="s">&quot;my_functions&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a call through such a pointer appears in a function, that function’s stack
+size will include a sufficient allocation for a call to any function which has
+been placed in <code class="docutils literal notranslate"><span class="pre">my_functions</span></code>. Pointer groups are empty until functions are
+added to the explicitly, so such a call is dangerous until all possible callees
+have been annotated with the correct group. In the following snippet, <code class="docutils literal notranslate"><span class="pre">func1</span></code>
+is annotated so that it is a member of the group <code class="docutils literal notranslate"><span class="pre">my_functions</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">_attribute__</span><span class="p">((</span><span class="w"> </span><span class="n">fptrgroup</span><span class="p">(</span><span class="s">&quot;my_functions&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">))</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">func1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="explicitly-setting-stack-size">
+<h3>Explicitly setting stack size<a class="headerlink" href="#explicitly-setting-stack-size" title="Permalink to this heading">#</a></h3>
+<p>In some cases it is necessary to explicitly set the stack size allocated for a
+function. This may be because a function does not have a fixed requirement (e.g.
+where a variable length array is used) or might be desirable when heavy use of
+indirect calls makes annotation infeasible.</p>
+<p>In these cases it is possible to specify the number of words which should be
+allocated for calls to a particular function; the following snippet is an
+assembly directive which sets the stack requirement for a function named
+<code class="docutils literal notranslate"><span class="pre">task_main</span></code> to 1024 words:</p>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="na">.globl</span><span class="w"> </span><span class="no">task_main.nstackwords</span>
+<span class="na">.set</span><span class="w"> </span><span class="no">task_main.nstackwords</span><span class="p">,</span><span class="mi">1024</span>
+</pre></div>
+</div>
+<p>Note that this is simply defining a symbol (whose name is based on the function
+name) which would be defined by the compiler for a calculable function.</p>
+<p>This code can be assembled and linked as a separate object, or can be passed to
+<code class="docutils literal notranslate"><span class="pre">xcc</span></code> as an additional input file when compiling C/C++ code.</p>
+<p>A limited set of binary operators is available for expressing stack size
+requirements; often this is useful for setting a function’s requirements in
+terms of functions it calls. The available operators are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">*</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$M</span></code> - evaluates to the greater of its two operands (useful for finding the
+hungriest of a list of functions)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$A</span></code> - evaluates to its left operand rounded up to the next multiple of the
+right operand (useful for rounding up to the stack alignment requirement)</p></li>
+</ul>
+<p>Parentheses (<code class="docutils literal notranslate"><span class="pre">(</span></code> and <code class="docutils literal notranslate"><span class="pre">)</span></code>) are also available.</p>
+<p>The following directives set <code class="docutils literal notranslate"><span class="pre">task_main</span></code>’s stack requirement to 1024 words
+plus the greater of the requirements of <code class="docutils literal notranslate"><span class="pre">my_function0</span></code> and <code class="docutils literal notranslate"><span class="pre">my_function1</span></code>,
+all rounded to double word alignment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.globl task_main.nstackwords
+.set task_main.nstackwords, (1024 + (my_function0.nstackwords $M my_function1.nstackwords )) $A 2
+</pre></div>
+</div>
+<p>When stack sizes are set this way, the compiler will still emit warnings for
+unannotated calls through pointers; this can be suppressed with the
+<code class="docutils literal notranslate"><span class="pre">-Wno-xcore-fptrgroup</span></code> option.</p>
+<p>Care should be taken when manually setting stack requirements - a function’s
+allocation must be sufficient for its ‘local’ usage as well as all functions it
+calls and threads it launches using <code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code>.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../../prog-ref/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Reference</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../prog-model.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">The multicore programming model</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Programming an XCORE tile with C and lib_xcore</a><ul>
+<li><a class="reference internal" href="#parallel-execution">Parallel execution</a><ul>
+<li><a class="reference internal" href="#par-jobs"><code class="docutils literal notranslate"><span class="pre">PAR_JOBS</span></code></a></li>
+<li><a class="reference internal" href="#stack-size-calculation">Stack size calculation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hardware-timers">Hardware timers</a></li>
+<li><a class="reference internal" href="#channel-communications">Channel communications</a><ul>
+<li><a class="reference internal" href="#channels">Channels</a></li>
+<li><a class="reference internal" href="#streaming-channels">Streaming channels</a><ul>
+<li><a class="reference internal" href="#routing-capacity">Routing capacity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-port-i-o">Basic port I/O</a></li>
+<li><a class="reference internal" href="#event-handling">Event handling</a></li>
+<li><a class="reference internal" href="#advanced-port-i-o">Advanced port I/O</a></li>
+<li><a class="reference internal" href="#guiding-stack-size-calculation">Guiding stack size calculation</a><ul>
+<li><a class="reference internal" href="#function-pointer-groups">Function pointer groups</a></li>
+<li><a class="reference internal" href="#explicitly-setting-stack-size">Explicitly setting stack size</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

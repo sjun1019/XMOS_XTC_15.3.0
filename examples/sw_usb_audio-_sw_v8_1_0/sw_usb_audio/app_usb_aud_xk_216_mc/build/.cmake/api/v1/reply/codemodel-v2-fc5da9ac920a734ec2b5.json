@@ -1,0 +1,177 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "app_usb_aud_xk_216_mc",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "1AMi2o2xxxxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-1AMi2o2xxxxxx-Debug-4971bc9d8ee81b11257a.json",
+					"name" : "1AMi2o2xxxxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "2AMi10o10xssxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2AMi10o10xssxxx-Debug-fc5125879f04ae1a29f0.json",
+					"name" : "2AMi10o10xssxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "2AMi16o16xxxaax::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2AMi16o16xxxaax-Debug-6046c2edc95cd1d06fba.json",
+					"name" : "2AMi16o16xxxaax",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "2AMi18o18mssaax::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2AMi18o18mssaax-Debug-7adac36c2832475db615.json",
+					"name" : "2AMi18o18mssaax",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "2AMi8o10mxsxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2AMi8o10mxsxxx-Debug-0d7bbbdd38ef3b4864a1.json",
+					"name" : "2AMi8o10mxsxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "2ASi10o10xssxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2ASi10o10xssxxx-Debug-97ad579af947396dbcfa.json",
+					"name" : "2ASi10o10xssxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "2ASi16o16xxxxxx_tdm8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2ASi16o16xxxxxx_tdm8-Debug-ea375b1c3690009d1d20.json",
+					"name" : "2ASi16o16xxxxxx_tdm8",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_1AMi2o2xxxxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_1AMi2o2xxxxxx-Debug-c523faaa80e758062c64.json",
+					"name" : "app_usb_aud_xk_216_mc_1AMi2o2xxxxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_2AMi10o10xssxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_2AMi10o10xssxxx-Debug-cac199edbc6faee49fe9.json",
+					"name" : "app_usb_aud_xk_216_mc_2AMi10o10xssxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_2AMi16o16xxxaax::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_2AMi16o16xxxaax-Debug-72923503fa6054254242.json",
+					"name" : "app_usb_aud_xk_216_mc_2AMi16o16xxxaax",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_2AMi18o18mssaax::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_2AMi18o18mssaax-Debug-676fc0f385d9038afa17.json",
+					"name" : "app_usb_aud_xk_216_mc_2AMi18o18mssaax",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_2AMi8o10mxsxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_2AMi8o10mxsxxx-Debug-e49cb2ac0312340008df.json",
+					"name" : "app_usb_aud_xk_216_mc_2AMi8o10mxsxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_2ASi10o10xssxxx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_2ASi10o10xssxxx-Debug-a43234452e1cb4497343.json",
+					"name" : "app_usb_aud_xk_216_mc_2ASi10o10xssxxx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "app_usb_aud_xk_216_mc_2ASi16o16xxxxxx_tdm8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-app_usb_aud_xk_216_mc_2ASi16o16xxxxxx_tdm8-Debug-46654261e6109507ef06.json",
+					"name" : "app_usb_aud_xk_216_mc_2ASi16o16xxxxxx_tdm8",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build",
+		"source" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

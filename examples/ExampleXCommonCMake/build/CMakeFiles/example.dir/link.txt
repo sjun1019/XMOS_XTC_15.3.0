@@ -1,0 +1,1 @@
+/Users/lsj/XMOS_XTC_15.3.0/bin/xcc -target=XUF216-512-QF60-C20 CMakeFiles/example.dir/src/main.xc.obj -o ../bin/example.xe 

@@ -1,0 +1,31 @@
+/* note
+Custom colours should be used from furo's vars where possible to manage light/dark mode
+https://github.com/pradyunsg/furo/blob/main/src/furo/assets/styles/variables/_colors.scss
+ */
+
+/* Custom header font weights/sizes/margins */
+.sidebar-brand-text {font-weight: 500;}
+h1 {font-weight: 700; font-size: 2em; margin-top: 1em;}
+h2 {font-weight: 500; font-size: 1.5em; margin-top: 2em;}
+h3 {font-weight: 400; font-size: 1.3em; margin-top: 1.5em;}
+h4 {font-weight: 600; font-size: 1em; margin-top: 1.5em;}
+h5 {font-weight: 600; font-size: 0.8em; margin-top: 1.5em;}
+h6 {font-weight: 900; text-transform: uppercase; font-size: 1em;}
+
+/* Code block styling */
+.code-block-caption .caption-number {
+    margin-right: auto;
+}
+
+/* Rules for the PDF linker */
+div#pdf_linker {
+    font-weight: 600; font-size: 0.8em;
+    margin-left: 0.5em; margin-top: 2em; text-align: center;
+    color: #1399db;
+    background-color: var(--color-background-secondary);
+}
+div#pdf_linker select {
+    width: 100%; max-width: 200px;
+    color: var(--color-foreground-primary);
+    background-color: var(--color-background-secondary);
+}

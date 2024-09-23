@@ -1,0 +1,692 @@
+<preCompilationAnalysis file="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc">
+<fDef name="biphase_encode" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" noreturn="false" doNotSpecialize="true" numParams="3"/>
+<fDef name="parity32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="spdif_rx_check_parity" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" noreturn="false" doNotSpecialize="true" numParams="5"/>
+<fDef name="zip_out_6" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" noreturn="false" doNotSpecialize="true" numParams="2"/>
+<fDef name="SpdifTransmit" global="true" noreturn="false" doNotSpecialize="false" numParams="5"/>
+<fDef name="SpdifTransmitError" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="delay_microseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_milliseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_seconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="spdif_tx" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="spdif_tx_output" global="true" noreturn="false" doNotSpecialize="false" numParams="3"/>
+<fDef name="spdif_tx_port_config" global="true" noreturn="false" doNotSpecialize="false" numParams="4"/>
+<fDef name="spdif_tx_reconfig_port" global="true" noreturn="false" doNotSpecialize="false" numParams="3"/>
+<fDef name="spdif_tx_reconfigure_sample_rate" global="true" noreturn="false" doNotSpecialize="false" numParams="3"/>
+<fDef name="spdif_tx_shutdown" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_crc32" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__assert" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="22"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="configure_clock_src" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx_port_config" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="configure_out_port" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="spdif_tx_port_config" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_set_clock_fall_delay" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx_port_config" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="3" caller="spdif_tx_port_config" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_crc32" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_crcn" global="true" numArgs="4">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="intval"><intval isSigned="true" val="16"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_zip" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_zip" global="true" numArgs="3">
+  <arg num="0">
+    <passThroughArg param="1" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_zip" global="true" numArgs="3">
+  <arg num="0">
+    <passThroughArg param="1" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_zip" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_zip" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="zip_out_6" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="zip_out_6" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_unreachable" global="true" numArgs="0">
+</fCall>
+<fCall name="parity32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="biphase_encode" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="3">
+  <arg num="0">
+    <passThroughArg param="0" caller="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <passThroughArg param="4" caller="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="biphase_encode" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="output_word" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="3">
+  <arg num="0">
+    <passThroughArg param="0" caller="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <passThroughArg param="4" caller="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_testct" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="5">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="intval"><intval isSigned="true" val="23"/></value>
+    </values>
+  </arg>
+  <arg num="4">
+    <passThroughArg param="4" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="5">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="intval"><intval isSigned="true" val="71"/></value>
+    </values>
+  </arg>
+  <arg num="4">
+    <passThroughArg param="4" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="subframe_tx" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifTransmit.xc" numArgs="5">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="intval"><intval isSigned="true" val="39"/></value>
+    </values>
+  </arg>
+  <arg num="4">
+    <passThroughArg param="4" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_testct" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="SpdifTransmit" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_testct" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmitError" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmitError" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmitError" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="SpdifTransmitError" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_testct" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="SpdifTransmitError" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="SpdifTransmit" global="true" numArgs="5">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="spdif_tx" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="configure_out_port" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="2" caller="spdif_tx_reconfig_port" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_tx" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="0" caller="spdif_tx_reconfig_port" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_out_uint" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_output" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="spdif_tx_output" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_out_uint" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_output" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="2" caller="spdif_tx_output" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_outct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_reconfigure_sample_rate" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_out_uint" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_reconfigure_sample_rate" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="spdif_tx_reconfigure_sample_rate" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_out_uint" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_reconfigure_sample_rate" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="2" caller="spdif_tx_reconfigure_sample_rate" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_outct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_shutdown" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_outct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_tx_shutdown" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+</preCompilationAnalysis>

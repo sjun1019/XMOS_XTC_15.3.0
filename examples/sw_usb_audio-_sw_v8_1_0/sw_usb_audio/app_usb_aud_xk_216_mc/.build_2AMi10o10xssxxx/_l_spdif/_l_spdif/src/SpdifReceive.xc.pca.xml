@@ -1,0 +1,520 @@
+<preCompilationAnalysis file="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc">
+<fDef name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" noreturn="false" doNotSpecialize="true" numParams="7"/>
+<fDef name="spdif_rx_check_parity" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="xor4" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" noreturn="false" doNotSpecialize="true" numParams="4"/>
+<fDef name="check_clock_div" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="delay_microseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_milliseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_seconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="spdif_rx_decode" global="true" noreturn="false" doNotSpecialize="false" numParams="3"/>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_crc32" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_crc32" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="15"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="true" val="15"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="xor4" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="4">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="intval"><intval isSigned="false" val="4294967295"/></value>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_sinct_byref" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_soutct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="spdif_rx_8UI" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="7">
+  <arg num="0">
+    <passThroughArg param="1" caller="spdif_rx_decode" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="cls" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/src/SpdifReceive.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+</preCompilationAnalysis>

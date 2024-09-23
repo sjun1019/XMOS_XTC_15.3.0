@@ -1,0 +1,22 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /Users/lsj/XMOS_XTC_15.3.0/bin/xcc 
+Build flags: -std=c++11
+Id flags:  
+
+The output was:
+1
+xcc: error: no xn source file and no -target option
+xcc: error: use -print-boards to list supported targets
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /Users/lsj/XMOS_XTC_15.3.0/bin/xcc 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+xcc: error: no xn source file and no -target option
+xcc: error: use -print-boards to list supported targets
+
+

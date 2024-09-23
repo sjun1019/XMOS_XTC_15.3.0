@@ -1,0 +1,87 @@
+<preCompilationAnalysis file="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/midi/queue.xc">
+<fDef name="is_power_of_2" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="queue_init" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="queue_is_empty" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="queue_is_full" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="queue_items" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="queue_pop_word" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="queue_push_word" global="true" noreturn="false" doNotSpecialize="false" numParams="3"/>
+<fDef name="queue_space" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="xassert_msg" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fCall name="is_power_of_2" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="queue_init" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="printstr" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="printstr" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_trap" global="true" numArgs="0">
+</fCall>
+<fCall name="queue_is_full" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="printstr" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="printstr" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_trap" global="true" numArgs="0">
+</fCall>
+<fCall name="queue_is_empty" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="printstr" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="printstr" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_trap" global="true" numArgs="0">
+</fCall>
+<fCall name="queue_items" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+</preCompilationAnalysis>

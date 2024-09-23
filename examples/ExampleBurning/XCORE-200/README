@@ -1,0 +1,54 @@
+This is a substitute implementation of the retired xburn board info (serial number) feature.
+
+It's provided as a demonstration of generic OTP programming using a CSV format, and for migration from older XTC Tools releases.
+It generates compatible output for use with the lib_otpinfo library on XCORE-200.
+
+To generate:
+  XBurn_BoardInfo.py \
+  --mac-address 01:23:45:56:67:89
+  --serial-number 82041875 \
+  --board-id 0xab010203 \
+  --board-string "My board" \
+  > otpinfo.csv
+
+This generates the following `otpinfo.csv` file:
+`
+*,0x7F9,0x6F617264
+*,0x7FA,0x4D792062
+*,0x7FB,0xAB010203
+*,0x7FC,0x04E3DC13
+*,0x7FD,0x45566789
+*,0x7FE,0x00000123
+*,0x7FF,0x507FFFFF
+`
+
+The CSV format consists of a tile ID column (where * means "all"), word address column, followed by the 32-bit word to program.
+It's intended to allow various forms of special-case OTP programming and can be customised as needed.
+
+To burn:
+  xburn --target XCORE-200-EXPLORER otpinfo.csv
+
+To verify:
+  xburn --target XCORE-200-EXPLORER --read
+`
+tile[0]:
+*
+0x000007f9: 0x6f617264
+0x000007fa: 0x4d792062
+0x000007fb: 0xab010203
+0x000007fc: 0x04e3dc13
+0x000007fd: 0x45566789
+0x000007fe: 0x00000123
+0x000007ff: 0x507fffff
+SecConfReg: 0x00000000
+tile[1]:
+*
+0x000007f9: 0x6f617264
+0x000007fa: 0x4d792062
+0x000007fb: 0xab010203
+0x000007fc: 0x04e3dc13
+0x000007fd: 0x45566789
+0x000007fe: 0x00000123
+0x000007ff: 0x507fffff
+SecConfReg: 0x00000000
+`

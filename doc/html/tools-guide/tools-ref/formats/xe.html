@@ -1,0 +1,876 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="XN specification" href="xn-spec/xn-spec.html" /><link rel="prev" title="File formats and data descriptions" href="index.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>XMOS executable (XE) file format - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="index.html">File formats and data descriptions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="xmos-executable-xe-file-format">
+<span id="xe-format"></span><h1>XMOS executable (XE) file format<a class="headerlink" href="#xmos-executable-xe-file-format" title="Permalink to this heading">#</a></h1>
+<p>The XMOS executable (XE) binary file format holds executable programs compiled
+to run on XMOS devices. The format supports distinct programs for each xCORE
+tile in a multi-tile or multi-chip design, and allows multiple loads and runs
+on each tile.</p>
+<p>In addition to the program itself, an XE file contains a description of the
+system it is intended to run on. This description takes the form of either an
+XML system configuration description or a 64-bit per-node system identifier.</p>
+<section id="binary-format">
+<span id="tools-developers-guide-executable-binary-format"></span><h2>Binary format<a class="headerlink" href="#binary-format" title="Permalink to this heading">#</a></h2>
+<p>The following sections explain the common elements of the binary format. All
+data is encoded as little endian.</p>
+<section id="xe-header">
+<span id="tools-developers-guide-executable-binary-format-xe-header"></span><h3>XE header<a class="headerlink" href="#xe-header" title="Permalink to this heading">#</a></h3>
+<p>An XE file must start with an XE header. It has the following format:</p>
+<div class="table-wrapper docutils container" id="id1">
+<span id="tools-developers-guide-executable-binary-format-xe-header-table"></span><span id="tools-developers-guide-executable-binary-format-xe-header-table"></span><table class="docutils align-default" id="id1">
+<caption><span class="caption-number">Table 14 </span><span class="caption-text">XE header</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Byte offset</strong></p></th>
+<th class="head"><p><strong>Length (bytes)</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0</p></td>
+<td><p>4</p></td>
+<td><p>The string <code class="docutils literal notranslate"><span class="pre">XMOS</span></code> encoded in ASCII.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x4</p></td>
+<td><p>1</p></td>
+<td><p>Major version number (2).</p></td>
+</tr>
+<tr class="row-even"><td><p>0x5</p></td>
+<td><p>1</p></td>
+<td><p>Minor version number (0).</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x6</p></td>
+<td><p>2</p></td>
+<td><p>Reserved. Must be set to zero.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="sectors">
+<span id="tools-developers-guide-executable-binary-format-sectors"></span><h3>Sectors<a class="headerlink" href="#sectors" title="Permalink to this heading">#</a></h3>
+<p>The XE header is followed by a list of sectors. The end of the sector list must
+be marked using a sector with a sector type of 0x5555. Each sector consists of
+a sector header, optionally followed by a variable-length sector contents block
+containing sector data. Padding is added after the sector data to make the
+sector contents block a whole number of 32-bit words.</p>
+<div class="table-wrapper docutils container" id="id2">
+<span id="tools-developers-guide-executable-binary-format-sectors-table"></span><span id="tools-developers-guide-executable-binary-format-sectors-table"></span><table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 15 </span><span class="caption-text">Sector header</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Byte offset</strong></p></th>
+<th class="head"><p><strong>Length (bytes)</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0</p></td>
+<td><p>2</p></td>
+<td><p>Sector type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x2</p></td>
+<td><p>2</p></td>
+<td><p>Reserved. Must be set to zero.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4</p></td>
+<td><p>8</p></td>
+<td><p>Size in bytes of the sector contents block.
+Set to zero if this sector has no sector
+contents block.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper docutils container" id="id3">
+<span id="tools-developers-guide-executable-binary-format-sector-contents-table"></span><span id="tools-developers-guide-executable-binary-format-sector-contents-table"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 16 </span><span class="caption-text">Sector contents block</span><a class="headerlink" href="#id3" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Byte offset</strong></p></th>
+<th class="head"><p><strong>Length (bytes)</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0</p></td>
+<td><p>1</p></td>
+<td><p>Size in bytes of the padding after the sector data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1</p></td>
+<td><p>3</p></td>
+<td><p>Reserved. Must be set to zero.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4</p></td>
+<td><p>n</p></td>
+<td><p>Sector data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x4+n</p></td>
+<td><p>p</p></td>
+<td><p>Padding bytes to align to the next 32-bit word.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4+n+p</p></td>
+<td><p>4</p></td>
+<td><p>Sector CRC.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The sector CRC is calculated on the byte stream from the start of the sector
+header to the byte before the sector CRC. The polynomial used is 0x04C11DB7
+(IEEE 802.3); the CRC register is initialized with 0xFFFFFFFF and residue is
+inverted to produce the CRC.</p>
+<p>The following sector types are defined:</p>
+<div class="table-wrapper docutils container" id="id4">
+<span id="tools-developers-guide-executable-binary-format-sector-types-table"></span><span id="tools-developers-guide-executable-binary-format-sector-types-table"></span><table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 17 </span><span class="caption-text">Sector types</span><a class="headerlink" href="#id4" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Value</strong></p></th>
+<th class="head"><p><strong>Name</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x1</p></td>
+<td><p>Binary</p></td>
+<td><p>Load binary image.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x2</p></td>
+<td><p>ELF</p></td>
+<td><p>Load ELF image.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3</p></td>
+<td><p>SysConfig</p></td>
+<td><p>System description XML.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x4</p></td>
+<td><p>NodeDescriptor</p></td>
+<td><p>Node description.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x5</p></td>
+<td><p>Goto</p></td>
+<td><p>Start execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x6</p></td>
+<td><p>Call</p></td>
+<td><p>Start execution and wait for return.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x8</p></td>
+<td><p>XN</p></td>
+<td><p>XN description.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x5555</p></td>
+<td><p>Last sector</p></td>
+<td><p>Marks the end of the file.</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFFFF</p></td>
+<td><p>Skip</p></td>
+<td><p>Skip this sector.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The meaning of the sector data depends on the sector type. The following
+sections provide further details of the format of the sector data for each
+sector type.</p>
+<section id="sysconfig-sector">
+<span id="xe-sysconfig"></span><h4>SysConfig sector<a class="headerlink" href="#sysconfig-sector" title="Permalink to this heading">#</a></h4>
+<p>The SysConfig sector contains a full XML description of the system, including
+number of nodes,  xCORE tiles and link/interconnect configuration.  This
+information is provided by XMOS to describe its chip products.  The format of
+the SysConfig sector is currently undocumented.</p>
+</section>
+<section id="node-descriptor-sector">
+<h4>Node descriptor sector<a class="headerlink" href="#node-descriptor-sector" title="Permalink to this heading">#</a></h4>
+<p>The NodeDescriptor sector describes an individual node, allowing the toolchain
+to validate an executable file matches the target device. There may be 0 or
+more NodeDescriptor sectors.</p>
+<div class="table-wrapper docutils container" id="id5">
+<span id="tools-developers-guide-executable-binary-format-node-descriptor-table"></span><span id="tools-developers-guide-executable-binary-format-node-descriptor-table"></span><table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 18 </span><span class="caption-text">NodeDescriptor sector</span><a class="headerlink" href="#id5" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Data byte offset</strong></p></th>
+<th class="head"><p><strong>Length (bytes)</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0</p></td>
+<td><p>2</p></td>
+<td><p>Index of the node in the JTAG scan chain.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x2</p></td>
+<td><p>2</p></td>
+<td><p>Reserved.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4</p></td>
+<td><p>4</p></td>
+<td><p>Device JTAG ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x8</p></td>
+<td><p>4</p></td>
+<td><p>Device JTAG user ID.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="xn-sector">
+<h4>XN sector<a class="headerlink" href="#xn-sector" title="Permalink to this heading">#</a></h4>
+<p>The XN sector contains a <a class="reference internal" href="xn-spec/xn-spec.html#xn-spec"><span class="std std-ref">XN description</span></a> of the system.</p>
+</section>
+<section id="binary-elf-sectors">
+<h4>Binary/ELF sectors<a class="headerlink" href="#binary-elf-sectors" title="Permalink to this heading">#</a></h4>
+<p>Binary or ELF sectors instruct the loader to load a program image on the
+specified xCORE tile. Binary/ELF sectors are formatted as shown in the
+following table:</p>
+<div class="table-wrapper docutils container" id="id6">
+<span id="tools-developers-guide-executable-binary-format-elf-sector-table"></span><span id="tools-developers-guide-executable-binary-format-elf-sector-table"></span><table class="docutils align-default" id="id6">
+<caption><span class="caption-number">Table 19 </span><span class="caption-text">Binary/ELF sector</span><a class="headerlink" href="#id6" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Data byte offset</strong></p></th>
+<th class="head"><p><strong>Length (bytes)</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0</p></td>
+<td><p>2</p></td>
+<td><p>Index of the node in the JTAG scan chain.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x2</p></td>
+<td><p>2</p></td>
+<td><p>xCORE tile number.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4</p></td>
+<td><p>8</p></td>
+<td><p>Load address of the binary image data. For
+ELF sectors this field should be set to 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xC</p></td>
+<td><p>n</p></td>
+<td><p>Image data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When a binary sector is loaded the data field is copied into memory starting at
+the specified load address. When a ELF sector is loaded the loadable segments
+of ELF image contained in the data field are loaded to the addresses specified
+in the ELF image.</p>
+</section>
+<section id="goto-call-sectors">
+<h4>Goto/call sectors<a class="headerlink" href="#goto-call-sectors" title="Permalink to this heading">#</a></h4>
+<p>Goto and call sectors instruct the loader to execute code on the specified
+xCORE tile.  If the last image loaded onto the tile was a ELF image execution
+starts at address of the <code class="docutils literal notranslate"><span class="pre">_start</span></code> symbol, otherwise execution starts at address
+specified as a field in the sector.</p>
+<p>When processing a call sector the loader should wait for the code to indicate
+successful termination via a done or exit system call before processing the
+next sector.</p>
+<div class="table-wrapper docutils container" id="id7">
+<span id="tools-developers-guide-executable-binary-format-goto-call-table"></span><span id="tools-developers-guide-executable-binary-format-goto-call-table"></span><table class="docutils align-default" id="id7">
+<caption><span class="caption-number">Table 20 </span><span class="caption-text">Goto/Call sector</span><a class="headerlink" href="#id7" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Data byte offset</strong></p></th>
+<th class="head"><p><strong>Length (bytes)</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0</p></td>
+<td><p>2</p></td>
+<td><p>Index of the node in the JTAG scan chain.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x2</p></td>
+<td><p>2</p></td>
+<td><p>xCORE tile number.</p></td>
+</tr>
+<tr class="row-even"><td><p>0x4</p></td>
+<td><p>8</p></td>
+<td><p>Specifies the address to jump to if the last
+image loaded onto the tile was a binary image.
+This field should be set to 0 if the last
+image loaded was an ELF image.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="last-sector">
+<h4>Last sector<a class="headerlink" href="#last-sector" title="Permalink to this heading">#</a></h4>
+<p>The last sector type is used to indicate the end of the sector list. A sector
+of this type should have no sector contents block.</p>
+</section>
+<section id="skip-sector">
+<h4>Skip sector<a class="headerlink" href="#skip-sector" title="Permalink to this heading">#</a></h4>
+<p>A loader must ignore any skip sectors that appear in the sector list. Changing
+the type of an existing sector to the skip sector type allows removal of
+sectors without effecting the layout of the XE file.</p>
+</section>
+</section>
+</section>
+<section id="booting-an-xe-file">
+<span id="tools-developers-guide-executable-booting-xe-file"></span><h2>Booting an XE File<a class="headerlink" href="#booting-an-xe-file" title="Permalink to this heading">#</a></h2>
+<p>To boot an XE file the sectors within the file must be processed in sequential
+order.  This allows a loader to load and execute sectors to initialize the
+system in an order defined by the toolchain, using as many boot stages as
+required. If an image is loaded onto an xCORE tile there must be exactly one
+Goto sector. This sector must appear after all Call, Binary and ELF sectors for
+that tile.</p>
+<p>A loader may choose to delay processing of Call sectors until a set of Call
+sectors have been accumulated for all xCORE tiles on the target device.  This
+allows the loader to reduce boot time by executing as much code as possible in
+parallel.</p>
+<p>The example in <a class="reference internal" href="#tools-developers-guide-executable-example-g4-boot"><span class="std std-ref">Example XE file</span></a> shows a
+typical layout for an XE file containing a program compiled to run on an xcore.ai
+device.</p>
+<div class="table-wrapper docutils container" id="id8">
+<span id="tools-developers-guide-executable-example-g4-boot"></span><span id="tools-developers-guide-executable-example-g4-boot"></span><table class="docutils align-default" id="id8">
+<caption><span class="caption-number">Table 21 </span><span class="caption-text">Example XE file</span><a class="headerlink" href="#id8" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Sector type</strong></p></th>
+<th class="head"><p><strong>Node</strong></p></th>
+<th class="head"><p><strong>Tile</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SysConfig</p></td>
+<td></td>
+<td></td>
+<td><p>XML System description, ignored by the loader.</p></td>
+</tr>
+<tr class="row-odd"><td><p>XN</p></td>
+<td></td>
+<td></td>
+<td><p>XN description, ignored by the loader.</p></td>
+</tr>
+<tr class="row-even"><td><p>ELF</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Load ELF image onto node 0 tile 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Call</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Execute program on node 0 tile 1 and wait for successful termination.</p></td>
+</tr>
+<tr class="row-even"><td><p>ELF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>Load ELF image onto node 0 tile 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Call</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>Execute program on node 0 tile 0 and wait for successful termination.</p></td>
+</tr>
+<tr class="row-even"><td><p>ELF</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Load ELF image onto node 0 tile 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Goto</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>Execute program on node 0 tile 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>ELF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>Load ELF image onto node 0 tile 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Goto</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>Execute program on node 0 tile 0.</p></td>
+</tr>
+<tr class="row-even"><td><p>Last sector</p></td>
+<td></td>
+<td></td>
+<td><p>Last sector marker.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A further example is given in the tutorial <a class="reference internal" href="../../tutorials/understanding-xe-structure.html#understanding-xe-structure"><span class="std std-ref">Understanding XE files and how they are loaded</span></a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="xn-spec/xn-spec.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">XN specification</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">File formats and data descriptions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">XMOS executable (XE) file format</a><ul>
+<li><a class="reference internal" href="#binary-format">Binary format</a><ul>
+<li><a class="reference internal" href="#xe-header">XE header</a></li>
+<li><a class="reference internal" href="#sectors">Sectors</a><ul>
+<li><a class="reference internal" href="#sysconfig-sector">SysConfig sector</a></li>
+<li><a class="reference internal" href="#node-descriptor-sector">Node descriptor sector</a></li>
+<li><a class="reference internal" href="#xn-sector">XN sector</a></li>
+<li><a class="reference internal" href="#binary-elf-sectors">Binary/ELF sectors</a></li>
+<li><a class="reference internal" href="#goto-call-sectors">Goto/call sectors</a></li>
+<li><a class="reference internal" href="#last-sector">Last sector</a></li>
+<li><a class="reference internal" href="#skip-sector">Skip sector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#booting-an-xe-file">Booting an XE File</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

@@ -1,0 +1,692 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Using software-defined memory" href="swmem.html" /><link rel="prev" title="Add support for a new flash device" href="add-flash-support/flash.html" />
+
+    <link rel="shortcut icon" href="../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Using LPDDR - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="index.html">Tools and target features</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tools-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools-ref/cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools-ref/formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools-ref/xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools-ref/libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../tools-ref/libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../tools-ref/libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../tools-ref/libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tools-ref/xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools-ref/xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools-ref/xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tools-ref/transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="using-lpddr">
+<h1>Using LPDDR<a class="headerlink" href="#using-lpddr" title="Permalink to this heading">#</a></h1>
+<p id="id1">This section shows how to use LPDDR1 devices in target systems which employ the xcore.ai (XU316) device.</p>
+<p>An LPDDR1 memory device may be connected to certain xcore.ai devices. The memory device may be either 256Mbit, 512Mbit or 1024Mbit in size. See the relevant device datasheets for full connectivity details and electrical specifications.</p>
+<p>The LPDDR memory contents may be accessed by application software executing on either tile 0 or on tile 1 of an xcore.ai device. It is not possible for both tiles to access LPDDR from a single application.</p>
+<p>The application developer provides annotated C-language source to indicate which elements of the application reside in LPDDR. The bootloader performs the hardware setup required for the application to execute from, to read from and to write to this memory.</p>
+<p><em>Note</em>: In a system with two xcore.ai devices, the LPDDR device and the flash memory device (used to boot the system) must be connected to the same xcore.ai device.</p>
+<section id="accessing-lpddr-in-an-application">
+<h2>Accessing LPDDR in an application<a class="headerlink" href="#accessing-lpddr-in-an-application" title="Permalink to this heading">#</a></h2>
+<p>Executable code or data entities that must reside in LPDDR must be annotated with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">__attribute__</span> <span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;.ExtMem&lt;qualifier&gt;&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;qualifier&gt;</span></code> must be the string <code class="docutils literal notranslate"><span class="pre">.bss</span></code> for data which must be initialised to 0 by the bootstrap (traditionally known as BSS) (and not occupy space in the flash image).</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;qualifier&gt;</span></code> may be any other string for data which is initialised or for code.</p>
+<p>The following examples illustrate how the <code class="docutils literal notranslate"><span class="pre">__attribute__</span></code> annotation should be applied:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Place</span> <span class="ow">in</span> <span class="n">BSS</span> <span class="o">-</span> <span class="n">zero</span><span class="o">-</span><span class="n">initialise</span> <span class="ow">in</span> <span class="n">bootstrap</span> <span class="o">-</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">occupy</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">flash</span> <span class="n">image</span>
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;.ExtMem.bss&quot;</span><span class="p">)))</span>
+<span class="n">char</span> <span class="n">working_area</span><span class="p">[</span><span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">];</span>
+
+<span class="o">//</span> <span class="n">Place</span> <span class="ow">in</span> <span class="n">BSS</span> <span class="o">-</span> <span class="n">zero</span><span class="o">-</span><span class="n">initialise</span> <span class="ow">in</span> <span class="n">bootstrap</span> <span class="o">-</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">occupy</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">flash</span> <span class="n">image</span>
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;.ExtMem.bss&quot;</span><span class="p">)))</span>
+<span class="n">extern</span> <span class="n">char</span> <span class="n">working_area</span><span class="p">[</span><span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">];</span>
+
+<span class="o">//</span> <span class="n">Annotation</span> <span class="k">for</span> <span class="n">executable</span> <span class="n">code</span> <span class="o">-</span> <span class="n">occupies</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">flash</span> <span class="n">image</span>
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;.ExtMem.code&quot;</span><span class="p">)))</span>
+<span class="n">void</span> <span class="n">procedure</span><span class="p">(</span><span class="nb">int</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">Annotation</span> <span class="k">for</span> <span class="n">initialised</span> <span class="n">data</span> <span class="o">-</span> <span class="n">occupies</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">flash</span> <span class="n">image</span>
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;.ExtMem.data&quot;</span><span class="p">)))</span>
+<span class="n">unsigned</span> <span class="n">ddr_data_word</span> <span class="o">=</span> <span class="mh">0xdeadbeef</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Annotation</span> <span class="k">for</span> <span class="n">initialised</span> <span class="n">data</span> <span class="o">-</span> <span class="n">occupies</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">flash</span> <span class="n">image</span>
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s2">&quot;.ExtMem_data&quot;</span><span class="p">)))</span>
+<span class="n">unsigned</span> <span class="n">ddr_stuff</span><span class="p">[</span><span class="mi">32768</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mh">0x12345678</span><span class="p">,</span> <span class="mh">0x234567ab</span><span class="p">,</span> <span class="mh">0x4567abcd</span> <span class="p">};</span>
+</pre></div>
+</div>
+<p>The annotation must be placed immediately before the definition and any declaration of the entity. Use <code class="docutils literal notranslate"><span class="pre">extern</span></code> in a declaration, to avoid multiple definitions of the same object.</p>
+</section>
+<section id="compiling-for-external-memory-lpddr-and-software-defined-memory">
+<span id="compiling-extmem"></span><h2>Compiling for external memory (LPDDR) and software-defined memory<a class="headerlink" href="#compiling-for-external-memory-lpddr-and-software-defined-memory" title="Permalink to this heading">#</a></h2>
+<p>As described under <a class="reference internal" href="../../prog-guide/prog-ref/memory-models.html#memory-models"><span class="std std-ref">memory models</span></a>,
+accessing a data object in external or software-defined memory directly, by name,
+requires the <code class="docutils literal notranslate"><span class="pre">large</span></code> or <code class="docutils literal notranslate"><span class="pre">hybrid</span></code> memory model.
+But accessing it via a pointer can be done in any memory model.
+XMOS recommends choosing one of the following schemes:</p>
+<section id="scheme-1-the-general-case-all-objects-may-be-accessed-directly">
+<h3>Scheme 1: the general case: all objects may be accessed directly<a class="headerlink" href="#scheme-1-the-general-case-all-objects-may-be-accessed-directly" title="Permalink to this heading">#</a></h3>
+<p>Compile the whole application for the same model, either <code class="docutils literal notranslate"><span class="pre">large</span></code> or <code class="docutils literal notranslate"><span class="pre">hybrid</span></code>.</p>
+<p>Model <code class="docutils literal notranslate"><span class="pre">large</span></code> is required only when the contiguous data area of any one tile
+(usually in internal RAM) exceeds 256KB,
+or if branches in code exceed the maximum range of the <code class="docutils literal notranslate"><span class="pre">small</span></code> model.</p>
+</section>
+<section id="scheme-2-access-objects-in-lpddr-or-software-defined-memory-via-pointers">
+<h3>Scheme 2: access objects in LPDDR or software-defined memory via pointers<a class="headerlink" href="#scheme-2-access-objects-in-lpddr-or-software-defined-memory-via-pointers" title="Permalink to this heading">#</a></h3>
+<p>Can be used for external/software memory access when all of the following are true:</p>
+<ol class="arabic simple">
+<li><p>No code (functions) will be placed in external memory, only data.</p></li>
+<li><p>External/software memory data is in a few, large objects which can be defined in dedicated source files. The scheme is not suitable if external/software memory objects are spread throughout an application.</p></li>
+<li><p>Internal RAM data for a tile fits within 256KB.</p></li>
+</ol>
+<p><strong>Advantage</strong>: smaller and faster code is generated to access internal RAM data, than when the <code class="docutils literal notranslate"><span class="pre">large</span></code> model is used.</p>
+<p>Define external/software memory objects in specific source files, with an accessor function,
+returning a pointer to the data.
+The source files defining external/software memory data and accessor functions
+must be compiled under the <code class="docutils literal notranslate"><span class="pre">hybrid</span></code> model.
+(The <code class="docutils literal notranslate"><span class="pre">large</span></code> model would also work, but is unnecessary if the conditions above are met.)
+All other source files can be compiled under the default (<code class="docutils literal notranslate"><span class="pre">small</span></code>) model.</p>
+<p>This scheme is intended for the specific case of storing a small number of very large objects
+in a memory other than the internal RAM.
+Writing address-getter functions for many, smaller, objects is not the recommended model.</p>
+<p id="extmem-example">Example:</p>
+<section id="external-c">
+<h4>external.c<a class="headerlink" href="#external-c" title="Permalink to this heading">#</a></h4>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">xcc</span> <span class="pre">-mcmodel=hybrid</span> <span class="pre">external.c</span> <span class="pre">...</span></code></div>
+<div class="line"><br /></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">__attribute__((section(&quot;.ExtMem.data&quot;)))</span> <span class="pre">int</span> <span class="pre">readings[MAX];</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span> <span class="pre">get_readings(void)</span> <span class="pre">{</span> <span class="pre">return</span> <span class="pre">readings;</span> <span class="pre">}</span></code></div>
+</div>
+</section>
+<section id="external-h">
+<h4>external.h<a class="headerlink" href="#external-h" title="Permalink to this heading">#</a></h4>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span> <span class="pre">get_readings(void);</span></code></div>
+</div>
+</section>
+<section id="main-c">
+<h4>main.c<a class="headerlink" href="#main-c" title="Permalink to this heading">#</a></h4>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">xcc</span> <span class="pre">-mcmodel=small</span> <span class="pre">main.c</span> <span class="pre">...</span></code></div>
+<div class="line"><br /></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;external.h&quot;</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">...</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span> <span class="pre">r</span> <span class="pre">=</span> <span class="pre">get_readings();</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">r[3]</span> <span class="pre">=</span> <span class="pre">k;</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">r[7];</span></code></div>
+</div>
+</section>
+</section>
+</section>
+<section id="hardware-setup">
+<span id="lpddr-hardware-setup"></span><h2>Hardware setup<a class="headerlink" href="#hardware-setup" title="Permalink to this heading">#</a></h2>
+<p>The xcore.ai device has a LPDDR controller which must be configured by the bootloader. The parameters required for configuration are provided in the target XN file. The following information is required:</p>
+<ol class="arabic simple">
+<li><p>The frequency at which the LPDDR interface is clocked</p></li>
+<li><p>The size of the LPDDR device (256Mbit, 512Mbit or 1024Mbit)</p></li>
+<li><p>xcore.ai output pad drive strengths (inputs to the LPDDR device)</p></li>
+<li><p>LPDDR output drive strengths (inputs to the xcore.ai device)</p></li>
+</ol>
+<section id="lpddr-clock-frequency-specification">
+<h3>LPDDR clock frequency specification<a class="headerlink" href="#lpddr-clock-frequency-specification" title="Permalink to this heading">#</a></h3>
+<p>The LPDDR clock may be provided either by the system PLL or by the secondary PLL.</p>
+<section id="using-the-primary-system-pll">
+<h4>Using the primary (system) PLL<a class="headerlink" href="#using-the-primary-system-pll" title="Permalink to this heading">#</a></h4>
+<p>The LPDDR clock may be specified as a frequency which is derived from the system PLL. The system PLL operates at multiple of 100MHz. This is divided by a constant to give the LPDDR clock.
+The LPDDR clock is driven from the system PLL via a fixed divide-by-two followed by a programmable divider. The LPDDR clock frequency is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_lpddr</span> <span class="o">=</span> <span class="n">f_syspll</span> <span class="o">/</span> <span class="n">div</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">div</span></code> is an even integer in the inclusive range 0x2 to 0x20000.
+When using the system PLL, the value of <code class="docutils literal notranslate"><span class="pre">div</span></code> is computed based on the LPDDR frequency specified in the XN file. The following target XN file excerpt shows the parameters required to provide 100MHz a LPDDR clock:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Extmem</span> <span class="n">SizeMbit</span><span class="o">=</span><span class="s2">&quot;1024&quot;</span> <span class="n">Frequency</span><span class="o">=</span><span class="s2">&quot;100MHz&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This is shown in context along with the drive strength specification:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;Packages&gt;
+  &lt;Package id=&quot;0&quot; Type=&quot;XS3-UnA-1024-FB265&quot;&gt;
+    &lt;Nodes&gt;
+      &lt;Node Id=&quot;0&quot; InPackageId=&quot;0&quot; Type=&quot;XS3-L16A-1024&quot; Oscillator=&quot;24MHz&quot; SystemFrequency=&quot;600MHz&quot; ReferenceFrequency=&quot;100MHz&quot;&gt;
+
+        &lt;Boot&gt;
+          &lt;Source Location=&quot;bootFlash&quot;/&gt;
+        &lt;/Boot&gt;
+
+        &lt;Extmem SizeMbit=&quot;1024&quot; Frequency=&quot;100MHz&quot;&gt;
+
+          &lt;!-- Attributes for Padctrl and Lpddr XML elements are as per equivalently named &#39;Node Configuration&#39; registers in datasheet --&gt;
+          &lt;!--
+            Padctrl attributes are applied to each named signal in the set below:
+            [6] = Schmitt enable, [5] = Slew, [4:3] = drive strength, [2:1] = pull option, [0] = read enable
+
+            Therefore:
+            0x30: 8mA-drive, fast-slew output
+            0x31: 8mA-drive, fast-slew bidir
+          --&gt;
+          &lt;Padctrl clk=&quot;0x30&quot; cke=&quot;0x30&quot; cs_n=&quot;0x30&quot; we_n=&quot;0x30&quot; cas_n=&quot;0x30&quot; ras_n=&quot;0x30&quot; addr=&quot;0x30&quot; ba=&quot;0x30&quot; dq=&quot;0x31&quot; dqs=&quot;0x31&quot; dm=&quot;0x30&quot;/&gt;
+
+          &lt;!--
+            LPDDR emr_opcode attribute:
+            emr_opcode[7:5] = LPDDR drive strength to xcore.ai
+
+            0x20: Half drive strength
+          --&gt;
+          &lt;Lpddr emr_opcode=&quot;0x20&quot;/&gt;
+        &lt;/Extmem&gt;
+</pre></div>
+</div>
+<p>The drive strength specifications should be provided based on board design parameters. The above values are for the XMOS XK-EVK-XU316 board which should be used as a reference design when creating a new board.</p>
+</section>
+<section id="using-the-secondary-pll">
+<h4>Using the secondary PLL<a class="headerlink" href="#using-the-secondary-pll" title="Permalink to this heading">#</a></h4>
+<p>The secondary PLL may be used as a source for the LPDDR clock. This overcomes limits in the available LPDDR frequencies which exist when using the primary (system) PLL. There are two sets of parameters required:</p>
+<ol class="arabic simple">
+<li><p>The PLL configuration values required to obtain a specified PLL output frequency</p></li>
+<li><p>A division value (which must be an even integer in the range 0x2 to 0x20000) used to divide the PLL output frequency to obtain the LPDDR clock frequency</p></li>
+</ol>
+<p>The PLL output frequency is given by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">Oscillator</span> <span class="n">x</span> <span class="n">SecondaryPllFeedbackDiv</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">SecondaryPllInputDiv</span> <span class="n">x</span> <span class="n">SecondaryPllOutputDiv</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following XN excerpt illustrates the specification of these parameters to provide the PLL output frequency 322MHz and a 166MHz LPDDR clock:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Node</span> <span class="n">Id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">InPackageId</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Type</span><span class="o">=</span><span class="s2">&quot;XS3-L16A-1024&quot;</span> <span class="n">Oscillator</span><span class="o">=</span><span class="s2">&quot;24MHz&quot;</span>
+ <span class="n">SystemFrequency</span><span class="o">=</span><span class="s2">&quot;600MHz&quot;</span> <span class="n">ReferenceFrequency</span><span class="o">=</span><span class="s2">&quot;100MHz&quot;</span>
+ <span class="n">SecondaryPllInputDiv</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">SecondaryPllOutputDiv</span><span class="o">=</span><span class="s2">&quot;3&quot;</span> <span class="n">SecondaryPllFeedbackDiv</span><span class="o">=</span><span class="s2">&quot;83&quot;</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">Extmem</span> <span class="n">SizeMbit</span><span class="o">=</span><span class="s2">&quot;1024&quot;</span> <span class="n">SourcePll</span><span class="o">=</span><span class="s2">&quot;SecondaryPll&quot;</span> <span class="n">Divider</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The following shows this excerpt in context (note the detailed comments as shown in the setup using the primary PLL have been removed for brevity):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;Node Id=&quot;0&quot; InPackageId=&quot;0&quot; Type=&quot;XS3-L16A-1024&quot; Oscillator=&quot;24MHz&quot;
+ SystemFrequency=&quot;600MHz&quot; ReferenceFrequency=&quot;100MHz&quot;
+ SecondaryPllInputDiv=&quot;1&quot; SecondaryPllOutputDiv=&quot;3&quot; SecondaryPllFeedbackDiv=&quot;83&quot;&gt;
+
+  &lt;Extmem SizeMbit=&quot;1024&quot; SourcePll=&quot;SecondaryPll&quot; Divider=&quot;2&quot;&gt;
+
+    &lt;!-- Attributes for Padctrl and Lpddr XML elements are as per equivalently named &#39;Node Configuration&#39; registers in datasheet --&gt;
+    &lt;Padctrl clk=&quot;0x30&quot; cke=&quot;0x30&quot; cs_n=&quot;0x30&quot; we_n=&quot;0x30&quot; cas_n=&quot;0x30&quot; ras_n=&quot;0x30&quot; addr=&quot;0x30&quot; ba=&quot;0x30&quot; dq=&quot;0x31&quot; dqs=&quot;0x31&quot; dm=&quot;0x30&quot;/&gt;
+
+    &lt;Lpddr emr_opcode=&quot;0x20&quot;/&gt;
+  &lt;/Extmem&gt;
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="level-1-cache">
+<h2>Level 1 cache<a class="headerlink" href="#level-1-cache" title="Permalink to this heading">#</a></h2>
+<p>A level 1 cache is situated between the xCORE tile and the LPDDR memory. This is a unified I and D cache, fully-associative, with write-back. It has 8 lines and the line size is 32 bytes. The replacement policy is pseudo-LRU (Least Recently Used).</p>
+<p>xCORE instructions are provided to prefetch, invalidate and flush this cache.</p>
+<p>It is not advisable to have more than 2 logical cores access the LPDDR because ‘cache-thrashing’ will occur (where data required by a logical core is repatedly evicted by another logical core and must be re-loaded).</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="swmem.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Using software-defined memory</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="add-flash-support/flash.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Add support for a new flash device</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Using LPDDR</a><ul>
+<li><a class="reference internal" href="#accessing-lpddr-in-an-application">Accessing LPDDR in an application</a></li>
+<li><a class="reference internal" href="#compiling-for-external-memory-lpddr-and-software-defined-memory">Compiling for external memory (LPDDR) and software-defined memory</a><ul>
+<li><a class="reference internal" href="#scheme-1-the-general-case-all-objects-may-be-accessed-directly">Scheme 1: the general case: all objects may be accessed directly</a></li>
+<li><a class="reference internal" href="#scheme-2-access-objects-in-lpddr-or-software-defined-memory-via-pointers">Scheme 2: access objects in LPDDR or software-defined memory via pointers</a><ul>
+<li><a class="reference internal" href="#external-c">external.c</a></li>
+<li><a class="reference internal" href="#external-h">external.h</a></li>
+<li><a class="reference internal" href="#main-c">main.c</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hardware-setup">Hardware setup</a><ul>
+<li><a class="reference internal" href="#lpddr-clock-frequency-specification">LPDDR clock frequency specification</a><ul>
+<li><a class="reference internal" href="#using-the-primary-system-pll">Using the primary (system) PLL</a></li>
+<li><a class="reference internal" href="#using-the-secondary-pll">Using the secondary PLL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#level-1-cache">Level 1 cache</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/lsj/XMOS_XTC_15.3.0/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -I/Users/lsj/XMOS_XTC_15.3.0/lib_xua-develop/lib_xua/host/xmosdfu/libusb/OSX64 -O3 -DNDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=c++14 -o CMakeFiles/xmosdfu.dir/src/xmosdfu.cpp.o -c /Users/lsj/XMOS_XTC_15.3.0/lib_xua-develop/lib_xua/host/xmosdfu/src/xmosdfu.cpp",
+  "file": "/Users/lsj/XMOS_XTC_15.3.0/lib_xua-develop/lib_xua/host/xmosdfu/src/xmosdfu.cpp"
+}
+]

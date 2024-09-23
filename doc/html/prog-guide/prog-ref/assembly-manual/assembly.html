@@ -1,0 +1,2372 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Programming for XCORE Devices" href="../programming-xs1-devices.html" /><link rel="prev" title="Make assembly programs compatible with the XMOS XS1 ABI" href="../assembly-for-xmos-xs1-abi/assembly-for-abi.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Assembly programming manual - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools-guide/index.html">Tools guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tools-guide/tools-ref/xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools-guide/tools-ref/transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Programming guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../programming-in-asm.html">Programming in assembly</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="assembly-programming-manual">
+<span id="assembly"></span><h1>Assembly programming manual<a class="headerlink" href="#assembly-programming-manual" title="Permalink to this heading">#</a></h1>
+<p>The XMOS assembly language supports the formation of objects in the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">Executable and Linkable Format
+(ELF)</a>
+with <a class="reference external" href="https://dwarfstd.org/dwarf3std.html">DWARF 3</a> debugging information.
+Extensions to the ELF format are documented in the <a class="reference internal" href="../xs1-abi/abi.html#xs1-abi"><span class="std std-ref">XMOS Application
+Binary Interface</span></a>.</p>
+<section id="lexical-conventions">
+<span id="assembly-lexical-conventions"></span><h2>Lexical conventions<a class="headerlink" href="#lexical-conventions" title="Permalink to this heading">#</a></h2>
+<p>There are six classes of tokens: symbol names, directives, constants,
+operators, instruction mnemonics and other separators. Blanks, tabs,
+formfeeds and comments are ignored except as they separate tokens.</p>
+<section id="comments">
+<span id="assembly-comments"></span><h3>Comments<a class="headerlink" href="#comments" title="Permalink to this heading">#</a></h3>
+<p>The character <code class="docutils literal notranslate"><span class="pre">#</span></code> introduces a comment, which terminates with a
+newline. Comments do not occur within string literals.</p>
+</section>
+<section id="symbol-names">
+<span id="assembly-symbol-names"></span><h3>Symbol names<a class="headerlink" href="#symbol-names" title="Permalink to this heading">#</a></h3>
+<p>A symbol name begins with a letter or with one of the characters
+‘<code class="docutils literal notranslate"><span class="pre">.</span></code>’ or ‘<code class="docutils literal notranslate"><span class="pre">_</span></code>’, followed by an optional sequence of letters,
+digits, periods, underscores and dollar signs. Upper and lower case
+letters are different.</p>
+</section>
+<section id="directives">
+<span id="assembly-directivevs"></span><h3>Directives<a class="headerlink" href="#directives" title="Permalink to this heading">#</a></h3>
+<p>A directive begins with ‘<code class="docutils literal notranslate"><span class="pre">.</span></code>’ followed by one or more letters.
+Directives instruct the assembler to perform some action (see <a class="reference internal" href="#assembly-directives-second"><span class="std std-ref">Directives</span></a>).</p>
+</section>
+<section id="constants">
+<span id="assembly-constants"></span><h3>Constants<a class="headerlink" href="#constants" title="Permalink to this heading">#</a></h3>
+<p>A constant is either an integer number, a character constant or a string
+literal.</p>
+<ul class="simple">
+<li><p>A binary integer is <code class="docutils literal notranslate"><span class="pre">0b</span></code> or <code class="docutils literal notranslate"><span class="pre">0B</span></code> followed by zero or more of the
+digits <code class="docutils literal notranslate"><span class="pre">01</span></code>.</p></li>
+<li><p>An octal integer is <code class="docutils literal notranslate"><span class="pre">0</span></code> followed by zero or more of the digits
+<code class="docutils literal notranslate"><span class="pre">01234567</span></code>.</p></li>
+<li><p>A decimal integer is a non-zero digit followed by zero or more of the
+digits <code class="docutils literal notranslate"><span class="pre">0123456789</span></code>.</p></li>
+<li><p>A hexadecimal integer is <code class="docutils literal notranslate"><span class="pre">0x</span></code> or <code class="docutils literal notranslate"><span class="pre">0X</span></code> followed by one or more of
+the digits and letters <code class="docutils literal notranslate"><span class="pre">0123456789abcdefABCDEF</span></code>.</p></li>
+<li><p>A character constant is a sequence of characters surrounded by single
+quotes.</p></li>
+<li><p>A string literal is a sequence of characters surrounded by double
+quotes.</p></li>
+</ul>
+<p>The C escape sequences may be used to specify certain characters.</p>
+</section>
+</section>
+<section id="sections-and-relocations">
+<span id="assembly-sections-and-relocations"></span><h2>Sections and relocations<a class="headerlink" href="#sections-and-relocations" title="Permalink to this heading">#</a></h2>
+<p>Named ELF sections are specified using directives (see <a class="reference internal" href="#assembly-section"><span class="std std-ref">section, pushsection, popsection</span></a>).
+In addition, there is a unique
+unnamed “absolute” section and a unique unnamed “undefined” section. The
+notation {<em>secname</em> X} refers to an “offset X into section <em>secname</em>.”</p>
+<p>The values of symbols in the absolute section are unaffected by
+relocations. For example, address {absolute 0} is “relocated” to
+run-time address 0. The values of symbols in the undefined section are
+not set.</p>
+<p>The assembler keeps track of the current section. Initially the current
+section is set to the text section. Directives can be used to change the
+current section. Assembly instructions and directives which allocate
+storage are emitted in the current section. For each section, the
+assembler maintains a location counter which holds the current offset in
+the section. The <em>active location counter</em> refers to the location
+counter for the current section.</p>
+</section>
+<section id="symbols">
+<span id="assembly-symbols"></span><h2>Symbols<a class="headerlink" href="#symbols" title="Permalink to this heading">#</a></h2>
+<p>Each symbol has exactly one name; each name in an assembly program
+refers to exactly one symbol. A local symbol is any symbol beginning
+with the characters “<code class="docutils literal notranslate"><span class="pre">.L</span></code>”. A local symbol may be discarded by the
+linker when no longer required for linking.</p>
+<section id="attributes">
+<span id="assembly-attributes"></span><h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">#</a></h3>
+<p>Each symbol has a <em>value</em>, an associated section and a <em>binding</em>. A
+symbol is assigned a value using the <code class="docutils literal notranslate"><span class="pre">set</span></code> or <code class="docutils literal notranslate"><span class="pre">linkset</span></code> directives
+(see <a class="reference internal" href="#assembly-set"><span class="std std-ref">set, linkset</span></a>), or through its use in a label (see <a class="reference internal" href="#assembly-labels"><span class="std std-ref">Labels</span></a>).
+The default binding of symbols in the undefined
+section is <em>global</em>; for all other symbols the default binding is
+<em>local</em>.</p>
+</section>
+</section>
+<section id="labels">
+<span id="assembly-labels"></span><h2>Labels<a class="headerlink" href="#labels" title="Permalink to this heading">#</a></h2>
+<p>A label is a symbol name immediately followed by a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>). The
+symbol’s value is set to the current value of the active location
+counter. The symbol’s section is set to the current section. A symbol
+name must not appear in more than one label.</p>
+</section>
+<section id="expressions">
+<span id="assembly-expressions"></span><h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this heading">#</a></h2>
+<p>An expression specifies an address or value. The result of an expression
+must be an absolute number or an offset into a particular section. An
+expression is a <em>constant expression</em> if all of its symbols are defined
+and it evaluates to a constant. An expression is a simple expression if
+it is one of a constant expression, a symbol, or a symbol +/- a constant.
+An expression may be encoded in the ELF-extended expression section and
+its value evaluated by the linker (see <a class="reference internal" href="#assembly-set"><span class="std std-ref">set, linkset</span></a>);
+the encoding scheme is determined by the ABI. The syntax of an
+expression is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>expression ::= unary-exp
+             | expression infix-op unary-exp
+             | unary-exp ``?`` unary-exp ``$:`` unary-exp
+             | function-exp
+
+unary-exp ::= argument
+            | prefix-op unary-exp
+
+argument ::= symbol
+           | constant
+           | ``(`` expression ``)``
+
+function-exp ::= ``$overlay_region_ptr`` ``(`` symbol ``)``
+               | ``$overlay_index`` ``(`` symbol ``)``
+               | ``$overlay_physical_addr`` ``(`` symbol ``)``
+               | ``$overlay_virtual_addr`` ``(`` symbol ``)``
+               | ``$overlay_num_bytes`` ``(`` symbol ``)``
+
+infix-op ::= *one of*
+             ``+`` ``-`` ``&lt;`` ``&gt;`` ``&lt;=`` ``&gt;=`` ``||`` ``&lt;&lt;`` ``&gt;&gt;`` ``*`` ``$M`` ``$A`` ``&amp;`` ``/``
+
+prefix-op ::= *one of*
+              ``-`` ``~`` ``$D``
+</pre></div>
+</div>
+<p>Symbols are evaluated to {<em>section</em> <em>x</em>} where <em>section</em> is one of a
+named section, the absolute section or the undefined section, and <em>x</em> is
+a signed 2’s complement 32-bit integer.</p>
+<p>Infix operators have the same precedence and behavior as C, and
+operators with equal precedence are performed left to right. In
+addition, the <code class="docutils literal notranslate"><span class="pre">$M</span></code> operator has lowest precedence, and the <code class="docutils literal notranslate"><span class="pre">$A</span></code>
+operator has the highest precedence.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code> operators, the set of valid operations and
+results is given in <a class="reference internal" href="#assembly-valid-ops-for-plus-minus"><span class="std std-ref">Valid operations for + and - operators</span></a>.
+For the <code class="docutils literal notranslate"><span class="pre">$D</span></code> operator, the argument must be a symbol; the result is
+1 if the symbol is defined and 0 otherwise.</p>
+<div class="table-wrapper docutils container" id="id2">
+<span id="assembly-valid-ops-for-plus-minus"></span><span id="assembly-valid-ops-for-plus-minus"></span><table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 53 </span><span class="caption-text">Valid operations for <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code> operators</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Op</p></th>
+<th class="head"><p>Left Operand</p></th>
+<th class="head"><p>Right Operand</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>{<em>section</em> x}</p></td>
+<td><p>{absolute y}</p></td>
+<td><p>{<em>section</em> x+y}</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>{absolute x}</p></td>
+<td><p>{<em>section</em> y}</p></td>
+<td><p>{<em>section</em> x+y}</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>{absolute x}</p></td>
+<td><p>{absolute y}</p></td>
+<td><p>{absolute x+y}</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>{<em>section</em> x}</p></td>
+<td><p>{<em>section</em> y}</p></td>
+<td><p>{absolute x-y}</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>{<em>section</em> x}</p></td>
+<td><p>{absolute y}</p></td>
+<td><p>{<em>section</em> x-y}</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>{absolute x}</p></td>
+<td><p>{absolute y}</p></td>
+<td><p>{absolute x-y}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">?</span></code> operator is used to select between symbols: if the first
+operand is non-zero then the result is the second operand, otherwise the
+result is the third operand.</p>
+<p>The operators <code class="docutils literal notranslate"><span class="pre">$overlay_region_ptr</span></code>, <code class="docutils literal notranslate"><span class="pre">$overlay_index</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$overlay_physical_addr</span></code>, <code class="docutils literal notranslate"><span class="pre">$overlay_virtual_addr</span></code> and <code class="docutils literal notranslate"><span class="pre">$overlay_num_bytes</span></code>
+can be used to query properties of the overlay containing the overlay roots
+with the specified overlay key symbol (see <a class="reference internal" href="#assembly-overlay-directives"><span class="std std-ref">Overlay directives</span></a>).
+The set of results of these operators is given in
+<a class="reference internal" href="#assembly-overlay-expr-properties"><span class="std std-ref">Operators for querying properties of overlays.</span></a>.</p>
+<div class="table-wrapper docutils container" id="id3">
+<span id="assembly-overlay-expr-properties"></span><span id="assembly-overlay-expr-properties"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 54 </span><span class="caption-text">Operators for querying properties of overlays.</span><a class="headerlink" href="#id3" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$overlay_region_ptr</p></td>
+<td><p>Virtual address of the overlay region containing the overlay.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$overlay_index</p></td>
+<td><p>Index of the overlay in the overlay region.</p></td>
+</tr>
+<tr class="row-even"><td><p>$overlay_physical_addr</p></td>
+<td><p>Physical address of the overlay.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$overlay_virtual_addr</p></td>
+<td><p>Virtual (runtime) address of the overlay.</p></td>
+</tr>
+<tr class="row-even"><td><p>$overlay_num_bytes</p></td>
+<td><p>Size of the overlay in bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For all other operators, both arguments must be absolute and the result
+is absolute. The <code class="docutils literal notranslate"><span class="pre">$M</span></code> operator returns the maximum of the two operands
+and the <code class="docutils literal notranslate"><span class="pre">$A</span></code> operator returns the value of the first operand aligned
+to the second.</p>
+<p>Wherever an absolute expression is required, if omitted then {absolute
+0} is assumed.</p>
+</section>
+<section id="assembly-directives-second">
+<span id="id1"></span><h2>Directives<a class="headerlink" href="#assembly-directives-second" title="Permalink to this heading">#</a></h2>
+<p>Directives instruct the assembler to perform some action. The supported
+directives are given in this section.</p>
+<section id="add-to-set">
+<span id="assembly-directives-add-to-set"></span><h3>add_to_set<a class="headerlink" href="#add-to-set" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">add_to_set</span></code> directive adds an expression to a set of expressions
+associated with a key symbol. Its syntax is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>add-to-set-directive ::= ``.add_to_set`` symbol ``,`` expression
+                       | ``.add_to_set`` symbol ``,`` expression ``,`` symbol
+</pre></div>
+</div>
+<p>An optional predicate symbol may be specified as the 3rd argument. If this
+argument is specified the expression will only be added to the set if the
+predicate symbol is not eliminated from the linked object.</p>
+</section>
+<section id="max-reduce-sum-reduce">
+<h3>max_reduce, sum_reduce<a class="headerlink" href="#max-reduce-sum-reduce" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">max_reduce</span></code> directive computes the maximum of the values of the
+expressions in a set. The <code class="docutils literal notranslate"><span class="pre">sum_reduce</span></code> directive computes the sum of the
+values of the expressions in a set.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>max-reduce-directive ::= ``.max_reduce`` symbol ``,`` symbol ``,`` expression
+sum-reduce-directive ::= ``.sum_reduce`` symbol ``,`` symbol ``,`` expression
+</pre></div>
+</div>
+<p>The first symbol is defined using the value computed by the directive.
+The second symbol is the key symbol identifying the set of expressions (see
+<a class="reference internal" href="#assembly-directives-add-to-set"><span class="std std-ref">add_to_set</span></a>). The expression specifies the initial
+value for the reduction operation.</p>
+</section>
+<section id="align">
+<span id="assembly-align"></span><h3>align<a class="headerlink" href="#align" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">align</span></code> directive pads the active location counter section to the
+specified storage boundary. Its syntax is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>align-directive ::= ``.align`` expression
+</pre></div>
+</div>
+<p>The expression must be a constant expression; its value must be a power
+of 2. This value specifies the alignment required in bytes.</p>
+</section>
+<section id="ascii-asciiz">
+<span id="assembly-asciiz"></span><span id="assembly-ascii"></span><h3>ascii, asciiz<a class="headerlink" href="#ascii-asciiz" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ascii</span></code> directive assembles each string into consecutive
+addresses. The <code class="docutils literal notranslate"><span class="pre">asciiz</span></code> directive is the same, except that each string
+is followed by a null byte.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ascii-directive ::= ``.ascii`` string-list
+                  | ``.asciiz`` string-list
+
+string-list ::= string-list ``,`` string
+              | string
+</pre></div>
+</div>
+</section>
+<section id="byte-short-int-long-word">
+<span id="assembly-word"></span><span id="assembly-long"></span><span id="assembly-int"></span><span id="assembly-short"></span><span id="assembly-byte"></span><h3>byte, short, int, long, word<a class="headerlink" href="#byte-short-int-long-word" title="Permalink to this heading">#</a></h3>
+<p>These directives emit, for each expression, a number that at run-time is
+the value of that expression. The byte order is determined by the
+endianness of the target architecture. The size of numbers emitted with
+the word directive is determined by the size of the natural word on the
+target architecture. The size of the numbers emitted using the other
+directives are determined by the sizes of corresponding types in the
+ABI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>value-directive ::= value-size exp-list
+
+value-size ::= ``.byte``
+             | ``.short``
+             | ``.int``
+             | ``.long``
+             | ``.word``
+
+exp-list ::= exp-list ``,`` expression
+           | expression
+</pre></div>
+</div>
+</section>
+<section id="file">
+<span id="assembly-file"></span><h3>file<a class="headerlink" href="#file" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">file</span></code> directive has two forms.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>file-directive ::= ``.file`` string
+                 | ``.file`` constant string
+</pre></div>
+</div>
+<p>When used with one argument, the <code class="docutils literal notranslate"><span class="pre">file</span></code> directive creates an ELF
+symbol table entry with type <code class="docutils literal notranslate"><span class="pre">STT_FILE</span></code> and the specified string
+value. This entry is guaranteed to be the first entry in the symbol
+table.</p>
+<p>When used with two arguments the <code class="docutils literal notranslate"><span class="pre">file</span></code> directive adds an entry to the
+DWARF 3 <code class="docutils literal notranslate"><span class="pre">.debug_line</span></code> file names table. The first argument is a unique
+positive integer to use as the index of the entry in the table. The
+second argument is the name of the file.</p>
+</section>
+<section id="loc">
+<span id="assembly-loc"></span><h3>loc<a class="headerlink" href="#loc" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.loc</span></code> directive adds a row to the DWARF 3
+<code class="docutils literal notranslate"><span class="pre">.debug_line</span></code> line number matrix.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>loc-directive ::= ``.loc`` constant constant &lt;constant&gt;?
+                | ``.loc`` constant constant constant &lt;loc-option&gt;*
+
+loc-option ::= ``basic_block``
+             | ``prologue_end``
+             | ``epilogue_begin``
+             | ``is_stmt`` constant
+             | ``isa`` constant
+</pre></div>
+</div>
+<p>The address register is set to active location counter. The first two
+arguments set the file and line registers respectively. The optional
+third argument sets the column register. Additional arguments set
+further registers in the <code class="docutils literal notranslate"><span class="pre">.debug_line</span></code> state machine.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">basic_block</span></code></dt><dd><p>Sets <em>basic_block</em> to true.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">prologue_end</span></code></dt><dd><p>Sets <em>prologue_end</em> to true.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">epilogue_begin</span></code></dt><dd><p>Sets <em>epilogue_begin</em> to true.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">is_stmt</span></code></dt><dd><p>Sets <em>is_stmt</em> to the specified value, which must be 0 or 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">isa</span></code></dt><dd><p>Sets <em>isa</em> to the specified value.</p>
+</dd>
+</dl>
+</section>
+<section id="weak">
+<span id="assembly-weak"></span><h3>weak<a class="headerlink" href="#weak" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">weak</span></code> directive sets the weak attribute on the specified symbol.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>weak-directive ::= ``.weak`` symbol
+</pre></div>
+</div>
+</section>
+<section id="globl-global-extern-locl-local">
+<span id="assembly-local"></span><span id="assembly-locl"></span><span id="assembly-extern"></span><span id="assembly-global"></span><span id="assembly-globl"></span><h3>globl, global, extern, locl, local<a class="headerlink" href="#globl-global-extern-locl-local" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">globl</span></code> directive makes the specified symbols visible to other
+objects during linking. The <code class="docutils literal notranslate"><span class="pre">extern</span></code> directive specifies that the
+symbol is defined in another object. The <code class="docutils literal notranslate"><span class="pre">locl</span></code> directive specifies a
+symbol has local binding.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>visibility ::= ``.globl``
+             | ``.extern``
+             | ``.locl``
+             | ``.global``
+             | ``.extern``
+             | ``.local``
+
+vis-directive ::= visibility symbol
+                | visibility symbol ``,`` string
+</pre></div>
+</div>
+<p>If the optional string is provided, an <code class="docutils literal notranslate"><span class="pre">SHT_TYPEINFO</span></code> entry is created
+in the ELF-extended type section which contains the symbol and an index
+into the string table whose entry contains the specified string. (If the
+string does not already exist in the string table, it is inserted.) The
+meaning of this string is determined by the ABI.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">global</span></code> and <code class="docutils literal notranslate"><span class="pre">local</span></code> directives are synonyms for the <code class="docutils literal notranslate"><span class="pre">globl</span></code>
+and <code class="docutils literal notranslate"><span class="pre">locl</span></code> directives. They are provided for compatibility with other
+assemblers.</p>
+</section>
+<section id="globalresource">
+<span id="assembly-globalresource"></span><h3>globalresource<a class="headerlink" href="#globalresource" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>globalresource-directive ::= ``.globalresource`` expression ``,`` string
+                           | ``.globalresource`` expression ``,`` string ``,`` string
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">globalresource</span></code> directive causes the assembler to add information to the
+binary to indicate that there was a global port or clock declaration. The first
+argument is the resource ID of the port. The second argument is the name of the
+variable. The optional third argument is the tile the port was declared on. For
+example:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">.globalresource</span> <span class="pre">0x10200,</span> <span class="pre">p,</span> <span class="pre">tile[0]</span></code></p>
+</div></blockquote>
+<p>specifies that the port <code class="docutils literal notranslate"><span class="pre">p</span></code> was declared on <code class="docutils literal notranslate"><span class="pre">tile[0]</span></code> and initialized with the resource ID <code class="docutils literal notranslate"><span class="pre">0x10200</span></code>.</p>
+</section>
+<section id="typestring">
+<span id="assembly-typestring"></span><h3>typestring<a class="headerlink" href="#typestring" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">typestring</span></code> adds an <code class="docutils literal notranslate"><span class="pre">SHT_TYPEINFO</span></code> entry in the ELF-extended type
+section which contains the symbol and an index into the string table whose entry
+contains the specified string. (If the string does not already exist in the
+string table, it is inserted.) The meaning of this string is determined by the
+ABI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>typestring-directive ::= ``.typestring`` symbol ``,`` string
+</pre></div>
+</div>
+</section>
+<section id="assembly-corerev">
+<span id="assembly-core"></span><span id="assembly-ident"></span><span id="ident-core-corerev"></span><h3>ident, core, corerev<a class="headerlink" href="#assembly-corerev" title="Permalink to this heading">#</a></h3>
+<p>Each of these directives creates an ELF note section named
+“<code class="docutils literal notranslate"><span class="pre">.xmos_note</span></code>.”</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>info-directive ::= ``.ident`` string
+                 | ``.core`` string
+                 | ``.corerev`` string
+</pre></div>
+</div>
+<p>The contents of this section is a (name, type, value) triplet: the name
+is <code class="docutils literal notranslate"><span class="pre">xmos</span></code>; the type is either <code class="docutils literal notranslate"><span class="pre">IDENT</span></code>, <code class="docutils literal notranslate"><span class="pre">CORE</span></code> or <code class="docutils literal notranslate"><span class="pre">COREREV</span></code>; and
+the value is the specified string.</p>
+</section>
+<section id="section-pushsection-popsection">
+<span id="assembly-popsection"></span><span id="assembly-pushsection"></span><span id="assembly-section"></span><h3>section, pushsection, popsection<a class="headerlink" href="#section-pushsection-popsection" title="Permalink to this heading">#</a></h3>
+<p>The section directives change the current ELF section (see <a class="reference internal" href="#assembly-sections-and-relocations"><span class="std std-ref">Sections and relocations</span></a>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>section-directive ::= sec-or-push name
+                    | sec-or-push name ``,`` flags &lt;sec-type&gt;?
+                    | ``.popsection``
+
+sec-or-push ::= ``.section``
+              | ``.pushsection``
+
+flags ::= string
+
+sec-type ::= type
+           | type ``,`` flag-args
+
+type ::= ``@progbits``
+       | ``@nobits``
+
+flag-args ::= string
+</pre></div>
+</div>
+<p>The code following a <code class="docutils literal notranslate"><span class="pre">section</span></code> or <code class="docutils literal notranslate"><span class="pre">pushsection</span></code> directive is
+assembled and appended to the named section. The optional flags may
+contain any combination of the following characters.</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td><p>section is allocatable</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>section is placed in the global constant pool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>section is placed in the global data region</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
+<td><p>section is writable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>section is executable</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td><p>section is mergeable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">S</span></code></p></td>
+<td><p>section contains zero terminated strings</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The optional type argument <code class="docutils literal notranslate"><span class="pre">progbits</span></code> specifies that the section
+contains data; <code class="docutils literal notranslate"><span class="pre">nobits</span></code> specifies that it does not.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">M</span></code> symbol is specified as a flag, a type argument must be
+specified and an integer must be provided as a flag-specific argument.
+The flag-specific argument represents the entity size of data entries in
+the section. For example:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">.section</span> <span class="pre">.cp.const4,</span> <span class="pre">&quot;M&quot;,</span> <span class="pre">&#64;progbits,</span> <span class="pre">4</span></code></p>
+</div></blockquote>
+<p>Sections with the <code class="docutils literal notranslate"><span class="pre">M</span></code> flag but not S flag must contain fixed-size
+constants, each <em>flag-args</em> bytes long. Sections with both the <code class="docutils literal notranslate"><span class="pre">M</span></code> and
+<code class="docutils literal notranslate"><span class="pre">S</span></code> flags must contain zero-terminated strings, each character
+<em>flag-args</em> bytes long. The linker may remove duplicates within sections
+with the same name, entity size and flags.</p>
+<p>Each section with the same name must have the same type and flags. The
+<code class="docutils literal notranslate"><span class="pre">section</span></code> directive replaces the current section with the named
+section. The <code class="docutils literal notranslate"><span class="pre">pushsection</span></code> directive pushes the current section onto
+the top of a <em>section stack</em> and then replaces the current section with
+the named section. The <code class="docutils literal notranslate"><span class="pre">popsection</span></code> directive replaces the current
+section with the section on top of the section stack and then pops this
+section from the stack.</p>
+</section>
+<section id="text">
+<span id="assembly-text"></span><h3>text<a class="headerlink" href="#text" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">text</span></code> directive changes the current ELF section to the <code class="docutils literal notranslate"><span class="pre">.text</span></code>
+section. The section type and attributes are determined by the ABI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>text-directive ::= ``.text``
+</pre></div>
+</div>
+</section>
+<section id="set-linkset">
+<span id="assembly-linkset"></span><span id="assembly-set"></span><h3>set, linkset<a class="headerlink" href="#set-linkset" title="Permalink to this heading">#</a></h3>
+<p>A symbol is assigned a value using the <code class="docutils literal notranslate"><span class="pre">set</span></code> or <code class="docutils literal notranslate"><span class="pre">linkset</span></code> directive.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>set-directive ::= set-type symbol ``,`` expression
+
+set-type ::= ``.set``
+           | ``.linkset``
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">set</span></code> directive defines the named symbol with the value of the
+expression. The expression must be either a constant or a symbol: if the
+expression is a constant, the symbol is defined in the absolute section;
+if the expression is a symbol, the defined symbol inherits its section
+information and other attributes from this symbol.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">linkset</span></code> directive is the same, except that the expression is not
+evaluated; instead one or more <code class="docutils literal notranslate"><span class="pre">SHT_EXPR</span></code> entries are created in the
+ELF-extended expression section which together form a tree
+representation of the expression.</p>
+<p>Any symbol used in the assembly code may be a target of an <code class="docutils literal notranslate"><span class="pre">SHT_EXPR</span></code>
+entry, in which case its value is computed by the linker by evaluating
+the expression once values for all other symbols in the expression are
+known. This may happen at any incremental link stage; once the value is
+known, it is assigned to the symbol as with set and the expression entry
+is eliminated from the linked object.</p>
+</section>
+<section id="cc-top-cc-bottom">
+<span id="assembly-cc-bottom"></span><span id="assembly-cc-top"></span><h3>cc_top, cc_bottom<a class="headerlink" href="#cc-top-cc-bottom" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">cc_top</span></code> and <code class="docutils literal notranslate"><span class="pre">cc_bottom</span></code> directives are used to mark the
+beginning and end of elimination blocks.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cc-top-directive ::= ``.cc_top`` name ``,`` predicate
+                    | ``.cc_top`` name
+
+cc-directive ::= cc-top-directive
+               | ``.cc_bottom`` name
+
+name ::= symbol
+
+predicate ::= symbol
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cc_top</span></code> and <code class="docutils literal notranslate"><span class="pre">cc_bottom</span></code> directives with the same name refer to the
+same elimination block. An elimination block must have precisely one
+<code class="docutils literal notranslate"><span class="pre">cc_top</span></code> directive and one <code class="docutils literal notranslate"><span class="pre">cc_bottom</span></code> directive. The top and bottom
+of an elimination block must be in the same section. The elimination
+block consists of the data and labels in this section between the
+<code class="docutils literal notranslate"><span class="pre">cc_top</span></code> and <code class="docutils literal notranslate"><span class="pre">cc_bottom</span></code> directives. Elimination blocks must be
+disjoint; it is illegal for elimination blocks to overlap.</p>
+<p>An elimination block is retained in final executable if one of the following
+is true:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A label inside the elimination block is referenced from a location
+outside an elimination block.</p></li>
+<li><p>A label inside the elimination block is referenced from an elimination
+block which is not eliminated</p></li>
+<li><p>The predicate symbol is defined outside an elimination block or
+is contained in an elimination block which is not eliminated.</p></li>
+</ul>
+</div></blockquote>
+<p>If none of these conditions are true the elimination block is removed from
+the final executable.</p>
+</section>
+<section id="scheduling">
+<span id="assembly-scheduling"></span><h3>scheduling<a class="headerlink" href="#scheduling" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">scheduling</span></code> directive enables or disables instruction scheduling.
+When scheduling is enabled, the assembler may reorder instructions to
+minimize the number of FNOPs. The default scheduling mode is determined
+by the command-line option <a class="reference internal" href="../../../tools-guide/tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html#cmdoption-xcc-fschedule"><code class="xref std std-option docutils literal notranslate"><span class="pre">xcc</span> <span class="pre">-fschedule</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>scheduling-directive ::= ``.scheduling`` scheduling-mode
+
+scheduling-mode ::= ``on``
+                  | ``off``
+                  | ``default``
+</pre></div>
+</div>
+</section>
+<section id="issue-mode">
+<span id="assembly-issue-mode"></span><h3>issue_mode<a class="headerlink" href="#issue-mode" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">issue_mode</span></code> directive changes the current issue mode assumed by the
+assembler. See <a class="reference internal" href="#assembly-instructions"><span class="std std-ref">Instructions</span></a> for details of how the issue mode
+affects how instructions are assembled.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>issue-mode-directive ::= ``.issue_mode`` issue-mode
+
+issue-mode ::= ``single``
+             | ``dual``
+</pre></div>
+</div>
+</section>
+<section id="syntax">
+<span id="assembly-syntax"></span><h3>syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">syntax</span></code> directive changes the current syntax mode. See
+<a class="reference internal" href="#assembly-instructions"><span class="std std-ref">Instructions</span></a> for details of how assembly instructions
+are specified in each mode.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>syntax-directive ::= ``.syntax`` syntax
+
+syntax ::= ``default``
+         | ``architectural``
+</pre></div>
+</div>
+</section>
+<section id="assert">
+<span id="assembly-assert"></span><h3>assert<a class="headerlink" href="#assert" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>assert-directive ::= ``.assert`` constant ``,`` symbol ``,`` string
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">assert</span></code> directive requires an assertion to be tested prior to
+generating an executable object: the assertion fails if the symbol has a
+non-zero value. If the constant is 0, a failure should be reported as a
+warning; if the constant is 1, a failure should be reported as an error.
+The string is a message for an assembler or linker to emit on failure.</p>
+</section>
+<section id="overlay-directives">
+<span id="assembly-overlay-directives"></span><h3>Overlay directives<a class="headerlink" href="#overlay-directives" title="Permalink to this heading">#</a></h3>
+<p>The overlay directives control how code and data is partitioned into overlays
+that are loaded on demand at runtime.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>overlay-directive ::= ``.overlay_reference`` symbol ``,`` symbol
+                    | ``.overlay_root`` symbol ``,`` symbol
+                    | ``.overlay_root`` symbol
+                    | ``.overlay_subgraph_conflict`` sym-list
+
+sym-list ::= sym-list ``,`` symbol
+           | symbol
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">overlay_root</span></code> directive specifies that the first symbol should be
+treated as an overlay root. The optional second symbols specifies a overlay
+key symbol. If no overlay key symbol is explictly specified the overlay root
+symbol is used as the key symbol. Specifying the same overlay key symbol for
+multiple overlay roots forces the overlay roots into the same overlay.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">overlay_reference</span></code> directive specifies that linker should assume that
+there is a reference from the first symbol to the second symbol when
+it partitions the program into overlays.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">overlay_subgraph_conflict</span></code> directive specifies that linker should not
+place any code or data reachable from one the symbols into an overlay that is
+mapped an overlay region that contains another overlay containing code or data
+reachable from one of the other symbols.</p></li>
+</ul>
+</section>
+<section id="language-directives">
+<span id="assembly-language-directives"></span><h3>Language directives<a class="headerlink" href="#language-directives" title="Permalink to this heading">#</a></h3>
+<p>The language directives create entries in the ELF-extended expression
+section; the encoding is determined by the ABI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>xc-directive ::= globdir symbol ``,`` string
+               | globdir symbol ``,`` symbol ``,`` range-args ``,`` string
+               | ``.globpassesref`` symbol ``,`` symbol ``,`` string
+               | ``.call`` symbol ``,`` symbol
+               | ``.par`` symbol ``,`` symbol ``,`` string
+
+range-args ::= expression ``,`` expression
+
+globdir ::= ``.globread``
+          | ``.globwrite``
+          | ``.parwrite``
+          | ``.globpassesref``
+</pre></div>
+</div>
+<p>For each directive, the string is an error message for the assembler or
+linker to display on encountering an error attributed to the directive.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">call</span></code></dt><dd><p>Both symbols must have function type. This directive sets the property that
+the first function may make a call to the second function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">par</span></code></dt><dd><p>Both symbols must have function type. This directive sets the property
+that the first function is invoked in parallel with the second function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">globread</span></code></dt><dd><p>The first symbol must have function type and the second directive must
+have object type. This directive sets the property that the function may
+read the object. When a range is specified, the first expression is the
+offset from the start of the variable in bytes of the address which is
+read and the second expression is the size of the read in bytes.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">globwrite</span></code></dt><dd><p>The first symbol must have function type and the second directive must
+have object type. This directive sets the property that the function may
+write the object. When a range is specified, the first expression is the
+offset from the start of the variable in bytes of the address which is
+written and the second expression is the size of the write in bytes.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parwrite</span></code></dt><dd><p>The first symbol must have function type and the second directive must have
+object type. This directive set the property that the function is called in
+an expression which writes to the object where the order of evalulation of
+the write and the function call is undefined. When a range is specified, the
+first expression is the offset from the start of the variable in bytes of
+the address which is written and the second expression is the size of the
+write in bytes.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">globpassesref</span></code></dt><dd><p>The first symbol must have function type and the second directive must have
+object type. This directive sets the property that the object may be passed
+by reference to the function.</p>
+</dd>
+</dl>
+</section>
+<section id="uleb128-sleb128">
+<span id="assembly-sleb128"></span><span id="assembly-uleb128"></span><h3>uleb128, sleb128<a class="headerlink" href="#uleb128-sleb128" title="Permalink to this heading">#</a></h3>
+<p>The following directives emit, for each expression in the
+comma-separated list of expressions, a value that encodes either an
+unsigned or signed DWARF little-endian base 128 number.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>leb-directive ::= ``.uleb128`` exp-list
+                | ``.sleb128`` exp-list
+</pre></div>
+</div>
+</section>
+<section id="space-skip">
+<span id="assembly-skip"></span><span id="assembly-space"></span><h3>space, skip<a class="headerlink" href="#space-skip" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">space</span></code> directive emits a sequence of bytes, specified by the
+first expression, each with the fill value specified by the second
+expression. Both expressions must be constant expressions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>space-or-skip ::= ``.space``
+                | ``.skip``
+
+space-directive ::= space-or-skip expression
+                  | space-or-skip expression ``,`` expression
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">skip</span></code> directive is a synonym for the space directive. It is
+provided for compatibility with other assemblers.</p>
+</section>
+<section id="type">
+<span id="assembly-type"></span><h3>type<a class="headerlink" href="#type" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">type</span></code> directive specifies the type of a symbol to be either a
+function symbol or an object symbol.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>type-directive ::= ``.type`` symbol ``,`` symbol-type
+
+symbol-type ::= ``@function``
+              | ``@object``
+</pre></div>
+</div>
+</section>
+<section id="size">
+<span id="assembly-size"></span><h3>size<a class="headerlink" href="#size" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> directive specifies the size associated with a symbol.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>size-directive ::= ``.size`` symbol ``,`` expression
+</pre></div>
+</div>
+</section>
+<section id="jmptable-jmptable32">
+<span id="assembly-jmptable32"></span><span id="assembly-jmptable"></span><h3>jmptable, jmptable32<a class="headerlink" href="#jmptable-jmptable32" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">jmptable</span></code> and <code class="docutils literal notranslate"><span class="pre">jmptable32</span></code> directives generate a table of
+unconditional branch instructions. The target of each branch instruction
+is the next label in the list. The size of the each branch instruction
+is 16 bits for the <code class="docutils literal notranslate"><span class="pre">jmptable</span></code> directive and 32 bits for the
+<code class="docutils literal notranslate"><span class="pre">jmptable32</span></code> directive.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>jmptable-directive ::= ``.jmptable`` &lt;jmptable-list&gt;?
+                     | ``.jmptable32`` &lt;jmptable-list&gt;?
+
+jmptable-list ::= symbol
+                | jmptable-list symbol
+</pre></div>
+</div>
+<p>Each symbol must be a label. A maximum of 32 labels maybe specified. If
+the unconditional branch distance does not fit into a 16-bit branch
+instruction, a branch is made to a trampoline at the end of the table,
+which performs the branch to the target label.</p>
+</section>
+</section>
+<section id="instructions">
+<span id="assembly-instructions"></span><h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<p>Assembly instructions are normally inserted into an ELF text section.
+The syntax of an instruction is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>instruction ::= mnemonic &lt;instruction-args&gt;?
+
+instruction-args ::= instruction-args ``,`` instruction-arg
+                   | instruction-arg
+
+instruction-arg ::= symbol ``[`` expression ``]``
+                  | symbol ``[`` expression ``]`` ``:`` symbol
+                  | expression
+</pre></div>
+</div>
+<p>To target the dual issue execution mode of xCORE-200 devices, instructions may
+be put in bundles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>separator ::= newline
+            | ``;``
+
+instruction-bundle ::= ``{`` &lt;separator&gt;* bundle-contents &lt;separator&gt;* ``}``
+
+bundle-contents ::= instruction &lt;separator&gt;+ instruction
+                  | instruction
+</pre></div>
+</div>
+<p>The current issue mode, as specifed by the issue_mode directive
+(see <a class="reference internal" href="#assembly-issue-mode"><span class="std std-ref">issue_mode</span></a>), affects how the assembler assembles
+instructions. Initially the current issue mode is single and instruction bundles
+cannot be used. If the current issue mode is changed to dual then:</p>
+<ul class="simple">
+<li><p>Instruction bundles can be specified.</p></li>
+<li><p>16-bit instructions not in an instruction bundle are implicitly
+placed in an instruction bundle alongside a <code class="docutils literal notranslate"><span class="pre">NOP</span></code> instruction.</p></li>
+<li><p>The encoding of some operands may change. For example the assembler
+applies a different scaling factor to the immediate operand of relative
+branch instructions to match the different scaling factor that the processor
+uses at runtime when the instruction is executed in dual issue mode.</p></li>
+</ul>
+<p>The order in which instructions are listed in an instruction bundle is not
+significant. The assembler may reorder the instructions in the bundle to satisfy
+architectural constraints.</p>
+<p>The assembly instructions are summarized below using the default assembly
+syntax. The <a class="reference external" href="https://www.xmos.com/developer/doc/XM-000280-RF">XMOS XS1 Architecture</a> documents the architectural
+syntax of the instructions. The syntax directive is used to switch the syntax
+mode.</p>
+<p>The following notation is used:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bitp</span></code></p></td>
+<td><p>one of: <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, <code class="docutils literal notranslate"><span class="pre">7</span></code>, <code class="docutils literal notranslate"><span class="pre">8</span></code>, <code class="docutils literal notranslate"><span class="pre">16</span></code>, <code class="docutils literal notranslate"><span class="pre">24</span></code> and <code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p>register used as a base address</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>register used as a conditional operand</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e</span></code></p></td>
+<td><p>register used as a destination operand</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+<td><p>register used as a index operand</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r</span></code></p></td>
+<td><p>register used as a resource identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>register used as a source operand</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>register used as a thread identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>small unsigned constant in the range <code class="docutils literal notranslate"><span class="pre">0</span></code>…  <code class="docutils literal notranslate"><span class="pre">11</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>~~x~~</sub></p></td>
+<td><p>unsigned constant in the range <code class="docutils literal notranslate"><span class="pre">0</span></code>…  (  <code class="docutils literal notranslate"><span class="pre">2</span></code> <sup>~~x~~</sup>  <code class="docutils literal notranslate"><span class="pre">-1</span></code>  )</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">v,</span> <span class="pre">w,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>registers used for two or more source operands</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A register is one of: <code class="docutils literal notranslate"><span class="pre">r0</span></code>, <code class="docutils literal notranslate"><span class="pre">r1</span></code>, <code class="docutils literal notranslate"><span class="pre">r2</span></code>, <code class="docutils literal notranslate"><span class="pre">r3</span></code>, <code class="docutils literal notranslate"><span class="pre">r4</span></code>, <code class="docutils literal notranslate"><span class="pre">r5</span></code>,
+<code class="docutils literal notranslate"><span class="pre">r6</span></code>, <code class="docutils literal notranslate"><span class="pre">r7</span></code>, <code class="docutils literal notranslate"><span class="pre">r8</span></code>, <code class="docutils literal notranslate"><span class="pre">r9</span></code>, <code class="docutils literal notranslate"><span class="pre">r10</span></code>, <code class="docutils literal notranslate"><span class="pre">r11</span></code>, <code class="docutils literal notranslate"><span class="pre">sp</span></code>, <code class="docutils literal notranslate"><span class="pre">dp</span></code>, <code class="docutils literal notranslate"><span class="pre">cp</span></code>
+and <code class="docutils literal notranslate"><span class="pre">lr</span></code>. The instruction determines which of these registers are
+permitted.</p>
+<p>Where there is choice of instruction formats, the assembler chooses the
+format with the smallest size. To force a specific format, specify a
+mnemonic of the form <code class="docutils literal notranslate"><span class="pre">INSTRUCTION_format</span></code> where the instruction and
+format names are as described in the architecture manual. For example
+the <code class="docutils literal notranslate"><span class="pre">LDWCP_ru6</span></code> mnemonic specifies the ru6 format of the <code class="docutils literal notranslate"><span class="pre">LDWCP</span></code>
+instruction.</p>
+<section id="data-access">
+<span id="assembly-instructions-data-access"></span><h3>Data access<a class="headerlink" href="#data-access" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-data-access-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-data-access-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ld16s</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Load signed 16 bits</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ld8u</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Load unsigned 8 bits</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lda16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Add to 16-bit address</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lda16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[-i]</span></code></p></td>
+<td><p>Subtract from 16-bit address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldap</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">u</span></code> <sub>~~20~~</sub></p></td>
+<td><p>Load pc-relative address</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldap</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">-u</span></code> <sub>~~20~~</sub></p></td>
+<td><p>Load pc-relative address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Add to a word address</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[-i]</span></code></p></td>
+<td><p>Subtract from a word address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Add to a word address immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[-u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Subtract from a word address immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">cp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load address of word in constant pool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">dp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load address of word in data pool</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldaw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">sp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load address of word on stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Load double word (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">b[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load double word immediate (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">sp[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load double from the stack (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">et,</span> <span class="pre">sp[4]</span></code></p></td>
+<td><p>Load ET from the stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sed,</span> <span class="pre">sp[3]</span></code></p></td>
+<td><p>Load SED from the stack</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spc,</span> <span class="pre">sp[1]</span></code></p></td>
+<td><p>Load SPC from the stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssr,</span> <span class="pre">sp[2]</span></code></p></td>
+<td><p>Load SSR from the stack</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Load word</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">b[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load word immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">cp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load word from constant pool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">cp[u</span></code> <sub>~~20~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load word from constant pool</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">dp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load word from data pool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">sp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Load word from stack</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cp,</span> <span class="pre">s</span></code></p></td>
+<td><p>Set constant pool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dp,</span> <span class="pre">s</span></code></p></td>
+<td><p>Set data pointer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp,</span> <span class="pre">s</span></code></p></td>
+<td><p>Set the stack pointer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">st16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>16-bit store</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">st8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>8-bit store</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">std</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Store double word (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">b[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Store double word immediate (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">std</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y,</span> <span class="pre">x,</span> <span class="pre">sp[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Store double word on the stack (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sed,</span> <span class="pre">sp[3]</span></code></p></td>
+<td><p>Store SED on the stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">et,</span> <span class="pre">sp[4]</span></code></p></td>
+<td><p>Store ET on the stack</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spc,</span> <span class="pre">sp[1]</span></code></p></td>
+<td><p>Store SPC on the stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssr,</span> <span class="pre">sp[2]</span></code></p></td>
+<td><p>Store SSR on the stack</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">b[i]</span></code></p></td>
+<td><p>Store word</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">b[u</span></code> <sub>~~s~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Store word immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">dp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Store word in data pool</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">sp[u</span></code> <sub>16</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Store word on stack</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="branching-jumping-and-calling">
+<span id="assembly-instructions-branching-jumping-and-calling"></span><h3>Branching, jumping and calling<a class="headerlink" href="#branching-jumping-and-calling" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-branching-jumping-and-calling-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-branching-jumping-and-calling-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bau</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Branch absolute unconditional</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bf</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Branch relative if false</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bf</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">-u</span></code> <sub>16</sub></p></td>
+<td><p>Branch relative if false</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>~~20~~</sub></p></td>
+<td><p>Branch and link relative</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-u</span></code> <sub>~~20~~</sub></p></td>
+<td><p>Branch and link relative</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bla</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Branch and link absolute via register</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bla</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cp[u</span></code> <sub>~~20~~</sub>  <code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Branch and link absolute via CP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">blat</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Branch and link absolute via table</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bru</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Branch relative unconditional via register</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Branch relative if true</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">-u</span></code> <sub>16</sub></p></td>
+<td><p>Branch relative if true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Branch relative unconditional</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-u</span></code> <sub>16</sub></p></td>
+<td><p>Branch relative unconditional</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dualentsp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Adjust stack, save link register and enable dual issue (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">entsp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Adjust stack and save link register and enable single issue</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">extdp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Extend data pointer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">extsp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Extend stack pointer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">retsp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Return</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data-manipulation">
+<span id="assembly-instructions-data-manipulation"></span><h3>Data manipulation<a class="headerlink" href="#data-manipulation" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-data-manipulation-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-data-manipulation-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">add</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Add</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">add</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>Add immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Bitwise and</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">andnot</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>And not</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ashr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Arithmetic shift right</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ashr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Arithmetic shift right immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bitrev</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Bit reverse</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">byterev</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Byte reverse</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clz</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Count leading zeros</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">crc32</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">r,</span> <span class="pre">p</span></code></p></td>
+<td><p>Word CRC</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">crc32_inc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Word CRC with address increment (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">crc8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r,</span> <span class="pre">o,</span> <span class="pre">d,</span> <span class="pre">p</span></code></p></td>
+<td><p>8-step CRC</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">crcn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">p,</span> <span class="pre">n</span></code></p></td>
+<td><p>Variable step CRC (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">divs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Signed division</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">divu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Unsigned division</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Equal</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">x,</span> <span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>Equal immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ladd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">v</span></code></p></td>
+<td><p>Long unsigned add with carry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Load constant</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ldivu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">v,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Long unsigned divide</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lextract</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">u,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Bitfield extraction from register pair (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linsert</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Inserts a bitfield into a pair of registers (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lmul</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">v,</span> <span class="pre">w</span></code></p></td>
+<td><p>Long multiply</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lsats</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Saturate signed (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lss</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Less than signed</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lsu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Less than unsigned</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lsub</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e,</span> <span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">v</span></code></p></td>
+<td><p>Long unsigned subtract</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">maccs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Mulitply and accumulate signed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maccu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Multiply and accumulate unsigned</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mkmsk</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Make mask</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mkmsk</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Make mask immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mul</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Multiply</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">neg</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Two’s complement negate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Bitwise not</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Bitwise or</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rems</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Signed remainder</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">remu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Unsigned remainder</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sext</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Sign extend</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sext</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Sign extend immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">shl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Shift left</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Shift left immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">shr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Shift right</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Shift right immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sub</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Subtract</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sub</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>Subtract immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unzip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x</span></code></p></td>
+<td><p>Unzips a pair of registers (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">x,</span> <span class="pre">y</span></code></p></td>
+<td><p>Bitwise exclusive or</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xor4</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">v</span></code></p></td>
+<td><p>Bitwise exclusive or of four words (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zext</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Zero extend</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zext</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Zero extend immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zip</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">e,</span> <span class="pre">x</span></code></p></td>
+<td><p>Zips together a pair of registers (xCORE-200 only)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="concurrency-and-thread-synchronization">
+<span id="assembly-instructions-concurrency-and-thread-synchronization"></span><h3>Concurrency and thread synchronization<a class="headerlink" href="#concurrency-and-thread-synchronization" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-concurrency-and-thread-synchronization-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-concurrency-and-thread-synchronization-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">freet</span></code></p></td>
+<td></td>
+<td><p>Free unsynchronized thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">id</span></code></p></td>
+<td><p>Get thread ID</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getst</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Get synchronized thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mjoin</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Master synchronize and join</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">msync</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Master synchronize</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ssync</span></code></p></td>
+<td></td>
+<td><p>Slave synchronize</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]:cp,</span> <span class="pre">s</span></code></p></td>
+<td><p>Initialize thread’s CP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]:dp,</span> <span class="pre">s</span></code></p></td>
+<td><p>Initialize thread’s DP</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]:lr,</span> <span class="pre">s</span></code></p></td>
+<td><p>Initialize thread’s LR</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]:pc,</span> <span class="pre">s</span></code></p></td>
+<td><p>Initialize thread’s PC</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">init</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]:sp,</span> <span class="pre">s</span></code></p></td>
+<td><p>Initialize thread’s SP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]:d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Set register in thread</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">start</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t[r]</span></code></p></td>
+<td><p>Start thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tsetmr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p>Set register in master thread</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="communication">
+<span id="assembly-instructions-communication"></span><h3>Communication<a class="headerlink" href="#communication" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-communication-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-communication-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chkct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Test for control token</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chkct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>Test for control token immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Get network</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">in</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Input data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Input control token</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Input token of data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">out</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Output data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Output control token</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>Output control token immediate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Output token of data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set network</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">testlcl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Test local</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">testct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Test for control token</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">testwct</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Test for position of control token</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="resource-operations">
+<span id="assembly-instructions-resource-operations"></span><h3>Resource operations<a class="headerlink" href="#resource-operations" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-resource-operations-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-resource-operations-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clrpt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Clear port time</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elate</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Throw exception if too late (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">endin</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>End a current input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">freer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Free a resource</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Get resource data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">u</span></code> <sub>~~s~~</sub></p></td>
+<td><p>Allocate resource</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gettime</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>Get the reference time (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getts</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Get port timestamp</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">in</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Input data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inpw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r],</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Input a part word</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inshr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Input and shift right</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">out</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Output data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outpw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s,</span> <span class="pre">bitp</span></code></p></td>
+<td><p>Output a part word</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outpw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s,</span> <span class="pre">w</span></code></p></td>
+<td><p>Output a part word immediate (xCORE-200 only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outshr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Output data and shift</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">peek</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Peek at port data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set resource control bits</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Set resource control bits immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setclk</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set clock for a resource</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setev</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">r11</span></code></p></td>
+<td><p>Set environment vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setpsc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set the port shift count</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setpt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set the port time</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setrdy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set ready input for a port</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">settw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set transfer width for a port</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setv</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r],</span> <span class="pre">r11</span></code></p></td>
+<td><p>Set event vector</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">syncr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Synchronize a resource</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="event-handling">
+<span id="assembly-instructions-event-handling"></span><h3>Event handling<a class="headerlink" href="#event-handling" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-event-handling-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-event-handling-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clre</span></code></p></td>
+<td></td>
+<td><p>Clear all events</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">clrsr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Clear bits in SR</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">edu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Disable events</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eef</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Enable events if false</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eet</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">res[r]</span></code></p></td>
+<td><p>Enable events if true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eeu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">res[r]</span></code></p></td>
+<td><p>Enable events</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getsr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Get bits from SR</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">setsr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code> <sub>16</sub></p></td>
+<td><p>Set bits in SR</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">waitef</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Wait for event if false</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">waitet</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Wait for event if true</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">waiteu</span></code></p></td>
+<td></td>
+<td><p>Wait for event</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="interrupts-exceptions-and-kernel-calls">
+<span id="assembly-instructions-interrupts-exceptions-and-kernel-calls"></span><h3>Interrupts, exceptions and kernel calls<a class="headerlink" href="#interrupts-exceptions-and-kernel-calls" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-interrupts-exceptions-and-kernel-calls-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-interrupts-exceptions-and-kernel-calls-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clrsr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code><sub>16</sub></p></td>
+<td><p>Clear bits in SR</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ecallf</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Raise exception if false</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ecallt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Raise exception if true</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">ed</span></code></p></td>
+<td><p>Get ED into r11</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">et</span></code></p></td>
+<td><p>Get ET into r11</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">kep</span></code></p></td>
+<td><p>Get the kernel entry point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">ksp</span></code></p></td>
+<td><p>Get the kernel stack pointer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">getsr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r11,</span> <span class="pre">u</span></code><sub>16</sub></p></td>
+<td><p>Get bits from SR</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kcall</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Kernel call</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kcall</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code><sub>16</sub></p></td>
+<td><p>Kernel call immediate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kentsp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code><sub>16</sub></p></td>
+<td><p>Switch to kernel stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">krestsp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code><sub>16</sub></p></td>
+<td><p>Restore stack pointer from kernel stack</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kret</span></code></p></td>
+<td></td>
+<td><p>Kernel return</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">kep,</span> <span class="pre">r11</span></code></p></td>
+<td><p>Set the kernel entry point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">setsr</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">u</span></code><sub>16</sub></p></td>
+<td><p>Set bits in SR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="debugging">
+<span id="assembly-instructions-debugging"></span><h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper longtable smaller vertical-borders horizontal-borders docutils container" id="assembly-instructions-debugging-table">
+<table class="longtable smaller vertical-borders horizontal-borders docutils align-default" id="assembly-instructions-debugging-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dcall</span></code></p></td>
+<td></td>
+<td><p>Cause a debug interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dentsp</span></code></p></td>
+<td></td>
+<td><p>Save and modify stack pointer for debug</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dgetreg</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Debug read of another thread’s register</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">drestsp</span></code></p></td>
+<td></td>
+<td><p>Restore non debug stack pointer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dret</span></code></p></td>
+<td></td>
+<td><p>Return from debug interrupt</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">ps[r]</span></code></p></td>
+<td><p>Get processor state</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ps[r],</span> <span class="pre">s</span></code></p></td>
+<td><p>Set processor state</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="pseudo-instructions">
+<span id="assembly-pseduo-instructions"></span><h3>Pseudo instructions<a class="headerlink" href="#pseudo-instructions" title="Permalink to this heading">#</a></h3>
+<p>In the default syntax mode, the assembler supports a small set of pseudo
+instructions. These instructions do not exist on the processor, but are
+translated by the assembler into xCORE instructions.</p>
+<div class="table-wrapper smaller vertical-borders horizontal-borders docutils container" id="assembly-pseduo-instructions-table">
+<table class="smaller vertical-borders horizontal-borders docutils align-default" id="assembly-pseduo-instructions-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mnemonic</p></th>
+<th class="head"><p>Operands</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mov</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d,</span> <span class="pre">s</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">d,</span> <span class="pre">s,</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nop</span></code></p></td>
+<td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">r0,</span> <span class="pre">r0,</span> <span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="assembly-program">
+<span id="assembly-assembly-program"></span><h2>Assembly program<a class="headerlink" href="#assembly-program" title="Permalink to this heading">#</a></h2>
+<p>An assembly program consists of a sequence of statements.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>program ::= &lt;statement&gt;*
+
+statement ::= &lt;label-list&gt;? &lt;dir-or-inst&gt;? separator
+
+label-list ::= label
+             | label-list label
+
+dir-or-inst ::= directive
+              | instruction
+              | instruction-bundle
+
+directive ::= align-directive
+            | ascii-directive
+            | value-directive
+            | file-directive
+            | loc-directive
+            | weak-directive
+            | vis-directive
+            | text-directive
+            | set-directive
+            | cc-directive
+            | scheduling-directive
+            | syntax-directive
+            | assert-directive
+            | xc-directive
+            | space-directive
+            | type-directive
+            | size-directive
+            | jmptable-directive
+            | globalresource-directive
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../programming-xs1-devices.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Programming for XCORE Devices</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../assembly-for-xmos-xs1-abi/assembly-for-abi.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Make assembly programs compatible with the XMOS XS1 ABI</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Assembly programming manual</a><ul>
+<li><a class="reference internal" href="#lexical-conventions">Lexical conventions</a><ul>
+<li><a class="reference internal" href="#comments">Comments</a></li>
+<li><a class="reference internal" href="#symbol-names">Symbol names</a></li>
+<li><a class="reference internal" href="#directives">Directives</a></li>
+<li><a class="reference internal" href="#constants">Constants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sections-and-relocations">Sections and relocations</a></li>
+<li><a class="reference internal" href="#symbols">Symbols</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#labels">Labels</a></li>
+<li><a class="reference internal" href="#expressions">Expressions</a></li>
+<li><a class="reference internal" href="#assembly-directives-second">Directives</a><ul>
+<li><a class="reference internal" href="#add-to-set">add_to_set</a></li>
+<li><a class="reference internal" href="#max-reduce-sum-reduce">max_reduce, sum_reduce</a></li>
+<li><a class="reference internal" href="#align">align</a></li>
+<li><a class="reference internal" href="#ascii-asciiz">ascii, asciiz</a></li>
+<li><a class="reference internal" href="#byte-short-int-long-word">byte, short, int, long, word</a></li>
+<li><a class="reference internal" href="#file">file</a></li>
+<li><a class="reference internal" href="#loc">loc</a></li>
+<li><a class="reference internal" href="#weak">weak</a></li>
+<li><a class="reference internal" href="#globl-global-extern-locl-local">globl, global, extern, locl, local</a></li>
+<li><a class="reference internal" href="#globalresource">globalresource</a></li>
+<li><a class="reference internal" href="#typestring">typestring</a></li>
+<li><a class="reference internal" href="#assembly-corerev">ident, core, corerev</a></li>
+<li><a class="reference internal" href="#section-pushsection-popsection">section, pushsection, popsection</a></li>
+<li><a class="reference internal" href="#text">text</a></li>
+<li><a class="reference internal" href="#set-linkset">set, linkset</a></li>
+<li><a class="reference internal" href="#cc-top-cc-bottom">cc_top, cc_bottom</a></li>
+<li><a class="reference internal" href="#scheduling">scheduling</a></li>
+<li><a class="reference internal" href="#issue-mode">issue_mode</a></li>
+<li><a class="reference internal" href="#syntax">syntax</a></li>
+<li><a class="reference internal" href="#assert">assert</a></li>
+<li><a class="reference internal" href="#overlay-directives">Overlay directives</a></li>
+<li><a class="reference internal" href="#language-directives">Language directives</a></li>
+<li><a class="reference internal" href="#uleb128-sleb128">uleb128, sleb128</a></li>
+<li><a class="reference internal" href="#space-skip">space, skip</a></li>
+<li><a class="reference internal" href="#type">type</a></li>
+<li><a class="reference internal" href="#size">size</a></li>
+<li><a class="reference internal" href="#jmptable-jmptable32">jmptable, jmptable32</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#data-access">Data access</a></li>
+<li><a class="reference internal" href="#branching-jumping-and-calling">Branching, jumping and calling</a></li>
+<li><a class="reference internal" href="#data-manipulation">Data manipulation</a></li>
+<li><a class="reference internal" href="#concurrency-and-thread-synchronization">Concurrency and thread synchronization</a></li>
+<li><a class="reference internal" href="#communication">Communication</a></li>
+<li><a class="reference internal" href="#resource-operations">Resource operations</a></li>
+<li><a class="reference internal" href="#event-handling">Event handling</a></li>
+<li><a class="reference internal" href="#interrupts-exceptions-and-kernel-calls">Interrupts, exceptions and kernel calls</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#pseudo-instructions">Pseudo instructions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#assembly-program">Assembly program</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

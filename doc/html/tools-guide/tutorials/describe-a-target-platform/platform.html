@@ -1,0 +1,752 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Working with targets" href="../working-with-targets/index.html" /><link rel="prev" title="Tools and target features" href="../index.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Describe a target platform - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Tools and target features</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tools-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tools-ref/xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tools-ref/transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="describe-a-target-platform">
+<span id="describe-platform"></span><h1>Describe a target platform<a class="headerlink" href="#describe-a-target-platform" title="Permalink to this heading">#</a></h1>
+<p>Hardware target platforms are described using an XN file. This file provides
+information to the XMOS XTC tools about the target
+hardware, including XMOS devices, ports, flash memories and
+oscillators.</p>
+<p>The XMOS tools use the XN data to generate a platform-specific header
+file <code class="docutils literal notranslate"><span class="pre">&lt;platform.h&gt;</span></code>, and to compile, boot and debug programs.</p>
+<p>An XMOS target platform comprises one or more nodes, where each node has one or two
+tiles. A package (or device) typically contains one node, but some
+packages contain two nodes.</p>
+<figure class="align-default">
+<img alt="../../../_images/xn-board.png" src="../../../_images/xn-board.png" />
+</figure>
+<section id="supported-network-topologies">
+<span id="describe-platform-supported-network-topologies"></span><h2>Supported network topologies<a class="headerlink" href="#supported-network-topologies" title="Permalink to this heading">#</a></h2>
+<p>To route messages across the xCONNECT Link network, the routing ID and routing
+table of each node on the network must configured. The tools use the information
+in the XN file to setup the routing for the network before running the
+application.</p>
+<p>If the routing configuration is explicitly specified in the XN file, the tools
+use this configuration. If the routing configuration is omitted from the XN file
+the tools choose a suitable set of routing IDs and routing tables based on the
+network topology in the XN file. The tools support the following network topologies.</p>
+<div class="table-wrapper docutils container" id="id1">
+<span id="platform-automatic-routing-topologies"></span><span id="platform-automatic-routing-topologies"></span><table class="docutils align-default" id="id1">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Topologies supported by the tools</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Network Topology</p></th>
+<th class="head"><p>Supported Configurations</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Single node</p></td>
+<td><p>Single XCORE-200 or xcore.ai node</p></td>
+</tr>
+<tr class="row-odd"><td><p>Line of nodes</p></td>
+<td><p>Two XCORE-200 nodes or two xcore.ai nodes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The xTAG provides an optional xCONNECT link to the target board. When it is connected to
+a board with a single device containing one node, a line of two nodes is formed.
+A board with two nodes and an xTAG is a line of three nodes.</p>
+</section>
+<section id="a-board-with-a-single-package">
+<span id="describe-platform-describe-simple-hardware-platform"></span><h2>A board with a single package<a class="headerlink" href="#a-board-with-a-single-package" title="Permalink to this heading">#</a></h2>
+<p>The following example shows how to provide the XN description for a board
+containing a single xcore.ai package with one node. The XN file fragments below have
+been copied from the file in this XTC release
+<code class="docutils literal notranslate"><span class="pre">targets\XK-EVK-XU316\XK-EVK-XU316.xn</span></code>.</p>
+<section id="initial-declarations">
+<h3>Initial declarations<a class="headerlink" href="#initial-declarations" title="Permalink to this heading">#</a></h3>
+<p>An XN file starts with an XML declaration.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</pre></div>
+</div>
+<p>The following code provides the start of the network.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Network</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.xmos.com&quot;</span>
+<span class="w">         </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">         </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.xmos.com http://www.xmos.com&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>The following code provides the board description information (shown by <code class="docutils literal notranslate"><span class="pre">xcc</span> <span class="pre">-print-boards</span></code>
+and when <code class="docutils literal notranslate"><span class="pre">xcc</span></code> does recognise the target name supplied with <code class="docutils literal notranslate"><span class="pre">-target</span></code>).</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Type&gt;</span>Board<span class="nt">&lt;/Type&gt;</span>
+<span class="nt">&lt;Name&gt;</span>xcore.ai<span class="w"> </span>Explorer<span class="w"> </span>Kit<span class="w"> </span>(XK-EVK-XU316)<span class="nt">&lt;/Name&gt;</span>
+</pre></div>
+</div>
+<p>The following code declares two xCORE Tiles. The declaration “<code class="docutils literal notranslate"><span class="pre">tileref</span> <span class="pre">tile[2];</span></code>”
+is exported to the header file <code class="docutils literal notranslate"><span class="pre">&lt;platform.h&gt;</span></code>.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Declarations&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Declaration&gt;</span>tileref<span class="w"> </span>tile[2]<span class="nt">&lt;/Declaration&gt;</span>
+<span class="nt">&lt;/Declarations&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="the-package-with-clocks-and-tiles">
+<h3>The package with clocks and tiles<a class="headerlink" href="#the-package-with-clocks-and-tiles" title="Permalink to this heading">#</a></h3>
+<p>The next code fragment declares a single package
+(a BGA FB265 package containing the XS3 processor architecure and 1024 kilo bytes of internal RAM).
+A crystal oscillator provides an input clock to this package at 24 MHz.
+Each tile clock oscillates at a frequency of 600 MHz, and the reference clock used for
+timers oscillates at 100 MHz. The bootloader will setup these frequencies using the
+system PLL and clock dividers in the device.</p>
+<p>It is typical to clock the reference clock at 100 MHz and the tiles at a multiple of
+100 MHz.</p>
+<p>The code descibes the boot source. In this case it is a flash device referred to as <code class="docutils literal notranslate"><span class="pre">bootFlash</span></code>.
+This will be described in more detail later.</p>
+<p>The code then describes the LPDDR on this board in the section <code class="docutils literal notranslate"><span class="pre">ExtMem</span></code>. See the section
+<a class="reference internal" href="../lpddr.html#lpddr-hardware-setup"><span class="std std-ref">Hardware setup</span></a> for full details on the contents of this section.</p>
+<p>The code then describes each tile in the package referring to the tiles declared in the <code class="docutils literal notranslate"><span class="pre">tileref</span></code>
+section above.</p>
+<p>The physical ports connected to a tile may be provided with convenient board or application names
+as shown in this example. These names are provided in the generated file <code class="docutils literal notranslate"><span class="pre">&lt;platform.h&gt;</span></code>,
+and may be used by application software written in the C language, xC language or
+assembly language.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Packages&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Package</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;XS3-UnA-1024-FB265&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Nodes&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Node</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">InPackageId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;XS3-L16A-1024&quot;</span><span class="w"> </span><span class="na">Oscillator=</span><span class="s">&quot;24MHz&quot;</span><span class="w"> </span><span class="na">SystemFrequency=</span><span class="s">&quot;600MHz&quot;</span><span class="w"> </span><span class="na">ReferenceFrequency=</span><span class="s">&quot;100MHz&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Boot&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Source</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;bootFlash&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Boot&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Extmem</span><span class="w"> </span><span class="na">sizeMbit=</span><span class="s">&quot;1024&quot;</span><span class="w"> </span><span class="na">Frequency=</span><span class="s">&quot;100MHz&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Extmem&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Tile</span><span class="w"> </span><span class="na">Number=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;tile[0]&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_1B&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_CS&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_1C&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SCLK&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_4B&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SIO&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_4C&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_LEDS&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_4D&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_BUTTONS&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Tile&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Tile</span><span class="w"> </span><span class="na">Number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;tile[1]&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_1G&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_PDM_CLK&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_1F&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_PDM_DATA&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Tile&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/Node&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Nodes&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Package&gt;</span>
+<span class="nt">&lt;/Packages&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="routing-to-the-xtag">
+<h3>Routing to the xTAG<a class="headerlink" href="#routing-to-the-xtag" title="Permalink to this heading">#</a></h3>
+<p>The code then describes network routing required to send data from the xTAG
+to the device over the xCONNECT link. This code should be provided exactly
+as shown below.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Nodes&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Node</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;device:&quot;</span><span class="w"> </span><span class="na">RoutingId=</span><span class="s">&quot;0x8000&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Service</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Proto=</span><span class="s">&quot;xscope_host_data(chanend c);&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Chanend</span><span class="w"> </span><span class="na">Identifier=</span><span class="s">&quot;c&quot;</span><span class="w"> </span><span class="na">end=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Service&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Node&gt;</span>
+<span class="nt">&lt;/Nodes&gt;</span>
+</pre></div>
+</div>
+<p>The code then provides the xCONNECT physical routing between the target device
+and the xTAG. This sets the inter-symbol delay between edge transitions at 5 clock cycles
+where the clock is running at the tile frequency (600 MHz in the above example).
+Usually, This code should be provided exactly as shown below.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Links&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;2wire&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;5clk&quot;</span><span class="w"> </span><span class="na">Flags=</span><span class="s">&quot;XSCOPE&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;XL0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Chanend=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Link&gt;</span>
+<span class="nt">&lt;/Links&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="boot-device">
+<h3>Boot device<a class="headerlink" href="#boot-device" title="Permalink to this heading">#</a></h3>
+<p>The code then provides information about the <code class="docutils literal notranslate"><span class="pre">bootFlash</span></code> device referred to above.
+This is a QSPI device (<code class="docutils literal notranslate"><span class="pre">Class=&quot;SQIFlash&quot;</span></code>) with a size of 16384 pages (<code class="docutils literal notranslate"><span class="pre">NumPages=&quot;16384&quot;</span></code>),
+a page size of 256 bytes (<code class="docutils literal notranslate"><span class="pre">PageSize=&quot;256&quot;</span></code>) and a sector size of 4096 bytes (<code class="docutils literal notranslate"><span class="pre">SectorSize=&quot;4096&quot;</span></code>).</p>
+<p>Note all modern flash devices have a page size of 256 bytes.</p>
+<p>This device is connected to tile 0, via the ports with convenience names
+<code class="docutils literal notranslate"><span class="pre">PORT_SQI_CS</span></code>, <code class="docutils literal notranslate"><span class="pre">PORT_SQI_SCLK</span></code> and <code class="docutils literal notranslate"><span class="pre">PORT_SQI_SIO</span></code>.
+The bootrom is “hard-wired” to use a QSPI device connected to these ports
+when instructed to boot from this source.
+(See the device datasheet for further information on how to specify which source the bootrom uses.)</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;ExternalDevices&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Device</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Tile=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Class=</span><span class="s">&quot;SQIFlash&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;bootFlash&quot;</span><span class="w"> </span><span class="na">PageSize=</span><span class="s">&quot;256&quot;</span><span class="w"> </span><span class="na">SectorSize=</span><span class="s">&quot;4096&quot;</span><span class="w"> </span><span class="na">NumPages=</span><span class="s">&quot;16384&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Attribute</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_CS&quot;</span><span class="w">   </span><span class="na">Value=</span><span class="s">&quot;PORT_SQI_CS&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Attribute</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SCLK&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;PORT_SQI_SCLK&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Attribute</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SIO&quot;</span><span class="w">  </span><span class="na">Value=</span><span class="s">&quot;PORT_SQI_SIO&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Device&gt;</span>
+<span class="nt">&lt;/ExternalDevices&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="jtag-connectivity">
+<h3>JTAG connectivity<a class="headerlink" href="#jtag-connectivity" title="Permalink to this heading">#</a></h3>
+<p>Finally the devices connected in the JTAG chain to the xTAG are described. In this case there is only one.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;JTAGChain&gt;</span>
+<span class="w">  </span><span class="nt">&lt;JTAGDevice</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/JTAGChain&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="a-board-with-a-package-with-two-nodes">
+<h2>A board with a package with two nodes<a class="headerlink" href="#a-board-with-a-package-with-two-nodes" title="Permalink to this heading">#</a></h2>
+<p>The following example describes a board with the <code class="docutils literal notranslate"><span class="pre">XUF232-1024-FB167</span></code> package,
+which contains two nodes, each comprising two xCORE tiles.</p>
+<p>Note additional <code class="docutils literal notranslate"><span class="pre">usb_tile</span></code> declarations are provided to allow access to the USB PHYs.
+Only one of these PHYs is connected to external package pins.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;Network</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.xmos.com&quot;</span>
+<span class="w">         </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">         </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.xmos.com http://www.xmos.com&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Type&gt;</span>Board<span class="nt">&lt;/Type&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Name&gt;</span>XUF232-1024-FB167-C40<span class="w"> </span>Bringup<span class="nt">&lt;/Name&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;Declarations&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Declaration&gt;</span>tileref<span class="w"> </span>tile[4]<span class="nt">&lt;/Declaration&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Declaration&gt;</span>tileref<span class="w"> </span>usb_tile[2]<span class="nt">&lt;/Declaration&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Declarations&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;Packages&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Package</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;XS2-UFnA-1024-FB167&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Nodes&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Node</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">InPackageId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;XS2-L16A-512&quot;</span><span class="w"> </span><span class="na">SystemFrequency=</span><span class="s">&quot;500MHz&quot;</span><span class="w"> </span><span class="na">OscillatorSrc=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Boot&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Source</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;bootFlash0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Bootee</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;/Boot&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Tile</span><span class="w"> </span><span class="na">Number=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;tile[0]&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_1B&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_CS_0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_1C&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SCLK_0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Port</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;XS1_PORT_4B&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SIO_0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;/Tile&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Tile</span><span class="w"> </span><span class="na">Number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;tile[1]&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Node&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Node</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">InPackageId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;XS2-L16A-512&quot;</span><span class="w"> </span><span class="na">SystemFrequency=</span><span class="s">&quot;500MHz&quot;</span><span class="w"> </span><span class="na">OscillatorSrc=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Boot&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Source</span><span class="w"> </span><span class="na">Location=</span><span class="s">&quot;LINK&quot;</span><span class="w"> </span><span class="na">BootMode=</span><span class="s">&quot;4&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;/Boot&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Tile</span><span class="w"> </span><span class="na">Number=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;tile[2]&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;Tile</span><span class="w"> </span><span class="na">Number=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;tile[3]&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Node&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Node</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">InPackageId=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;periph:XS1-SU&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;usb_tile[0]&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Node&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Node</span><span class="w"> </span><span class="na">Id=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">InPackageId=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;periph:XS1-SU&quot;</span><span class="w"> </span><span class="na">Reference=</span><span class="s">&quot;usb_tile[1]&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Node&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/Nodes&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Links&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;5wire&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;3clk&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;7&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;5wire&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;3clk&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;4&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;5wire&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;3clk&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;6&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;5wire&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;3clk&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;5wire&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;8&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;52clk,52clk&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;XL0&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;1clk,1clk&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Link&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Link</span><span class="w"> </span><span class="na">Encoding=</span><span class="s">&quot;5wire&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;8&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;52clk,52clk&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;LinkEndpoint</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">Link=</span><span class="s">&quot;XL0&quot;</span><span class="w"> </span><span class="na">Delays=</span><span class="s">&quot;1clk,1clk&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Link&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/Links&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Package&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Packages&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;ExternalDevices&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Device</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Tile=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Class=</span><span class="s">&quot;SQIFlash&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;bootFlash0&quot;</span><span class="w"> </span><span class="na">Type=</span><span class="s">&quot;S25LQ016B&quot;</span><span class="w"> </span><span class="na">PageSize=</span><span class="s">&quot;256&quot;</span><span class="w"> </span><span class="na">SectorSize=</span><span class="s">&quot;4096&quot;</span><span class="w"> </span><span class="na">NumPages=</span><span class="s">&quot;8192&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Attribute</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_CS&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;PORT_SQI_CS_0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Attribute</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SCLK&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;PORT_SQI_SCLK_0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Attribute</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;PORT_SQI_SIO&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;PORT_SQI_SIO_0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Device&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/ExternalDevices&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;JTAGChain&gt;</span>
+<span class="w">    </span><span class="nt">&lt;JTAGDevice</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;JTAGDevice</span><span class="w"> </span><span class="na">NodeId=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/JTAGChain&gt;</span>
+
+<span class="nt">&lt;/Network&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../working-with-targets/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Working with targets</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tools and target features</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Describe a target platform</a><ul>
+<li><a class="reference internal" href="#supported-network-topologies">Supported network topologies</a></li>
+<li><a class="reference internal" href="#a-board-with-a-single-package">A board with a single package</a><ul>
+<li><a class="reference internal" href="#initial-declarations">Initial declarations</a></li>
+<li><a class="reference internal" href="#the-package-with-clocks-and-tiles">The package with clocks and tiles</a></li>
+<li><a class="reference internal" href="#routing-to-the-xtag">Routing to the xTAG</a></li>
+<li><a class="reference internal" href="#boot-device">Boot device</a></li>
+<li><a class="reference internal" href="#jtag-connectivity">JTAG connectivity</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a-board-with-a-package-with-two-nodes">A board with a package with two nodes</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

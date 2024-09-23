@@ -1,0 +1,1383 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Design and manufacture systems with flash memory" href="../design-with-flash/flash.html" /><link rel="prev" title="Working with targets" href="index.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Introduction - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Tools and target features</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="index.html">Working with targets</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tools-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../tools-ref/libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tools-ref/xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tools-ref/xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tools-ref/xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tools-ref/transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="introduction">
+<span id="working-with-targets"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
+<p>The XTC Tools are a suite of tools to run on a host PC for working with XMOS target systems.
+A target system is typically a single printed circuit board populated with one or more XMOS
+devices. A target program, (which is a .xe-suffixed file produced by the <code class="docutils literal notranslate"><span class="pre">xcc</span></code> tool),
+may be downloaded into the target RAM and executed using the <code class="docutils literal notranslate"><span class="pre">xrun</span></code> tool. Symbolic
+debugging of a target program may be carried out using the <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> tool. A
+target program may burned to non-volatile flash using the <code class="docutils literal notranslate"><span class="pre">xflash</span></code> tool. These
+tools require an XMOS xTAG to connect the target system to the host computer via
+a USB 2.0 interface.</p>
+</section>
+<section id="key-target-based-features">
+<h1>Key target-based features<a class="headerlink" href="#key-target-based-features" title="Permalink to this heading">#</a></h1>
+<p>The following target-related features are provided by the XTC Tools:</p>
+<ol class="arabic simple">
+<li><p>Reset the target, download and launch a target program, and optionally
+support host-IO and xSCOPE operations</p></li>
+<li><p>Write a target program to a flash device in a target system</p></li>
+<li><p>Dump the current state of the target (does not reset the target)</p></li>
+<li><p>Provide symbolic debug of a target (where the program is either downloaded
+into RAM or booted from flash)</p>
+<ol class="arabic simple">
+<li><p>The target may be debugged starting from a system-reset state or the debugger
+may be attached to a running program</p></li>
+<li><p>Host-IO and xSCOPE API calls may be left in programs which are deployed.
+The tools will optionally enable host-IO when a connection is made via an
+xTAG</p></li>
+</ol>
+</li>
+<li><p>Provide an API for a developer to use on the host computer to transfer
+application data to and from the target</p></li>
+<li><p>Provide sample-based profiling of a target</p></li>
+<li><p>Management of all xTAGs attached to the host</p>
+<ol class="arabic simple">
+<li><p>List the xTAGs and detect the type of target system attached</p></li>
+<li><p>For all the tools, an xTAG may be specified by its list index or by unique
+identifier</p></li>
+<li><p>If only one xTAG is connected to the host an identifier does not need to
+be supplied to the tools</p></li>
+</ol>
+</li>
+</ol>
+<section id="targets">
+<h2>Targets<a class="headerlink" href="#targets" title="Permalink to this heading">#</a></h2>
+<p>Two generations of XMOS target system are supported by the tools:</p>
+<ul class="simple">
+<li><p>xCORE-200 (XS2A Instruction Set Architecture)</p></li>
+<li><p>xcore.ai (XS3A Instruction Set Architecture)</p></li>
+</ul>
+<p>Evaluation boards may be obtained from various sources, such as Farnell.</p>
+</section>
+</section>
+<section id="xtag">
+<h1>xTAG<a class="headerlink" href="#xtag" title="Permalink to this heading">#</a></h1>
+<p>The xTAG is the physical host-to-target interface. Two types are supported by
+the tools; xTAG v3.0
+(<a class="reference external" href="https://www.xmos.com/download/xTAG-3-Hardware-Manual(1.0).pdf">https://www.xmos.com/download/xTAG-3-Hardware-Manual(1.0).pdf</a>) and xTAG v4.0.
+Both xTAG types have a USB 2.0 High Speed (Micro-B) interface for
+connection to the host which also supplies the power to the xTAG. The xTAG3 has
+a proprietary xSYS interface to the target board and the xTAG4 has an xSYS2
+interface to the target board.</p>
+<p>Both xSYS and xSYS2 provide 4-wire IEEE1149.1 JTAG interface and a duplex serial
+xCONNECT link (xLINK) interface, plus some additional control signals. Note the optional
+JTAG signal nTRST is not pinned out.</p>
+<p>When an xTAG is attached to a host it listens for a connection by certain host
+programs (<code class="docutils literal notranslate"><span class="pre">xrun</span></code>, <code class="docutils literal notranslate"><span class="pre">xgdb</span></code>, <code class="docutils literal notranslate"><span class="pre">xflash</span></code> or <code class="docutils literal notranslate"><span class="pre">xburn</span></code>). The first connection
+will download firmware to the xTAG which will support target-related operations.
+The firmware is not downloaded on subsequent connections until the xTAG is
+power-cycled.</p>
+<p>The elapsed time required to connect to an xTAG is highly variable, due to the
+possibility of a firmware download occurring, and because the host operating
+system can introduce delays. This period may extend when multiple xTAGs are
+attached to the host computer. When a connection is initiated a lock is taken
+which may pause the execution of other independent host tools each using their
+own xTAG. The lock is released once the connection is established. Automated
+test systems should ensure any timeout for an xTAG response is sufficient for
+the worst case which may need to be determined empirically.</p>
+<p>If the xTAG has been used previously with an earlier Tools 15 release the first
+connection will attempt to install the firmware required for use with this
+release. The xTAG will automatically reboot as part of this process which will
+be shown by the xTAG LEDs.</p>
+<p>Note 1: If an xTAG has been used with a tools release earlier than Tools 15 it
+must be manually power cycled prior to making a connection with Tools 15.</p>
+<p>Note 2: If the host is rebooted it may fail to enumerate the attached xTAGs. The
+xTAGs must be power-cycled. Some USB hubs provide a mechanism to power-cycle
+their downstream ports, and these are recommended for remote lab environments.
+Note Windows hosts do not support this feature.</p>
+<section id="xtag-v3-0">
+<h2>xTAG v3.0<a class="headerlink" href="#xtag-v3-0" title="Permalink to this heading">#</a></h2>
+<p>xTAG v3.0 datasheet: <a class="reference external" href="https://www.xmos.com/download/xTAG-3-Hardware-Manual(1.0).pdf">https://www.xmos.com/download/xTAG-3-Hardware-Manual(1.0).pdf</a></p>
+<p>The xTAG v3.0 provides the xSYS target interface (IDC 20-pin 0.1”) and supports
+XCORE-200 target families. It supports only 3v3 target voltage levels.</p>
+</section>
+<section id="xtag-v4-0">
+<h2>xTAG v4.0<a class="headerlink" href="#xtag-v4-0" title="Permalink to this heading">#</a></h2>
+<p>The xTAG v4.0 provides the xSYS2 target interface (Amphenol Minitek127 20-pin 0.05”)
+and supports XCORE-200 and xcore.ai target families. It supports 1v8 and 3v3
+target voltages, automatically and independently for JTAG and xLINK interfaces.</p>
+<p>The xLINK is optional - if it is not connected a reduced-footprint
+connector may be employed on the target board. To reduce the connector cost to a
+minimum, for production programming and testing, a Tag-Connect Plug-Of-Nails may
+be used. Only the IEEEE1149.1 JTAG signals need to be connected.</p>
+</section>
+<section id="using-xtags-with-windows-hosts">
+<h2>Using xTAGs with Windows hosts<a class="headerlink" href="#using-xtags-with-windows-hosts" title="Permalink to this heading">#</a></h2>
+<p>On Windows host computers the click-through XTC installer sets up an
+xTAG service. This service starts following the installation
+procedure and each time the host boots, and requires no further administration.</p>
+<p>On Windows hosts it is not possible to switch between an XTC Tools 15 series
+release and an earlier XTC Tools release and use the host tools which require
+access to an xTAG.</p>
+<p>On Windows hosts the xTAG unique identifiers are shown in upper case but the
+tools are case-insensitive so scripts which drive the tools may be used
+interchangeably between all OS types supported by the tools.</p>
+</section>
+</section>
+<section id="host-tools">
+<h1>Host tools<a class="headerlink" href="#host-tools" title="Permalink to this heading">#</a></h1>
+<p>The host tools that interface with the target system are <code class="docutils literal notranslate"><span class="pre">xrun</span></code>, <code class="docutils literal notranslate"><span class="pre">xgdb</span></code>,
+<code class="docutils literal notranslate"><span class="pre">xflash</span></code> and <code class="docutils literal notranslate"><span class="pre">xburn</span></code>.</p>
+<p>Unless stated otherwise the following examples in this section assume a single
+xTAG and target system are attached to the host computer.</p>
+<section id="xrun">
+<h2>xrun<a class="headerlink" href="#xrun" title="Permalink to this heading">#</a></h2>
+<p>The program <code class="docutils literal notranslate"><span class="pre">xrun</span></code> is used to:</p>
+<ol class="arabic simple">
+<li><p>List the xTAGs and target systems attached to the host computer</p></li>
+<li><p>Download a target program to RAM and launch it</p></li>
+<li><p>Download a target program to RAM and launch it, managing host-IO</p></li>
+<li><p>Download a target program to RAM and launch it, and capture xSCOPE data to a
+file</p></li>
+<li><p>Download a target program to RAM and launch it, and allow a user-supplied host program
+capture xSCOPE data from the target and send data to the target</p></li>
+<li><p>Dump the state of a target either with a <code class="docutils literal notranslate"><span class="pre">.xe</span></code> target program so it may be
+represented symbolically or without a <code class="docutils literal notranslate"><span class="pre">.xe</span></code> to show state as raw data</p></li>
+</ol>
+<section id="list-the-attached-xtags">
+<h3>List the attached xTAGs<a class="headerlink" href="#list-the-attached-xtags" title="Permalink to this heading">#</a></h3>
+<p>The command <code class="docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">-l</span></code> lists the xTAGs attached to the host computer. When an xTAG
+is first plugged into the host the red LEDs should be illuminated in a dim
+state. These should change state when <code class="docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">-l</span></code> is invoked. Sometimes the host fails
+to identify the xTAG. In this case it should be unplugged for several seconds
+and then re-inserted. If the xTAG is not listed check for its presence. On Linux
+hosts run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lsusb
+</pre></div>
+</div>
+<p>On Windows hosts open the Device Manager and expand Universal Serial Bus
+devices.</p>
+</section>
+<section id="launching-a-target-program">
+<h3>Launching a target program<a class="headerlink" href="#launching-a-target-program" title="Permalink to this heading">#</a></h3>
+<p>A target program may be launched on the target system with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun my_program.xe
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">xrun</span></code> will exit immediately, leaving the target program running
+indefinitely. If the target program fails it may be debugged by attaching with <code class="docutils literal notranslate"><span class="pre">xgdb</span></code>.</p>
+<p>A target program may be launched with host-IO enabled with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun --io my_program.xe
+</pre></div>
+</div>
+<p>or with <a class="reference internal" href="../../tools-ref/xscope/index.html#xscope-index"><span class="std std-ref">xSCOPE</span></a> host-IO enabled:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun --xscope my_program.xe
+</pre></div>
+</div>
+</section>
+</section>
+<section id="xgdb">
+<h2>xgdb<a class="headerlink" href="#xgdb" title="Permalink to this heading">#</a></h2>
+<p>The host tool <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> is a variant of the open-source tool <code class="docutils literal notranslate"><span class="pre">gdb</span></code>. It supports the
+standard <em>gdb</em> command line options and commands, plus extra command options and
+builtin commands for use with XMOS targets.</p>
+<p>It may be used to carry out all the functions supported by <code class="docutils literal notranslate"><span class="pre">xrun</span></code>, plus</p>
+<ol class="arabic simple">
+<li><p>Interactive, symbolic debug of the downloaded program</p></li>
+<li><p>Scripted actions with the target</p></li>
+<li><p>Attaching to a target which is running a program which either booted from
+flash or was downloaded and launched with xrun or xgdb</p></li>
+</ol>
+<p>Symbolic debug is only available for a source compilation unit (that is, a .c., .cpp or .xc
+file) if it is compiled with the <code class="docutils literal notranslate"><span class="pre">-g</span></code> option passed to xcc. Reducing the
+optimisation level used by <code class="docutils literal notranslate"><span class="pre">xcc</span></code> with the <code class="docutils literal notranslate"><span class="pre">-O</span></code> option will improve debuggability at
+the expense of potential changes in program behaviour.</p>
+<section id="debugging-a-target-program">
+<h3>Debugging a target program<a class="headerlink" href="#debugging-a-target-program" title="Permalink to this heading">#</a></h3>
+<p>The following command will start a debug session of the program my_program.xe by
+connecting to the target, downloading the program and initialising the device
+based on the target XN used to build the program:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;connect&quot; -ex &quot;load&quot; my_program.xe
+</pre></div>
+</div>
+<p>Commands supplied with the option <code class="docutils literal notranslate"><span class="pre">-ex</span></code> may be entered at the (gdb) prompt if
+preferred.</p>
+<p>To start the program running the user must enter the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">continue</span>
+</pre></div>
+</div>
+<p>Before starting the program debugging commands may be supplied. For example,
+breakpoints may be set with the <code class="docutils literal notranslate"><span class="pre">break</span></code> command.</p>
+<p>Once the target program is started the (gdb) prompt will not be available.
+Host-IO may appear on the console. Once started the target program
+may be stopped by pressing Ctrl-C which will report the stopped location and
+provide the (gdb) prompt.</p>
+<p>The active logical cores may be listed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">info</span> <span class="n">threads</span>
+</pre></div>
+</div>
+<p>Each active logical core is assigned a unique “gdb thread” number. Only active
+logical cores in all tiles in the system are listed. Note the “gdb thread”
+number assignments are not static and they may vary each time the target stops.
+A logical core may be selected for further inspection with the thread command.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">thread</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>The back trace (call stack) for the logical core may be shown with the where
+command, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">where</span>
+</pre></div>
+</div>
+<p>Local and global variables may be inspected with the standard gdb commands. See
+the gdb documentation for details.</p>
+</section>
+<section id="attaching-to-a-target">
+<h3>Attaching to a target<a class="headerlink" href="#attaching-to-a-target" title="Permalink to this heading">#</a></h3>
+<p>In some cases it may be desirable to inspect the state of a target system
+without resetting it. It is possible to <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-attach"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">attach</span></code></a> to a running target. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex attach my_program.xe
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">xgdb</span></code> will stop all the tiles and provide the (gdb) prompt. <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> commands
+may be issued as illustrated in the previous section.</p>
+</section>
+</section>
+</section>
+<section id="target-interaction">
+<h1>Target interaction<a class="headerlink" href="#target-interaction" title="Permalink to this heading">#</a></h1>
+<p>The JTAG interface is used by the tools to establish a connection to the target,
+to reset it and to download programs to RAM. It is used to interact with the
+target, for example, to extract register state and to set breakpoints.  It is
+used to monitor the target to detect program termination, to detect the target
+taking a fatal exception and to interrupt the target. It may be used to handle
+host-IO.</p>
+<section id="debug-mode">
+<h2>Debug mode<a class="headerlink" href="#debug-mode" title="Permalink to this heading">#</a></h2>
+<p>Each tile will be placed in its debug mode to: download a program, when a
+breakpoint is reached, to terminate a target program and when interrupted by a
+Ctrl-C operation in the <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> console. In some cases it will enter debug mode to
+forward host-IO data. When a tile enters debug mode all its logical cores will
+be paused.</p>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
+<p>The tools <code class="docutils literal notranslate"><span class="pre">xrun</span></code> and <code class="docutils literal notranslate"><span class="pre">xgdb</span></code>  place a breakpoint on the exception handler entry point.
+When the target takes a fatal exception (for example, due to arithmetic
+divide-by-zero), the tools will report on the occurrence of the exception. xgdb
+may be used to debug the cause, symbolically, typically by showing the
+back-trace.</p>
+<p>Note the message <code class="docutils literal notranslate"><span class="pre">SIGTRAP</span></code> is generated if a tile enters debug mode unexpectedly.
+This may occur when certain low-level operations are being carried out with the
+tiles. The target program has <strong>not</strong> taken an exception.</p>
+</section>
+<section id="launch-with-xrun">
+<h2>Launch with xrun<a class="headerlink" href="#launch-with-xrun" title="Permalink to this heading">#</a></h2>
+<p>If the target program is launched by <code class="docutils literal notranslate"><span class="pre">xrun</span></code> without any optional arguments, <code class="docutils literal notranslate"><span class="pre">xrun</span></code>
+loads and runs the program, then exits immediately leaving the target program
+running. If the <code class="docutils literal notranslate"><span class="pre">--io</span></code> option or any of the <code class="docutils literal notranslate"><span class="pre">--xscope</span></code> options are supplied to xrun it
+will not exit until the target program terminates - see below.</p>
+</section>
+<section id="termination">
+<h2>Termination<a class="headerlink" href="#termination" title="Permalink to this heading">#</a></h2>
+<p>If a tile’s control flow reaches the end of <code class="docutils literal notranslate"><span class="pre">main()</span></code> that tile will terminate and
+wait. When control flow for all tiles has reached the end of <code class="docutils literal notranslate"><span class="pre">main()</span></code>, the
+<code class="docutils literal notranslate"><span class="pre">xrun</span></code> session will terminate with a successful exit code. If the program was launched
+using <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> it will report “Program exited normally “ on termination. (If <code class="docutils literal notranslate"><span class="pre">xrun</span></code> has
+been used to launch a program without either the <a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html#cmdoption-xrun-io"><code class="xref std std-option docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">--io</span></code></a> or <a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html#cmdoption-xrun-xscope"><code class="xref std std-option docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">--xscope</span></code></a>
+options, then it will detach after loading, and not await termination.)</p>
+<p>If a tile calls <code class="docutils literal notranslate"><span class="pre">exit()</span></code> with a non-zero value, this will be returned by <code class="docutils literal notranslate"><span class="pre">xrun</span></code> as
+the process exit code. One tile calling <code class="docutils literal notranslate"><span class="pre">exit()</span></code> terminates the entire system.
+If launched by <code class="docutils literal notranslate"><span class="pre">xgdb</span></code>, the exit code will be shown
+on the console, and the <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#cmdoption-xgdb-return-child-result"><code class="xref std std-option docutils literal notranslate"><span class="pre">xgdb</span> <span class="pre">--return-child-result</span></code></a> option can be used to make
+<code class="docutils literal notranslate"><span class="pre">xgdb</span></code> return the exit code as its exit code.</p>
+</section>
+</section>
+<section id="host-io">
+<span id="adv-tutorial-host-io"></span><h1>Host-IO<a class="headerlink" href="#host-io" title="Permalink to this heading">#</a></h1>
+<p>If the target program calls standard library IO functions from <code class="docutils literal notranslate"><span class="pre">stdio.h</span></code> such as
+<code class="docutils literal notranslate"><span class="pre">printf()</span></code>, <code class="docutils literal notranslate"><span class="pre">fprintf()</span></code>, <code class="docutils literal notranslate"><span class="pre">fopen()</span></code>, <code class="docutils literal notranslate"><span class="pre">fread()</span></code> and <code class="docutils literal notranslate"><span class="pre">fwrite()</span></code>,
+and the program was launched with
+<code class="docutils literal notranslate"><span class="pre">xgdb</span></code>, or with <code class="docutils literal notranslate"><span class="pre">xrun</span></code> and the <a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html#cmdoption-xrun-io"><code class="xref std std-option docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">--io</span></code></a> or <a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html#cmdoption-xrun-xscope"><code class="xref std std-option docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">--xscope</span></code></a> options, these calls will be
+redirected to act on the host computer’s filesystem (or its console, for
+stdin, stdout and stderr). This is part of the “semihosting” system which runs
+all system calls on the host system when the target is connected via a debug interface.
+By default, data is sent to and from the target via the JTAG interface.
+Using the JTAG interface, the tile making the call enters debug mode which pauses execution of <strong>all</strong> its logical cores.</p>
+<p>These calls may be left in the program when it is deployed to boot from flash
+using <code class="docutils literal notranslate"><span class="pre">xflash</span></code>. The system calls will be skipped if a debugger is not connected, however
+much of the logic (such as the string formatting of printf) will still execute.
+If <code class="docutils literal notranslate"><span class="pre">xrun</span></code> or <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> is later used with a such a system, the IO will be
+redirected to the host computer. There is a deployment penalty in
+run-time and memory used; each call will process its arguments before inspecting
+internal state to determine whether <code class="docutils literal notranslate"><span class="pre">xrun</span></code> or <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> is connected.</p>
+<p>Note <code class="docutils literal notranslate"><span class="pre">stdio.h</span></code> and other headers mentioned in the following sections can be found
+under the tools installation in the sub-directory <code class="docutils literal notranslate"><span class="pre">target/include</span></code>.</p>
+<p>An example xrun command to enable host-IO:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun --adapter-id DFW7DTYY --io test.xe
+</pre></div>
+</div>
+<p>An example xgdb command (note IO is enabled by default when using xgdb):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;connect --adapter-id DFW7DTYY&quot; -ex load -ex continue test.xe
+</pre></div>
+</div>
+<section id="reduced-overhead-print-functions">
+<h2>Reduced-overhead print functions<a class="headerlink" href="#reduced-overhead-print-functions" title="Permalink to this heading">#</a></h2>
+<p>The header <code class="docutils literal notranslate"><span class="pre">print.h</span></code> provides a set of reduced overhead print functions such as
+<code class="docutils literal notranslate"><span class="pre">printstr()</span></code>. These do not perform any memory allocation or any runtime
+formatting, making them memory and run-time efficient compared with the standard
+library IO functions. For example, the following prints a set of characters
+without a new line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">printstr</span><span class="p">(</span><span class="s2">&quot;Starting test 1&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="syscall-host-io">
+<h2>Syscall host-IO<a class="headerlink" href="#syscall-host-io" title="Permalink to this heading">#</a></h2>
+<p>The header <code class="docutils literal notranslate"><span class="pre">syscall.h</span></code> provides the functions <code class="docutils literal notranslate"><span class="pre">_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">_close()</span></code>, <code class="docutils literal notranslate"><span class="pre">_write()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">_read()</span></code>. These may be used to perform host-IO with a reduced run-time and memory
+overhead compared with the standard library IO functions. The standard library
+IO functions call these underlying syscall functions. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">_open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">O_WRONLY</span> <span class="o">|</span> <span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">O_TRUNC</span><span class="p">,</span> <span class="n">S_IREAD</span> <span class="o">|</span> <span class="n">S_IWRITE</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">_write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="nb">len</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">Handle</span> <span class="n">error</span> <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="host-io-via-the-xconnect-link-xscope">
+<h2>Host-IO via the xCONNECT link (xSCOPE)<a class="headerlink" href="#host-io-via-the-xconnect-link-xscope" title="Permalink to this heading">#</a></h2>
+<p>The IO transfer rate via JTAG is relatively low. Furthermore, each IO call puts
+the tile in debug mode which is highly intrusive (as it pauses all logical
+cores). To achieve a significantly higher bandwidth and minimise intrusion into
+the target program, the xCONNECT link (xLINK) may be used as a transport. This may be
+configured in a lossy mode where data may be dropped if the host fails to keep
+pace with the target, or in lossless mode where the logical core emitting the
+data may be paused while data is being received by the host.</p>
+<p>Note the write APIs (<code class="docutils literal notranslate"><span class="pre">printf()</span></code>, <code class="docutils literal notranslate"><span class="pre">fprintf()</span></code>, <code class="docutils literal notranslate"><span class="pre">fwrite()</span></code> and <code class="docutils literal notranslate"><span class="pre">_write()</span></code>) will use
+xSCOPE exclusively. Other APIs such as <code class="docutils literal notranslate"><span class="pre">fopen()</span></code>, <code class="docutils literal notranslate"><span class="pre">fread()</span></code> or <code class="docutils literal notranslate"><span class="pre">_read()</span></code> always
+use the JTAG interface to transport data even if IO has been configured to use xSCOPE.</p>
+<p>To use the xSCOPE protocol over xLINK, the following should be provided in a
+source file from which the target program is built:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xscope.h&gt;</span>
+
+<span class="c1">// This user-implemented function will be called just before main()</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">xscope_user_init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// This enables using xSCOPE for write syscalls (such as when using printf)</span>
+<span class="w">  </span><span class="n">xscope_config_io</span><span class="p">(</span><span class="n">XSCOPE_IO_BASIC</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For full documentation of the xSCOPE runtime library, see <a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html#lib-xscope"><span class="std std-ref">xSCOPE target library</span></a>.</p>
+<p>Key points to note:</p>
+<ol class="arabic simple">
+<li><p>The program provides the function named <code class="docutils literal notranslate"><span class="pre">xscope_user_init()</span></code> (which is called
+automatically on program startup by the C-runtime initialisation code
+as a static constructor)</p></li>
+<li><p>The target program must be built with xSCOPE support, either by passing
+<a class="reference internal" href="../../tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html#cmdoption-xcc-fxscope"><code class="xref std std-option docutils literal notranslate"><span class="pre">xcc</span> <span class="pre">-fxscope</span></code></a> or an <a class="reference internal" href="../../tools-ref/formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> to xcc</p></li>
+<li><p>One of the <code class="docutils literal notranslate"><span class="pre">--xscope</span></code> options must be supplied to <a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html#xrun-manual"><span class="std std-ref">xrun</span></a> or
+the <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-connect"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">connect</span></code></a> command.</p></li>
+</ol>
+</section>
+</section>
+<section id="xscope-apis">
+<h1>xSCOPE APIs<a class="headerlink" href="#xscope-apis" title="Permalink to this heading">#</a></h1>
+<p>A set of target APIs is provided to send packets of data to the host
+to be visualised as waveforms with a 3rd party graphical tool.
+A set of virtual channels called ‘probes’ are defined in the target program and each appears as
+a separate waveform trace.</p>
+<p>The xLINK is always used to transport the data sent from the target.</p>
+<p>xSCOPE may be configured in lossy mode where data may be dropped if the host fails
+to keep pace with the target, or in lossless mode where logical core emitting
+the data may be paused while data is transferred.</p>
+<p>Lossy or lossless data delivery may be selected using <a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html#c.xscope_mode_lossless" title="xscope_mode_lossless"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_mode_lossless()</span></code></a>
+and <a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html#c.xscope_mode_lossy" title="xscope_mode_lossy"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_mode_lossy()</span></code></a>.</p>
+<p>The APIs are defined in <a class="reference internal" href="../../tools-ref/xscope/xscope-target-library.html#lib-xscope"><span class="std std-ref">xscope.h</span></a>. An example to emit float and integer data for
+two probes is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">xscope_user_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Register 2 probes. The first implicitly has ID 0, the second has ID 1.</span>
+<span class="w">    </span><span class="n">xscope_register</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">XSCOPE_CONTINUOUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Float0&quot;</span><span class="p">,</span><span class="w">     </span><span class="n">XSCOPE_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mV&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">XSCOPE_CONTINUOUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Iterations&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">XSCOPE_UINT</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;Steps&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">emit</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">xscope_float</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+<span class="w">    </span><span class="n">xscope_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The target program must be built with xSCOPE support, either by passing
+<a class="reference internal" href="../../tools-ref/cmd-line-tools/xcc-manual/xcc-manual.html#cmdoption-xcc-fxscope"><code class="xref std std-option docutils literal notranslate"><span class="pre">xcc</span> <span class="pre">-fxscope</span></code></a> or an <a class="reference internal" href="../../tools-ref/formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> to xcc</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">xrun</span></code> option <a class="reference internal" href="../../tools-ref/cmd-line-tools/xrun-manual/xrun-manual.html#cmdoption-xrun-xscope-file"><code class="xref std std-option docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">--xscope-file</span></code></a> must be supplied to specify a file into
+which the data will be written in IEEE 1364-2001 Verilog VCD format.</p>
+</section>
+<section id="user-supplied-host-program">
+<span id="adv-tutorial-host-io-userprog"></span><h1>User-supplied host program<a class="headerlink" href="#user-supplied-host-program" title="Permalink to this heading">#</a></h1>
+<p>The user may supply a host program which handles target data while the target
+program is running. The target can send data to the host program using either
+the xSCOPE APIs, the semihosting APIs (such as printf) or both sets. The host program can send data
+back to the target program.</p>
+<p>The host program can be written in either the C or C++ programming language. The
+header <a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html#lib-xscope-host"><span class="std std-ref">xscope_endpoint.h</span></a> provides the API for the host program. It must be
+linked against the shared library <code class="docutils literal notranslate"><span class="pre">libxscope_endpoint.so</span></code> on Linux and Mac hosts
+and <code class="docutils literal notranslate"><span class="pre">xscope_endpoint.a</span></code> on Windows hosts, using C linkage. These libraries are
+provided by the XTC Tools in the <code class="docutils literal notranslate"><span class="pre">lib</span></code> sub-directory of the installation root.
+See <a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html#lib-xscope-host"><span class="std std-ref">xSCOPE host library</span></a> for more information.</p>
+<p>In this example two consoles are used to launch the xgdb session and the host
+program.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;PORTNUM&gt;</span></code> must be substituted with a free system port number.</p>
+<p>Console 1: launch the xgdb session:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;connect --xscope-port --xscope-port localhost:&lt;PORTNUM&gt;&quot;
+</pre></div>
+</div>
+<p>Console 2: launch the host program:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ host_example &lt;PORTNUM&gt;
+</pre></div>
+</div>
+<section id="structure-of-the-host-program">
+<h2>Structure of the host program<a class="headerlink" href="#structure-of-the-host-program" title="Permalink to this heading">#</a></h2>
+<p>The host program starts by registering callback functions to handle selected
+target activities, such as target calls to <code class="docutils literal notranslate"><span class="pre">printf()</span></code> or target calls to xSCOPE
+APIs. It does this with calls to:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html#c.xscope_ep_set_print_cb" title="xscope_ep_set_print_cb"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_ep_set_print_cb()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html#c.xscope_ep_set_register_cb" title="xscope_ep_set_register_cb"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_ep_set_register_cb()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html#c.xscope_ep_set_record_cb" title="xscope_ep_set_record_cb"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_ep_set_record_cb()</span></code></a></p></li>
+</ul>
+<p>It then connects to the xgdb session using the <code class="docutils literal notranslate"><span class="pre">&lt;PORTNUM&gt;</span></code> argument passed to
+<code class="docutils literal notranslate"><span class="pre">main()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">xscope_ep_connect</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>If result is zero, the connection was successful. If non-zero the xgdb server
+was not ready. The <a class="reference internal" href="../../tools-ref/xscope/xscope-host-library.html#c.xscope_ep_connect" title="xscope_ep_connect"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_ep_connect()</span></code></a> API call may be re-tried
+until a connection is made.</p>
+<p>Once connected the program should sleep in an efficient manner. The callback
+functions will be called when necessary as a direct result of API calls by the
+target program.</p>
+</section>
+<section id="example-host-program-and-target-programs">
+<span id="working-with-targets-example-host-communication"></span><h2>Example host program and target programs<a class="headerlink" href="#example-host-program-and-target-programs" title="Permalink to this heading">#</a></h2>
+<p>In the following example the host program provides a set of call back functions
+which are called when the target-initiated events occur.</p>
+<section id="compile">
+<h3>Compile<a class="headerlink" href="#compile" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xcc<span class="w"> </span>-g<span class="w"> </span>-fxscope<span class="w"> </span>-target<span class="o">=</span>XCORE-AI-EXPLORER<span class="w"> </span>-o<span class="w"> </span>target.xe<span class="w"> </span>main.xc<span class="w"> </span>target.c
+$<span class="w"> </span>gcc<span class="w"> </span>-g<span class="w"> </span>-I<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>XMOS_TOOL_PATH<span class="k">)</span><span class="s2">/include&quot;</span><span class="w"> </span><span class="si">${</span><span class="nv">XMOS_TOOL_PATH</span><span class="si">}</span>/lib/xscope_endpoint.so<span class="w"> </span>-o<span class="w"> </span>host<span class="w"> </span>host.c
+</pre></div>
+</div>
+</section>
+<section id="run">
+<h3>Run<a class="headerlink" href="#run" title="Permalink to this heading">#</a></h3>
+<p>Open two consoles.</p>
+<p>In console 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun --xscope-port : target.xe
+XScope Realtime Server Enabled (localhost:37316)
+</pre></div>
+</div>
+<p>In console 2: Supply the port number printed by xrun following <code class="docutils literal notranslate"><span class="pre">localhost:</span></code> above:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./host 37316
+</pre></div>
+</div>
+</section>
+<section id="host-program">
+<span id="working-with-targets-example-host-program"></span><h3>Host program<a class="headerlink" href="#host-program" title="Permalink to this heading">#</a></h3>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-number">Listing 12 </span><span class="caption-text">host.c</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;signal.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xscope_endpoint.h&quot;</span>
+
+<span class="cm">/* Called when the target calls xscope_register() */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">xscope_register</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">g</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">data_type</span><span class="p">,</span>
+<span class="w">                            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">data_name</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Handle the registration of the probe with the id &#39;id&#39;</span>
+<span class="w">  </span><span class="c1">// For this example, we would expect a registration for:</span>
+<span class="w">  </span><span class="c1">// - Probe id=0, name = &quot;V&quot;</span>
+<span class="w">  </span><span class="c1">// - Probe id=1, name = &quot;I&quot;</span>
+<span class="w">  </span><span class="c1">// See the xscope_register call in the target file below</span>
+<span class="p">}</span>
+
+<span class="cm">/* Called on each target call to xscope_int() and similar APIs */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">xscope_record</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">                          </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timestamp</span><span class="p">,</span>
+<span class="w">                          </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="p">,</span>
+<span class="w">                          </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">dataval</span><span class="p">,</span>
+<span class="w">                          </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">databytes</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* id is the probe number used by the target in the xSCOPE API call */</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="cm">/* handle each probe id */</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">      </span><span class="cm">/* do something for probe 0 */</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">      </span><span class="cm">/* do something for probe 1 */</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/* Optional: Send a 2-byte reply to the host : max 256 bytes */</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ok&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">xscope_ep_request_upload</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">xscope_print</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timestamp</span><span class="p">,</span>
+<span class="w">                         </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="p">,</span>
+<span class="w">                         </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">running</span><span class="p">;</span>
+
+<span class="cm">/* Called when the target program terminates */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sigint_handler</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">){</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ERROR missing xscope port number: Usage example %s localhost:12340</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">-1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">xscope_ep_set_print_cb</span><span class="p">(</span><span class="n">xscope_print</span><span class="p">);</span>
+<span class="w">    </span><span class="n">xscope_ep_set_register_cb</span><span class="p">(</span><span class="n">xscope_register</span><span class="p">);</span>
+<span class="w">    </span><span class="n">xscope_ep_set_record_cb</span><span class="p">(</span><span class="n">xscope_record</span><span class="p">);</span>
+<span class="w">    </span><span class="n">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sigint_handler</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">attempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">MAX_ATTEMPTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">240</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">attempts</span><span class="o">&lt;</span><span class="n">MAX_ATTEMPTS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xscope_ep_connect</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">attempts</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xscope_ep_connect: failed %d attempts</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">attempts</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">running</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">xscope_ep_disconnect</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="target-program">
+<h3>Target program<a class="headerlink" href="#target-program" title="Permalink to this heading">#</a></h3>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 13 </span><span class="caption-text">main.xc</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;platform.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xscope.h&gt;</span>
+
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">main_tile0</span><span class="p">(</span><span class="n">chanend</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">chan</span><span class="w"> </span><span class="n">xscope_chan</span><span class="p">;</span>
+<span class="w">    </span><span class="n">par</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xscope_host_data</span><span class="p">(</span><span class="n">xscope_chan</span><span class="p">);</span>
+<span class="w">        </span><span class="n">on</span><span class="w"> </span><span class="n">tile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="n">main_tile0</span><span class="p">(</span><span class="n">xscope_chan</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 14 </span><span class="caption-text">test.c</span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">xscope_user_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">xscope_register</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="n">XSCOPE_CONTINUOUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;V&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">XSCOPE_INT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mV&quot;</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Probe 0 */</span>
+<span class="w">        </span><span class="n">XSCOPE_CONTINUOUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">XSCOPE_INT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mA&quot;</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Probe 1 */</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">main_tile0</span><span class="p">(</span><span class="n">chanend_t</span><span class="w"> </span><span class="n">xscope_end</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">xscope_mode_lossless</span><span class="p">();</span>
+<span class="w">    </span><span class="n">xscope_connect_data_from_host</span><span class="p">(</span><span class="n">xscope_end</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">xscope_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">);</span><span class="w">              </span><span class="cm">/* Send 45 to probe 0 */</span>
+
+<span class="w">    </span><span class="c1">// Read response from host</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bytes_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SELECT_RES</span><span class="p">(</span><span class="n">CASE_THEN</span><span class="p">(</span><span class="n">xscope_end</span><span class="p">,</span><span class="w"> </span><span class="n">read_host_data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nl">read_host_data</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">xscope_data_from_host</span><span class="p">(</span><span class="n">xscope_end</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">buffer_ptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytes_read</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">xscope_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">578</span><span class="p">);</span><span class="w">             </span><span class="cm">/* Send 578 to probe 1 */</span>
+
+<span class="w">    </span><span class="c1">// Read response from host</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bytes_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SELECT_RES</span><span class="p">(</span><span class="n">CASE_THEN</span><span class="p">(</span><span class="n">xscope_end</span><span class="p">,</span><span class="w"> </span><span class="n">read_host_data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nl">read_host_data</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">xscope_data_from_host</span><span class="p">(</span><span class="n">xscope_end</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">buffer_ptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytes_read</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="specifying-a-port-number-for-xgdb-and-the-user-host-program">
+<h2>Specifying a port number for xgdb and the user host program<a class="headerlink" href="#specifying-a-port-number-for-xgdb-and-the-user-host-program" title="Permalink to this heading">#</a></h2>
+<p>An example of an explicitly chosen port number is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xgdb</span> <span class="o">-</span><span class="n">ex</span> <span class="s2">&quot;connect --xscope-port-blocking --xscope-port localhost:45678&quot;</span>  <span class="n">led</span><span class="o">-</span><span class="n">flash</span><span class="o">.</span><span class="n">xe</span>
+</pre></div>
+</div>
+</section>
+<section id="allow-xgdb-to-choose-a-port-number-and-bind-avoiding-a-race-condition">
+<h2>Allow xgdb to choose a port number and bind - avoiding a race condition<a class="headerlink" href="#allow-xgdb-to-choose-a-port-number-and-bind-avoiding-a-race-condition" title="Permalink to this heading">#</a></h2>
+<p>It is often difficult to choose a port number and avoid the race condition where
+another program on the host computer binds to that number.
+This race can be prevented by allowing <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> to choose the port number, and bind to it
+(which is an <em>atomic</em> operation and prevents another program from using that number).
+<code class="docutils literal notranslate"><span class="pre">xgdb</span></code> prints the port number it has used, which is then passed to the host program.
+The following example shows the <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;connect --xscope-port-blocking --xscope-port :&quot;  led-flash.xe
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../tools-ref/xscope/xscope-performance.html#xscope-performance-figures"><span class="std std-ref">xSCOPE performance figures</span></a> for benchmarks on xSCOPE performance.</p>
+</section>
+</section>
+<section id="sample-based-profiling-of-the-target-program">
+<span id="working-with-targets-profiling"></span><h1>Sample-based profiling of the target program<a class="headerlink" href="#sample-based-profiling-of-the-target-program" title="Permalink to this heading">#</a></h1>
+<p>The tools provide a mechanism to profile a target program and report the time
+spent executing its lines and functions, as a flat call graph. It does this
+non-intrusively by sampling at a low frequency, which might vary considerably,
+the program counter of each logical core. The samples are captured in a set of
+<em>gprof</em> data files, and a report generated with the tools <code class="docutils literal notranslate"><span class="pre">xgprof</span></code>.</p>
+<p>This approach is useful for gaining insight into the behaviour of certain types
+of program, for example those which carry out a repetitive task. It may be
+useful for debugging a program which is failing to run as intended.</p>
+<section id="capturing-the-sample-data">
+<h2>Capturing the sample data<a class="headerlink" href="#capturing-the-sample-data" title="Permalink to this heading">#</a></h2>
+<p>Run and capture sample data using the <code class="docutils literal notranslate"><span class="pre">--gprof</span></code> option to the connect command to
+<code class="docutils literal notranslate"><span class="pre">xgdb</span></code>. When <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> is quit a set of gprof files (with the extension .gprof) will be
+written in the current working directory. The filename of each gprof file
+indicates the tile and logical core which it covers. For example, start capture
+with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;connect --gprof&quot; -ex load -ex continue CircularBuffer.xe
+</pre></div>
+</div>
+<p>Leave <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> running for a period to capture samples, interrupt it with Ctrl-C
+and exit xgdb with the quit command. On exit the gprof profile data files will
+be written to the current working directory.</p>
+</section>
+<section id="analysing-the-profile-data">
+<span id="analysing-profiling-data"></span><h2>Analysing the profile data<a class="headerlink" href="#analysing-the-profile-data" title="Permalink to this heading">#</a></h2>
+<p>Spit the target program (.xe) file using the <code class="docutils literal notranslate"><span class="pre">xobjdump</span> <span class="pre">-s</span></code> to obtain the Elf files
+for each tile. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xobjdump -s CircularBuffer.xe
+</pre></div>
+</div>
+<p>For the next step, the Elf <code class="docutils literal notranslate"><span class="pre">image_n0c0_2.elf</span></code> is used for tile 0 analysis, the Elf
+<code class="docutils literal notranslate"><span class="pre">image_n0c1_2.elf</span></code> is used for tile 1 and so on. Ignore Elf images without the <code class="docutils literal notranslate"><span class="pre">_2</span></code>
+suffix (these are bootstrap images used to provide system initialisation).</p>
+<p>Generate a flat profile report for a logical core with the tool xgprof,
+supplying the Elf for the tile and the gprof file for the logical core of the
+tile. It is typically necessary use a selection of report levels to understand
+the behaviour of the target program. For example, a summary report may be shown
+with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgprof -b image_n0c0_2.elf  tile[0]_core0.gprof
+</pre></div>
+</div>
+<p>A detailed report at the source line level may be shown with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgprof -l -b image_n0c0_2.elf tile[0]_core0.gprof
+</pre></div>
+</div>
+<p>A very detailed report at the address level with hit-counts may be shown with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgprof -C -l -b image_n0c0_2.elf tile[0]_core0.gprof
+</pre></div>
+</div>
+</section>
+<section id="profiling-a-target-program-which-boots-from-flash">
+<h2>Profiling a target program which boots from flash<a class="headerlink" href="#profiling-a-target-program-which-boots-from-flash" title="Permalink to this heading">#</a></h2>
+<p>The following command may be used to capture profile data for a system which
+booted from flash:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;attach --gprof&quot; -ex &quot;continue&quot; test.xe
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">test.xe</span></code> was used to build the flash image (or to build the upgrade image
+within the flash device) and is currently executing.</p>
+<p>Leave <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> running for a period to capture samples, interrupt with Ctrl-C and
+exit <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> with the quit command. On exit the gprof profile data files will be
+written to the current working directory.</p>
+<p>Follow the steps described above to analyse the data files.</p>
+</section>
+</section>
+<section id="target-errors-and-warnings">
+<h1>Target errors and warnings<a class="headerlink" href="#target-errors-and-warnings" title="Permalink to this heading">#</a></h1>
+<section id="xscope-not-supported">
+<h2>xSCOPE not supported<a class="headerlink" href="#xscope-not-supported" title="Permalink to this heading">#</a></h2>
+<p>The following message may be shown when <code class="docutils literal notranslate"><span class="pre">xrun</span></code> or <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> is launched with the
+<code class="docutils literal notranslate"><span class="pre">--xscope</span></code> option. This occurs because the application does not make the call
+<code class="docutils literal notranslate"><span class="pre">xscope_config_io(XSCOPE_IO_BASIC)</span></code> from a function named <code class="docutils literal notranslate"><span class="pre">xscope_user_init()</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XScope</span> <span class="n">connection</span> <span class="n">was</span> <span class="n">requested</span> <span class="k">with</span> <span class="s1">&#39;--xscope&#39;</span><span class="p">,</span> <span class="n">but</span> <span class="n">support</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">appear</span> <span class="n">to</span> <span class="n">be</span>
+<span class="n">compiled</span> <span class="n">into</span> <span class="n">program</span> <span class="p">(</span><span class="ow">or</span> <span class="n">symbols</span> <span class="n">are</span> <span class="n">missing</span><span class="p">)</span><span class="o">.</span> <span class="n">JTAG</span> <span class="n">IO</span> <span class="n">will</span> <span class="n">be</span> <span class="n">used</span><span class="o">.</span> <span class="n">See</span> <span class="o">-</span><span class="n">fxscope</span> <span class="n">compiler</span> <span class="n">option</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This implies any host-IO will be transported over the JTAG interface
+which is highly intrusive to the target program.</p>
+</section>
+<section id="failure-to-parse-xn-file">
+<h2>Failure to parse XN file<a class="headerlink" href="#failure-to-parse-xn-file" title="Permalink to this heading">#</a></h2>
+<p>When xrun or xgdb connects and loads a program to the target it configures the
+target using the target XN file (and associated configuration files) supplied to
+<code class="docutils literal notranslate"><span class="pre">xcc</span></code> with the <code class="docutils literal notranslate"><span class="pre">-target</span></code> option.</p>
+<p>If the following message is shown the clocks and clock dividers in the target
+will not be set correctly and the target program may not function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">Warning</span><span class="p">:</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">parse</span> <span class="n">XN</span> <span class="n">file</span><span class="p">,</span> <span class="n">error</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/.</span><span class="n">xgdb21287</span><span class="o">-</span><span class="n">I8WMQBQG</span><span class="o">/</span><span class="n">platform</span><span class="o">.</span><span class="n">xn</span><span class="p">:</span><span class="mi">11</span> <span class="n">Error</span><span class="p">:</span> <span class="n">XN11101</span> <span class="n">Configuration</span> <span class="n">file</span> <span class="k">for</span> <span class="n">node</span> <span class="nb">type</span> <span class="s2">&quot;XTAG4&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">.</span>
+<span class="p">,</span> <span class="n">PLL</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">be</span> <span class="nb">set</span> <span class="n">to</span> <span class="n">expected</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p>This may be because a local XN file and configuration file was used to build the
+target program. In the example above the file <code class="docutils literal notranslate"><span class="pre">XTAG4.cfg</span></code> could not be found in
+the tools installation. The location of these local XN and configuration files
+may be specified by setting the search path environment variables
+<code class="docutils literal notranslate"><span class="pre">XCC_TARGET_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">XCC_DEVICE_PATH</span></code> respectively. For example, on a Linux host,
+the following command adds the current working directory to the paths that will
+be searched:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ XCC_TARGET_PATH=. XCC_DEVICE_PATH=.:${XCC_DEVICE_PATH} xgdb …
+</pre></div>
+</div>
+</section>
+</section>
+<section id="command-examples">
+<h1>Command examples<a class="headerlink" href="#command-examples" title="Permalink to this heading">#</a></h1>
+<section id="xgdb-examples">
+<span id="working-with-targets-xgdb-examples"></span><h2>XGDB examples<a class="headerlink" href="#xgdb-examples" title="Permalink to this heading">#</a></h2>
+<p>In the following examples <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#xgdb-manual-commands"><span class="std std-ref">xgdb commands</span></a> are often supplied as a sequence of <code class="docutils literal notranslate"><span class="pre">-ex</span></code>
+options on the <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> command line. But the they may also be supplied in a command
+file or typed interactively at the gdb prompt. Commands may be abbreviated for
+convenience, but abbreviated forms must not be ambiguous.</p>
+<section id="load-and-run-a-program">
+<h3>Load and run a program<a class="headerlink" href="#load-and-run-a-program" title="Permalink to this heading">#</a></h3>
+<p>The following example connects to a target, loads the target program <code class="docutils literal notranslate"><span class="pre">test.xe</span></code>
+into RAM and starts it running. Once launched the program must be interrupted
+with a Ctrl-C action if it does not terminate, either to quit <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> or to enter
+further <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> commands.  A Ctrl-C action is made by the holding down both the
+Ctrl key and the C key on the keyboard:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex connect -ex load -ex continue test.xe
+</pre></div>
+</div>
+<p>Note the load command runs two phases. The first phase loads a setup image
+(which is automatically generated by the tools) to the target SRAM which is
+executed to initialise it. The second phase loads the target program which was
+built from the user’s source code.</p>
+</section>
+<section id="breakpoints">
+<h3>Breakpoints<a class="headerlink" href="#breakpoints" title="Permalink to this heading">#</a></h3>
+<p>A breakpoint may be set symbolically or with a numerical address to stop
+execution of all tiles when the control flow of a logical core reaches that
+address. The gdb prompt is shown along with a diagnostic message indicating the
+reason the program stopped.</p>
+<p>The xgdb command <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-break"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">break</span></code></a> inserts a soft breakpoint in RAM. There is no limit to
+the number of soft breakpoints that may be set. A soft breakpoint is implemented
+by writing a dcall instruction to the breakpoint address in the RAM of the tile.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">my_func</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="o">*</span><span class="mh">0x80402</span>
+</pre></div>
+</div>
+<p>In some cases a soft breakpoint cannot be used, for example where a program will
+be loaded to RAM over an external link after the breakpoint is set. The xgdb
+command <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-hbreak"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">hbreak</span></code></a> can be used. This will use the hardware emulation debug feature
+within the tile to set  a breakpoint. A maximum of three hardware breakpoints
+may be set:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">hbreak</span> <span class="n">my_func</span>
+</pre></div>
+</div>
+</section>
+<section id="watchpoints">
+<h3>Watchpoints<a class="headerlink" href="#watchpoints" title="Permalink to this heading">#</a></h3>
+<p>XGDB may set watchpoints (also known as data breakpoints) to stop all tiles when
+an access is made to a watched address. Two types of watchpoint command are
+supported:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-watch"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">watch</span></code></a> <code class="docutils literal notranslate"><span class="pre">&lt;location&gt;</span></code></dt><dd><p>stops execution when a store occurs to the specified location</p>
+</dd>
+<dt><a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-awatch"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">awatch</span></code></a> <code class="docutils literal notranslate"><span class="pre">&lt;location&gt;</span></code></dt><dd><p>stops execution when store occurs to or a load occurs from the specified location</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">xgdb</span></code> infers the address range to watch based on the type of the argument
+<code class="docutils literal notranslate"><span class="pre">&lt;location&gt;</span></code>.</p>
+<p>For example, if my_counter is declared as type int in the target program the
+following will watch for write accesses only to its 4-byte range:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">watch</span> <span class="n">my_counter</span>
+</pre></div>
+</div>
+<p>The following will watch for write and read accesses only to my_counter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">awatch</span> <span class="n">my_counter</span>
+</pre></div>
+</div>
+<p>A watch may be set on an address with a defined range. The following sets a
+watch on address 0x80250 with a range of 8 bytes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">watch</span>  <span class="p">(</span><span class="n">char</span> <span class="p">[</span><span class="mi">8</span><span class="p">])</span> <span class="o">*</span><span class="mh">0x80250</span>
+</pre></div>
+</div>
+<p>The debug hardware which provides watch support monitors the address issued by a
+load or store instruction, checking whether it is greater than or equal to the
+lower bound and less than or equal to the upper bound. If the lower bound is the
+address of the third byte of a word, and the upper bound is the address of the
+fourth byte of the word, and a 2-byte store is made to the address of the third
+byte the watch will trigger. But if a 4-byte store is made to the address of first
+byte the watch will not trigger (although this store will write to the third and
+fourth byte which is being watched).</p>
+<p>If a watch it is set on a global or static variable before the program is
+started it may be triggered when the startup code in the function <code class="docutils literal notranslate"><span class="pre">_start()</span></code>
+performs initialisation.</p>
+</section>
+<section id="attaching-to-a-running-target">
+<h3>Attaching to a running target<a class="headerlink" href="#attaching-to-a-running-target" title="Permalink to this heading">#</a></h3>
+<p>It is possible to perform symbolic debugging on a target which already has an application
+running. Such as if it has booted from flash, or if XRUN or XGDB had previously started
+a program then detached. The <a class="reference internal" href="../../tools-ref/cmd-line-tools/xgdb-manual/xgdb-manual.html#gdb-cmd-attach"><code class="xref std std-gdb-cmd docutils literal notranslate"><span class="pre">attach</span></code></a> command can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xgdb</span> <span class="o">-</span><span class="n">ex</span> <span class="s2">&quot;attach --adapter-id pr1V0_15&quot;</span>  <span class="n">led</span><span class="o">-</span><span class="n">flash</span><span class="o">.</span><span class="n">xe</span>
+</pre></div>
+</div>
+<p>If the target application was built to perform host-IO over JTAG (for example,
+by making a call to <code class="docutils literal notranslate"><span class="pre">printstrln()</span></code>) this will be enabled. XSCOPE communication
+will not function (See <a class="reference internal" href="../../tools-ref/xscope/index.html#xscope-common-issues"><span class="std std-ref">xSCOPE FAQ</span></a>).</p>
+</section>
+<section id="attaching-to-a-running-target-and-capture-data-to-generate-a-sample-based-profiling-report">
+<h3>Attaching to a running target and capture data to generate a sample-based profiling report<a class="headerlink" href="#attaching-to-a-running-target-and-capture-data-to-generate-a-sample-based-profiling-report" title="Permalink to this heading">#</a></h3>
+<p>The following command can be used to attach to a system which is running
+and collect profile data without intrusion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;attach --gprof --adapter-id pr1V0_15&quot; -ex &quot;continue&quot;  led-flash.xe
+</pre></div>
+</div>
+</section>
+</section>
+<section id="xrun-examples">
+<h2>xrun examples<a class="headerlink" href="#xrun-examples" title="Permalink to this heading">#</a></h2>
+<section id="listing-available-xtags">
+<h3>Listing available xTAGs<a class="headerlink" href="#listing-available-xtags" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">-l</span></code> option to the tool <code class="docutils literal notranslate"><span class="pre">xrun</span></code> will list all attached xTAGS, showing:</p>
+<ul class="simple">
+<li><p>The integer value that may be supplied to the <code class="docutils literal notranslate"><span class="pre">--id</span></code> option to xrun or to the
+<code class="docutils literal notranslate"><span class="pre">xgdb</span></code> <code class="docutils literal notranslate"><span class="pre">connect</span></code> command</p></li>
+<li><p>The xTAG type</p></li>
+<li><p>The unique adapter-id string which may be supplied to the <code class="docutils literal notranslate"><span class="pre">--adapter-id</span></code> option
+to <code class="docutils literal notranslate"><span class="pre">xrun</span></code>, to the <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> command <code class="docutils literal notranslate"><span class="pre">connect</span></code> or to the <code class="docutils literal notranslate"><span class="pre">xflash</span></code> option
+<code class="docutils literal notranslate"><span class="pre">--adapter-id</span> <span class="pre">&lt;&gt;</span></code></p></li>
+<li><p>The type of target connected to the xTAG. <code class="docutils literal notranslate"><span class="pre">XS2A</span></code> indicates an XCORE-200
+XS2A architecture and <code class="docutils literal notranslate"><span class="pre">XS3A</span></code> indicates an xcore.ai XS3A architecture. The digits in ‘[]’
+indicate the number of devices (XMOS nodes) (note there may be multiple in a package).
+A single <code class="docutils literal notranslate"><span class="pre">0</span></code> indicates one device.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%<span class="w"> </span>xrun<span class="w"> </span>-l
+Available<span class="w"> </span>XMOS<span class="w"> </span>Devices
+----------------------
+<span class="w">  </span>ID<span class="w">    </span>Name<span class="w">                    </span>Adapter<span class="w"> </span>ID<span class="w">      </span>Devices
+<span class="w">  </span>--<span class="w">    </span>----<span class="w">                    </span>----------<span class="w">      </span>-------
+<span class="w">  </span><span class="m">0</span><span class="w">     </span>XMOS<span class="w"> </span>XTAG-3<span class="w">             </span>.BT0u0X2<span class="w">        </span>XS3A<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">  </span><span class="m">1</span><span class="w">     </span>XMOS<span class="w"> </span>XTAG-4<span class="w">             </span>BEJMRJ7V<span class="w">        </span>XS2A<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">  </span><span class="m">2</span><span class="w">     </span>XMOS<span class="w"> </span>XTAG-3<span class="w">             </span>KAKqyceA<span class="w">        </span>XS2A<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">  </span><span class="m">3</span><span class="w">     </span>XMOS<span class="w"> </span>XTAG-4<span class="w">             </span>pr1v0_20<span class="w">        </span>XS3A<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>A device is described as “In Use” if a currently running host tool is using it.
+In some cases, after interrupting a session, an xgdb process may be
+left without a parent (orphaned), and it continues to hold its xTAG.
+On Linux hosts the orphaned process should be
+killed with the command <code class="docutils literal notranslate"><span class="pre">kill</span></code> and if this fails, with <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-9</span></code>.</p>
+<p>If the device is described with “Invalid firmware” is was last used by a host
+tool from a different tools release (and may be used again by the same tool).
+If a connection is made to the device with <code class="docutils literal notranslate"><span class="pre">xrun</span></code> or <code class="docutils literal notranslate"><span class="pre">xgdb</span></code> the firmware will
+be replaced.</p>
+</section>
+<section id="dump-the-target-state">
+<h3>Dump the target state<a class="headerlink" href="#dump-the-target-state" title="Permalink to this heading">#</a></h3>
+<p>The following will dump the state of the target:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun --dump-state test.xe
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">test.xe</span></code> is the target program that was launched on the target by an
+invocation of <code class="docutils literal notranslate"><span class="pre">xrun</span></code> or was burned to flash with the <code class="docutils literal notranslate"><span class="pre">xflash</span></code> tool.</p>
+<p>The following will dump the state of the target without a <code class="docutils literal notranslate"><span class="pre">.xe</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xrun --dump-state-no-xe
+</pre></div>
+</div>
+<p>Note in both cases all tiles will be put in their debug mode which will stop
+execution of all logical cores. They will be resumed after the state has been
+dumped (although, if they have hit an exception, xrun will not take them out
+of the exception.)</p>
+</section>
+<section id="reboot-an-xtag-which-fails-to-respond">
+<h3>Reboot an xTAG which fails to respond<a class="headerlink" href="#reboot-an-xtag-which-fails-to-respond" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--xtag=reboot</span></code> option to the xgdb command <code class="docutils literal notranslate"><span class="pre">connect</span></code> will force the xTAG
+reboot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xgdb -ex &quot;connect --xtag=reboot&quot;
+</pre></div>
+</div>
+<p>If the xTAG is flagged <strong>in use</strong> by <code class="docutils literal notranslate"><span class="pre">xrun</span> <span class="pre">-l</span></code> the above command will release it.
+Note this reboot feature is not available on Windows due to limitations in
+the standard Windows USB driver.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../design-with-flash/flash.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Design and manufacture systems with flash memory</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Working with targets</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

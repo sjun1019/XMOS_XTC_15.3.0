@@ -1,0 +1,226 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/build/xcommon_cmake/xcommon.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/build/xcommon_cmake/xcore_xs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/FetchContent.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.22.0-rc2/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.22.0-rc2/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.22.0-rc2/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.22.0-rc2/CMakeASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/Clang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/build/xcommon_cmake/xc_override.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/Clang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/build/xcommon_cmake/xc_override.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/local/share/cmake-3.22/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/build/xcommon_cmake/Compiler/XCC-ASM.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/build/xcommon_cmake/xc_override.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/deps.cmake"
+		},
+		{
+			"path" : "configs_partial.cmake"
+		},
+		{
+			"path" : "configs_build.cmake"
+		},
+		{
+			"path" : "configs_test.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_i2c/lib_i2c/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xassert/lib_xassert/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_adat/lib_adat/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_locks/lib_locks/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_logging/lib_logging/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_mic_array/lib_mic_array/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_spdif/lib_spdif/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_sw_pll/lib_sw_pll/lib_build_info.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xud/lib_xud/lib_build_info.cmake"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc/build",
+		"source" : "/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/sw_usb_audio/app_usb_aud_xk_216_mc"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

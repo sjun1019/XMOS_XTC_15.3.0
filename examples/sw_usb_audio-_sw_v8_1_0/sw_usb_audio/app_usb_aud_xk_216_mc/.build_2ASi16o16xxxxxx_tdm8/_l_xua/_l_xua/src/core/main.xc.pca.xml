@@ -1,0 +1,403 @@
+<preCompilationAnalysis file="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc">
+<fDef name="XUD_SetReady_In" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc" noreturn="false" doNotSpecialize="true" numParams="3"/>
+<fDef name="XUD_SetReady_InPtr" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc" noreturn="false" doNotSpecialize="true" numParams="3"/>
+<fDef name="XUD_SetReady_OutPtr" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc" noreturn="false" doNotSpecialize="true" numParams="2"/>
+<fDef name="HandleDfuRequest" global="true" interface="i_dfu" noreturn="false" doNotSpecialize="false" numParams="4"/>
+<fDef name="delay_microseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_milliseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_seconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="finish" global="true" interface="i_dfu" noreturn="false" doNotSpecialize="false" numParams="0"/>
+<fDef name="main" global="true" noreturn="false" doNotSpecialize="false" numParams="0"/>
+<fDef name="midi_get_ack_or_data" global="true" noreturn="false" doNotSpecialize="true" numParams="3"/>
+<fDef name="midi_send_ack" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="midi_send_data" global="true" noreturn="false" doNotSpecialize="true" numParams="2"/>
+<fDef name="thread_speed" global="true" noreturn="false" doNotSpecialize="false" numParams="0"/>
+<fDef name="usb_audio_io" global="true" noreturn="false" doNotSpecialize="false" numParams="7"/>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_zext" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="5"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="XUD_SetReady_InPtr" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc" numArgs="3">
+  <arg num="0">
+    <passThroughArg param="0" caller="XUD_SetReady_In" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <passThroughArg param="2" caller="XUD_SetReady_In" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/core/main.xc"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_testct" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_get_ack_or_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_get_ack_or_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_in_uint" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_get_ack_or_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_chkct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_get_ack_or_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_outct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_send_ack" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_out_uint" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_send_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="midi_send_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_outct" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_send_data" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_set_thread_norm" global="true" numArgs="0">
+</fCall>
+<fCall name="thread_speed" global="true" numArgs="0">
+</fCall>
+<fCall name="mixer" global="true" numArgs="3">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <passThroughArg param="1" caller="usb_audio_io" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="thread_speed" global="true" numArgs="0">
+</fCall>
+<fCall name="XUA_AudioHub" global="true" numArgs="9">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="7">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="8">
+    <passThroughArg param="6" caller="usb_audio_io" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="XUD_Main" global="true" numArgs="9">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="2"/></value>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="intval"><intval isSigned="true" val="3"/></value>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="7">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="8">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="thread_speed" global="true" numArgs="0">
+</fCall>
+<fCall name="__builtin_set_clk_src" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_set_port_clk" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_start_clock" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="XUA_Buffer" global="true" numArgs="7">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="thread_speed" global="true" numArgs="0">
+</fCall>
+<fCall name="XUA_Endpoint0" global="true" numArgs="7">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="null"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="null"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="interface"><interfaceInfo index="0" type="chan" isYielding="false"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="usb_audio_io" global="true" numArgs="7">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="null"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="null"/>
+    </values>
+  </arg>
+  <arg num="4">
+    <values>
+      <value type="null"/>
+    </values>
+  </arg>
+  <arg num="5">
+    <values>
+      <value type="null"/>
+    </values>
+  </arg>
+  <arg num="6">
+    <values>
+      <value type="interface"><interfaceInfo index="0" type="chan" isYielding="false"/></value>
+    </values>
+  </arg>
+</fCall>
+</preCompilationAnalysis>

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/lsj/XMOS_XTC_15.3.0/examples/ExampleXCommonCMake/build",
+  "command": "/Users/lsj/XMOS_XTC_15.3.0/bin/xcc   -g -target=XUF216-512-FB236-C20 -o CMakeFiles/example.dir/src/main.xc.obj -c /Users/lsj/XMOS_XTC_15.3.0/examples/ExampleXCommonCMake/src/main.xc",
+  "file": "/Users/lsj/XMOS_XTC_15.3.0/examples/ExampleXCommonCMake/src/main.xc"
+}
+]

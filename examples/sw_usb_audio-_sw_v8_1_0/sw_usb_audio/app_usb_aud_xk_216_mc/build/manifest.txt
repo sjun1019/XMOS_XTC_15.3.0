@@ -1,0 +1,14 @@
+Name                    | Location                                        | Branch/tag             | Changeset
+------------------------+-------------------------------------------------+------------------------+--------------------------------------------
+-                         -                                                 -                        -
+lib_xassert               https://github.com/xmos/lib_xassert               v4.2.0                   39d12979549df8f6716e64a2e03d1c8906347907
+lib_i2c                   https://github.com/xmos/lib_i2c                   v6.2.0                   4685b775d370c608a83ebe337203306f8fdc1b97
+lib_adat                  https://github.com/xmos/lib_adat                  v1.2.0                   8d046fba7550e90a062784ba6dae9a9e62fa1f68
+lib_locks                 https://github.com/xmos/lib_locks                 v2.2.0                   8bcca2852daeb1ccfb1c763d4b3d4f75c326ee2a
+lib_logging               https://github.com/xmos/lib_logging               v3.2.0                   10e63fdbe81c473b41abf2ec4c159fa502d05b46
+lib_dsp                   https://github.com/xmos/lib_dsp                   v6.3.0                   2aeca571aafeed0b705c6019e4bff0411e2f02b3
+lib_mic_array             https://github.com/xmos/lib_mic_array             v4.6.0                   4f91c2f75280d0c41eade852d31c3a64d5c696d9
+lib_spdif                 https://github.com/xmos/lib_spdif                 v6.1.0                   3cab17ad74bcf078aeb04100154e5be073f702d4
+lib_sw_pll                https://github.com/xmos/lib_sw_pll                v2.2.0                   551541acfa1fc9d4b7cec3291ff7707f0b68653a
+lib_xud                   https://github.com/xmos/lib_xud                   v2.3.1                   c6bc9a7e227561dc4c4134ef9ce2c7cf11849455
+lib_xua                   https://github.com/xmos/lib_xua                   v4.1.0                   48533bed7bd7c8d6c8231c1b27066417b688394e

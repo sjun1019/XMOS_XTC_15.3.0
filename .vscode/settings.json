@@ -1,0 +1,4 @@
+{
+    "cmake.generator": "Unix Makefiles",
+    "cmake.sourceDirectory": "/Users/lsj/XMOS_XTC_15.3.0/lib_xua-develop/lib_xua/host/xmosdfu"
+}

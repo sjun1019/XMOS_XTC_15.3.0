@@ -1,0 +1,4 @@
+xmake is licensed under the GNU General Public License v2.0.
+Details can be found in GPL.txt.
+In compliance with the license, source code for these components can
+be found on the xmos.com website.

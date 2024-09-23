@@ -1,0 +1,3 @@
+/Users/lsj/XMOS_XTC_15.3.0/build/CMakeFiles/xmosdfu.dir
+/Users/lsj/XMOS_XTC_15.3.0/build/CMakeFiles/edit_cache.dir
+/Users/lsj/XMOS_XTC_15.3.0/build/CMakeFiles/rebuild_cache.dir

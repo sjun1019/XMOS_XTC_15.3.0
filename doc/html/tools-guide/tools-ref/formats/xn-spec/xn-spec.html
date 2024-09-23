@@ -1,0 +1,1468 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="XSIM trace output" href="../xsim-trace.html" /><link rel="prev" title="XMOS executable (XE) file format" href="../xe.html" />
+
+    <link rel="shortcut icon" href="../../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>XN specification - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../index.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../index.html">File formats and data descriptions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="xn-specification">
+<span id="xn-spec"></span><h1>XN specification<a class="headerlink" href="#xn-specification" title="Permalink to this heading">#</a></h1>
+<section id="network-elements">
+<span id="xn-spec-network-elements"></span><h2>Network elements<a class="headerlink" href="#network-elements" title="Permalink to this heading">#</a></h2>
+<p>The network definition is specified as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Network xmlns=&quot;http://www.xmos.com&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://www.xmos.com http://www.xmos.com&quot;&gt;
+</pre></div>
+</div>
+<p>The XN hierarchy of elements is given below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>**Node**                               **Number**   **Description**
+
+Network                                1            An xCORE network
+├── Declarations                       0+
+│   └── Declaration                    1+           xCORE Tile declaration
+├── Packages                           1+
+│   └── Package                        1+           Device package
+│       ├── Nodes                      1
+│       │   └── Node                   1+           Node declaration
+│       │       ├── Tile               1+           An xCORE Tile
+│       │       │   └── Port           0+           An xCORE symbolic port name
+│       │       ├── Boot               0 or 1       Boot method
+│       │       │   ├── Source         1            Binary location
+│       │       │   └── Bootee         0+           Nodes booted
+│       │       ├── Extmem             0 or 1       External memory configuration
+│       │       │   ├── Lpddr          1            Pad control for LPDDR device outputs
+│       │       │   └── Padctrl        1            Pad control for xcore.ai outputs
+│       │       ├── RoutingTable       0 or 1
+│       │       │   ├── Bits           1
+│       │       │   │   └── Bit        1+           Direction for bit
+│       │       │   └── Links          1
+│       │       │       └── Link       1+           Direction for link
+│       │       └── Service            0+           Service declaration
+│       │           └── Chanend        1+           Chanend parameter
+│       └── Links                      0 or 1
+│           ├── Link                   1+           xCONNECT Link declaration
+│           └── LinkEndpoint           2            xCONNECT Link endpoint
+├── ExternalDevices                    0 or 1
+│   └── Device                         1+           External device
+│       └── Attribute                  0+           A device attribute
+└── JTAGChain                          0 or 1
+    └── JTAGDevice                     1+           A device in the JTAG chain
+</pre></div>
+</div>
+</section>
+<section id="declaration">
+<span id="xn-spec-declaration"></span><h2>Declaration<a class="headerlink" href="#declaration" title="Permalink to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Declaration</span></code> element provides a symbolic name for one or more
+xCORE Tiles. A single name or an array of names is supported with the form:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">tileref</span></code> <em>identifier</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">tileref</span></code> <em>identifier</em> <code class="docutils literal notranslate"><span class="pre">[</span></code> <em>constant-expression</em> <code class="docutils literal notranslate"><span class="pre">]</span></code></p>
+</div></blockquote>
+<p>An equivalent declaration is exported to the header file <code class="docutils literal notranslate"><span class="pre">&lt;platform.h&gt;</span></code> for use in
+XC programs. A <code class="docutils literal notranslate"><span class="pre">tileref</span></code> declaration is associated with physical xCORE tiles by the
+reference attribute of a <a class="reference internal" href="#xn-spec-core"><span class="std std-ref">~~Tile~~ element</span></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Declaration</span><span class="o">&gt;</span><span class="n">tileref</span> <span class="n">master</span><span class="o">&lt;/</span><span class="n">Declaration</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Declaration</span><span class="o">&gt;</span><span class="n">tileref</span> <span class="n">tile</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">&lt;/</span><span class="n">Declaration</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="package">
+<span id="xn-spec-package"></span><h2>Package<a class="headerlink" href="#package" title="Permalink to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Package</span></code> element refers to a package file that describes the
+mapping from xCORE ports and links to the pins on the package.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id2">
+<span id="xn-spec-package-element-properties"></span><span id="xn-spec-package-element-properties"></span><table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 22 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Package</span></code> element</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Id</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>A name for the package. All package names in the network must be unique.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>The name of the XML package. The tools search for the file <code class="docutils literal notranslate"><span class="pre">&lt;type&gt;.pkg</span></code> in
+the path specified by <code class="docutils literal notranslate"><span class="pre">XCC_DEVICE_PATH</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Package</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Type</span><span class="o">=</span><span class="s2">&quot;XS3-UnA-1024-QF60A&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This package is described in the file <code class="docutils literal notranslate"><span class="pre">XS3-UnA-1024-QF60A.pkg</span></code>.</p>
+</section>
+<section id="node">
+<span id="xn-spec-node"></span><h2>Node<a class="headerlink" href="#node" title="Permalink to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Node</span></code> element defines a set of xCORE Tiles in a network, all of which
+are connected to a single switch. The XMOS xcore.ai device XU316-1024-FB265
+is an example of a node.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id3">
+<span id="xn-spec-node-element-properties"></span><span id="xn-spec-node-element-properties"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 23 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Node</span></code> element</span><a class="headerlink" href="#id3" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 55.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Id</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>A name for the node. All node names in the network must be unique.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>If type is <code class="docutils literal notranslate"><span class="pre">periph:XS1-SU</span></code> the node is a XS1-SU peripheral node.
+Otherwise the type specifies the name of an XML file that
+describes the node. The tools search for the file
+<code class="docutils literal notranslate"><span class="pre">config_&lt;type&gt;.xml</span></code> in the path specified by
+<code class="docutils literal notranslate"><span class="pre">XCC_DEVICE_PATH</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Reference</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Associates the node with a xCORE Tile indentifer specified in a
+<code class="docutils literal notranslate"><span class="pre">Declaration</span></code>. This attribute is only valid on nodes with type
+<code class="docutils literal notranslate"><span class="pre">periph:XS1-SU</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RoutingId</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The routing identifier on the xCONNECT Link network.</p></td>
+</tr>
+<tr class="row-even"><td><p>InPackageId</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Maps the node to an element in the package file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Oscillator</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>The PLL oscillator input frequency, specified as a number followed by
+either <code class="docutils literal notranslate"><span class="pre">MHz,</span> <span class="pre">KHz</span></code> or <code class="docutils literal notranslate"><span class="pre">Hz</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>OscillatorSrc</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>The name of the node which supplies the PLL oscillator input.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SystemFrequency</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>The system frequency, specified as a number followed by either <code class="docutils literal notranslate"><span class="pre">MHz</span></code>,
+<code class="docutils literal notranslate"><span class="pre">KHz</span></code> or <code class="docutils literal notranslate"><span class="pre">Hz</span></code>. Defaults to 400MHz if not set.</p></td>
+</tr>
+<tr class="row-even"><td><p>PllFeedbackDivMin</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The minimum allowable PLL feedback divider. Defaults to 1 if not set.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ReferenceFrequency</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>A reference clock frequency, specified as a number followed by either
+<code class="docutils literal notranslate"><span class="pre">MHz</span></code>, <code class="docutils literal notranslate"><span class="pre">KHz</span></code> or <code class="docutils literal notranslate"><span class="pre">Hz</span></code>. Defaults to 100MHz if not set.</p></td>
+</tr>
+<tr class="row-even"><td><p>PllDividerStageOneReg</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The PLL divider stage 1 register value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PllMultiplierStageReg</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The PLL multiplier stage register value.</p></td>
+</tr>
+<tr class="row-even"><td><p>PllDividerStageTwoReg</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The PLL divider stage 2 register value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SecondaryPllInputDiv</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The secondary PLL input divider register value</p></td>
+</tr>
+<tr class="row-even"><td><p>SecondaryPllOutputDiv</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The secondary PLL output divider register value</p></td>
+</tr>
+<tr class="row-odd"><td><p>SecondaryPllFeedbackDiv</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The secondary PLL feedback divider register value</p></td>
+</tr>
+<tr class="row-even"><td><p>RefDiv</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SystemFrequency</span></code> / <code class="docutils literal notranslate"><span class="pre">RefDiv</span></code> = <code class="docutils literal notranslate"><span class="pre">ReferenceFrequency</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The PLL registers can be configured automatically using the attributes
+<code class="docutils literal notranslate"><span class="pre">SystemFrequency</span></code>, <code class="docutils literal notranslate"><span class="pre">PllFeedbackDivMin</span></code> and <code class="docutils literal notranslate"><span class="pre">ReferenceFrequency</span></code>,
+or can be configured manually using the attributes
+<code class="docutils literal notranslate"><span class="pre">PllDividerStageOneReg</span></code>, <code class="docutils literal notranslate"><span class="pre">PllMultiplierStageReg</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PllDividerStageTwoReg</span></code> and <code class="docutils literal notranslate"><span class="pre">RefDiv</span></code>. If any of the first three
+attributes are provided, none of the last four attributes may be
+provided, and vice versa.</p>
+<p>The PLL oscillator input frequency may be specifed using the <code class="docutils literal notranslate"><span class="pre">Oscillator</span></code> or
+<code class="docutils literal notranslate"><span class="pre">OscillatorSrc</span></code> attribute. If the <code class="docutils literal notranslate"><span class="pre">Oscillator</span></code> attribute is provided the
+<code class="docutils literal notranslate"><span class="pre">OscillatorSrc</span></code> attribute must not be provided, and vice versa.</p>
+<p>If manual configuration is used, the attributes <code class="docutils literal notranslate"><span class="pre">PllDividerStageOneReg</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PllMultiplierStageReg</span></code>, <code class="docutils literal notranslate"><span class="pre">PllDividerStageTwoReg</span></code> and <code class="docutils literal notranslate"><span class="pre">RefDiv</span></code> must be
+provided and the PLL oscillator input frequency must be specifed.
+The tools use these values to set the PLL registers and reference clock divider.
+Information on the PLL dividers can be found in the device datasheets.</p>
+<p>If the oscillator frequency is specifed and none of the manual PLL attributes
+are provided, automatic configuration is used.
+The tools attempt to program the PLL registers such that the target system
+frequency is achieved, the PLL feedback divider is greater than or equal
+to the minimum value and the target reference clock frequency is
+achieved. If any of these constraints cannot be met, the tools issue a
+warning and report the actual values used.</p>
+<p>If the oscillator frequency is not specified,
+the tools do not attempt to configure the PLLs. The PLL registers remain at
+their initial values as determined by the mode pins.</p>
+<p>The secondary PLL can only be configured manually by supplying <code class="docutils literal notranslate"><span class="pre">SecondaryPllInputDiv</span></code>,
+<code class="docutils literal notranslate"><span class="pre">SecondaryPllOutputDiv</span></code> and <code class="docutils literal notranslate"><span class="pre">SecondaryPllFeedbackDiv</span></code>.</p>
+<p><strong>Example</strong></p>
+<blockquote>
+<div><p>&lt;Node Id=”0” InPackageId=”0” Type=”XS3-L16A-1024” Oscillator=”24MHz” SystemFrequency=”600MHz” ReferenceFrequency=”100MHz”&gt;</p>
+</div></blockquote>
+<section id="tile">
+<span id="xn-spec-core"></span><h3>Tile<a class="headerlink" href="#tile" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Tile</span></code> element describes the properties of a single xCORE Tile.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id4">
+<span id="xn-spec-core-element-properties"></span><span id="xn-spec-core-element-properties"></span><table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 24 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Tileref</span></code> element</span><a class="headerlink" href="#id4" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Number</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The unique number for the tile in the node. A value between 0 and
+n-1 where n is the number of tiles as defined in the node’s XML
+file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reference</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>Associates the tile with an identifier with the form <code class="docutils literal notranslate"><span class="pre">tile[n]</span></code> in a
+<code class="docutils literal notranslate"><span class="pre">Declaration</span></code>. A tile may be associated with at most
+one identifier.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Tile</span> <span class="n">Number</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Reference</span><span class="o">=</span><span class="s2">&quot;tile[0]&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="port">
+<span id="xn-spec-port"></span><h3>Port<a class="headerlink" href="#port" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Port</span></code> element provides a symbolic name for a port.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id5">
+<span id="xn-spec-port-element-properties"></span><span id="xn-spec-port-element-properties"></span><table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 25 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Port</span></code> element</span><a class="headerlink" href="#id5" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Location</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>A port identifier defined in the standard header file <code class="docutils literal notranslate"><span class="pre">&lt;xs1.h&gt;</span></code>. The ports
+are described in the relevant device architecture manual and datasheet.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>A valid C preprocessor identifier. All port names declared in the
+network must be unique.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Port</span> <span class="n">Location</span><span class="o">=</span><span class="s2">&quot;XS1_PORT_1I&quot;</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_UART_TX&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">Port</span> <span class="n">Location</span><span class="o">=</span><span class="s2">&quot;XS1_PORT_1J&quot;</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_UART_RX&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="boot">
+<span id="xn-spec-boot"></span><h3>Boot<a class="headerlink" href="#boot" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Boot</span></code> element defines the how the node is booted. It contains one
+<a class="reference internal" href="#xn-spec-source"><span class="std std-ref">~~Source~~ element</span></a> and zero or more
+<a class="reference internal" href="#xn-spec-bootee"><span class="std std-ref">~~Bootee~~ elements</span></a> that are booted over
+xCONNECT Links. If the source specifies an xCONNECT Link, no <code class="docutils literal notranslate"><span class="pre">Bootee</span></code> elements
+may be specified.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The XMOS tools require a <code class="docutils literal notranslate"><span class="pre">Boot</span></code> element to be able to
+<a class="reference internal" href="../../../tutorials/design-with-flash/flash.html#design-with-flash-boot-from-flash"><span class="std std-ref">boot programs from flash memory</span></a>.</p>
+</div>
+</section>
+<section id="source">
+<span id="xn-spec-source"></span><h3>Source<a class="headerlink" href="#source" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Source</span></code> element specifies the location from which the node boots.
+It has the following attributes.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id6">
+<span id="xn-spec-source-element-properties"></span><span id="xn-spec-source-element-properties"></span><table class="docutils align-default" id="id6">
+<caption><span class="caption-number">Table 26 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Source</span></code> element</span><a class="headerlink" href="#id6" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Location</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Has the form <code class="docutils literal notranslate"><span class="pre">SPI:</span></code> or <code class="docutils literal notranslate"><span class="pre">LINK</span></code>. The <code class="docutils literal notranslate"><span class="pre">device-name</span></code> must be
+declared in the set of <code class="docutils literal notranslate"><span class="pre">Device</span></code> elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p>BootMode</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>Required for <code class="docutils literal notranslate"><span class="pre">Location</span></code> of type <code class="docutils literal notranslate"><span class="pre">LINK</span></code>, and maps to an entry
+in the “boot source pins” table in the “boot procedure” chapter
+of the datasheet. Valid values are 4 through 7.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Source</span> <span class="n">Location</span><span class="o">=</span><span class="s2">&quot;bootFlash&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="bootee">
+<span id="xn-spec-bootee"></span><h3>Bootee<a class="headerlink" href="#bootee" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Bootee</span></code> element specifies another node in the system that this node
+boots via an xCONNECT Link. If more than one xCONNECT Link is configured between
+this node and one of its bootees (see <a class="reference internal" href="#xn-spec-link"><span class="std std-ref">Link</span></a> and
+<a class="reference internal" href="#xn-spec-linkendpoint"><span class="std std-ref">LinkEndpoint</span></a>), the tools pick one to use for booting.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id7">
+<span id="xn-spec-bootee-element-properties"></span><span id="xn-spec-bootee-element-properties"></span><table class="docutils align-default" id="id7">
+<caption><span class="caption-number">Table 27 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Bootee</span></code> element</span><a class="headerlink" href="#id7" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NodeId</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>A valid identifier for another node.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Bootee</span> <span class="n">NodeId</span><span class="o">=</span><span class="s2">&quot;Secondary&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="bit">
+<span id="xn-spec-bit"></span><h3>Bit<a class="headerlink" href="#bit" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Bit</span></code> element specifies the direction for messages whose first mismatching
+bit matches the specified bit number.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id8">
+<span id="xn-spec-bit-element-properties"></span><span id="xn-spec-bit-element-properties"></span><table class="docutils align-default" id="id8">
+<caption><span class="caption-number">Table 28 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Bit</span></code> element</span><a class="headerlink" href="#id8" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>number</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The bit number, numbered from the least significant bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>direction</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The direction to route messages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Bit</span> <span class="n">number</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="link">
+<span id="xn-spec-routinglink"></span><h3>Link<a class="headerlink" href="#link" title="Permalink to this heading">#</a></h3>
+<p>When it appears within a <code class="docutils literal notranslate"><span class="pre">RoutingTable</span></code> element, a <code class="docutils literal notranslate"><span class="pre">Link</span></code> element specifies
+the direction of an xCONNECT Link (xLINK).</p>
+<div class="table-wrapper colwidths-given docutils container" id="id9">
+<span id="xn-spec-routinglink-element-properties"></span><span id="xn-spec-routinglink-element-properties"></span><table class="docutils align-default" id="id9">
+<caption><span class="caption-number">Table 29 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Link</span></code> element</span><a class="headerlink" href="#id9" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>name</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>A link identifier in the form X&lt;n&gt;L&lt;m&gt; where &lt;n&gt; denotes a tile number
+and &lt;m&gt; the link letter. See the corresponding package datasheet for
+available link pinouts.</p></td>
+</tr>
+<tr class="row-odd"><td><p>direction</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The direction of the link.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Link</span> <span class="n">number</span><span class="o">=</span><span class="s2">&quot;XLA&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="service">
+<span id="xn-spec-service"></span><h3>Service<a class="headerlink" href="#service" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Service</span></code> element specifies an XC service function provided by a node.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id10">
+<span id="xn-spec-service-element-properties"></span><span id="xn-spec-service-element-properties"></span><table class="docutils align-default" id="id10">
+<caption><span class="caption-number">Table 30 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Service</span></code> element</span><a class="headerlink" href="#id10" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Proto</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>The prototype for the service function, excluding the <code class="docutils literal notranslate"><span class="pre">service</span></code> keyword.
+This prototype is exported to the header file <code class="docutils literal notranslate"><span class="pre">&lt;platform.h&gt;</span></code> for use in
+XC programs.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Service</span> <span class="n">Proto</span><span class="o">=</span><span class="s2">&quot;service_function(chanend c1, chanend c2)&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><strong>xSCOPE Example</strong></p>
+<p>The text below is required to support xSCOPE and must reside under a <code class="docutils literal notranslate"><span class="pre">&lt;Network&gt;</span></code> element (at the same level as <code class="docutils literal notranslate"><span class="pre">&lt;Links&gt;</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Nodes</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">Node</span> <span class="n">Id</span><span class="o">=</span><span class="s2">&quot;2&quot;</span> <span class="n">Type</span><span class="o">=</span><span class="s2">&quot;device:&quot;</span> <span class="n">RoutingId</span><span class="o">=</span><span class="s2">&quot;0x8000&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">Service</span> <span class="n">Id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Proto</span><span class="o">=</span><span class="s2">&quot;xscope_host_data(chanend c);&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">Chanend</span> <span class="n">Identifier</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">Service</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">Node</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">Nodes</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="chanend">
+<span id="xn-spec-chanend"></span><h3>Chanend<a class="headerlink" href="#chanend" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Chanend</span></code> element describes a channel end parameter to an XC service
+function.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id11">
+<span id="xn-spec-chanend-element-properties"></span><span id="xn-spec-chanend-element-properties"></span><table class="docutils align-default" id="id11">
+<caption><span class="caption-number">Table 31 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Service</span></code> element</span><a class="headerlink" href="#id11" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Indentifier</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>The identifier for the chanend argument in the service function
+prototype.</p></td>
+</tr>
+<tr class="row-odd"><td><p>end</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The number of the channel end on the current node.</p></td>
+</tr>
+<tr class="row-even"><td><p>remote</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The number of the remote channel end that is connected to the channel
+end on the current node.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Chanend</span> <span class="n">Identifier</span><span class="o">=</span><span class="s2">&quot;c&quot;</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;23&quot;</span> <span class="n">remote</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="xn-spec-link">
+<span id="id1"></span><h2>Link<a class="headerlink" href="#xn-spec-link" title="Permalink to this heading">#</a></h2>
+<p>A Link element describes the characteristics of an xCONNECT Link. It must
+contain exactly two <a class="reference internal" href="#xn-spec-linkendpoint"><span class="std std-ref">~~LinkEndpoint~~ children</span></a>.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id12">
+<span id="xn-spec-link-element-properties"></span><span id="xn-spec-link-element-properties"></span><table class="docutils align-default" id="id12">
+<caption><span class="caption-number">Table 32 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Link</span></code> element</span><a class="headerlink" href="#id12" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Encoding</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Must be either <code class="docutils literal notranslate"><span class="pre">2wire</span></code> or <code class="docutils literal notranslate"><span class="pre">5wire</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Delays</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Of the form <code class="docutils literal notranslate"><span class="pre">&lt;x&gt;clk,&lt;y&gt;clk</span></code> where &lt;x&gt; specifies the inter-token delay
+value for the endpoint, and &lt;y&gt; specifies the intra-token delay value for
+the endpoint. &lt;x&gt; and &lt;y&gt; are specified as a number of
+<code class="docutils literal notranslate"><span class="pre">SystemFrequency</span></code> cycles. If <code class="docutils literal notranslate"><span class="pre">,&lt;y&gt;clk</span></code> is omitted, the &lt;x&gt;clk value is used
+for the intra-token delay value.</p></td>
+</tr>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>Specifies additional properties of the link. Use the value <code class="docutils literal notranslate"><span class="pre">XSCOPE</span></code> to
+specify a link used to send xSCOPE trace information.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Link</span> <span class="n">Encoding</span><span class="o">=</span><span class="s2">&quot;2wire&quot;</span> <span class="n">Delays</span><span class="o">=</span><span class="s2">&quot;4clk,4clk&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<section id="linkendpoint">
+<span id="xn-spec-linkendpoint"></span><h3>LinkEndpoint<a class="headerlink" href="#linkendpoint" title="Permalink to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">LinkEndpoint</span></code> describes one end of an xCONNECT Link, the details of
+which can be found in the device datasheet.
+Each endpoint associates a node identifier to a physical xCONNECT Link.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id13">
+<span id="xn-spec-linkendpoint-element-properties"></span><span id="xn-spec-linkendpoint-element-properties"></span><table class="docutils align-default" id="id13">
+<caption><span class="caption-number">Table 33 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">LinkEndpoint</span></code> element</span><a class="headerlink" href="#id13" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NodeID</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>A valid node identifier.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Link</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>A link identifier in the form <code class="docutils literal notranslate"><span class="pre">XL&lt;n&gt;</span></code> where &lt;n&gt; denotes a link index.
+See the corresponding device datasheet for
+available link pinouts.</p></td>
+</tr>
+<tr class="row-even"><td><p>RoutingId</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>The routing identifier on the xCONNECT Link network.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Chanend</p></td>
+<td><p>No</p></td>
+<td><p>Integer</p></td>
+<td><p>A channel end.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An endpoint is usually described as a combination of a node identifier
+and link identifier. For a streaming debug link, one of the endpoints
+must be described as a combination of a routing identifier and a channel
+end. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">LinkEndpoint</span> <span class="n">NodeId</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Link</span><span class="o">=</span><span class="s2">&quot;XL0&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">LinkEndpoint</span> <span class="n">RoutingId</span><span class="o">=</span><span class="s2">&quot;0x8000&quot;</span> <span class="n">Chanend</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The table below highlights the correct link name to use for the <code class="docutils literal notranslate"><span class="pre">Link</span></code>
+attribute within the <code class="docutils literal notranslate"><span class="pre">LinkEndpoint</span></code> element.</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>xConnect link Number</p></td>
+<td><p>Link specifier</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>XL0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>XL1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>XL2</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>XL3</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>XL4</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>XL5</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>XL6</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>XL7</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>XL8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following example demonstrates how Node 0 Link number 4 is connected to Node
+1 Link number 7:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Links</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">Link</span> <span class="n">Encoding</span><span class="o">=</span><span class="s2">&quot;5wire&quot;</span> <span class="n">Delays</span><span class="o">=</span><span class="s2">&quot;4,4&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">LinkEndpoint</span> <span class="n">NodeId</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Link</span><span class="o">=</span><span class="s2">&quot;XL4&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">LinkEndpoint</span> <span class="n">NodeId</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="n">Link</span><span class="o">=</span><span class="s2">&quot;XL7&quot;</span><span class="o">/&gt;</span>
+  <span class="o">&lt;/</span><span class="n">Link</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">Links</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="device">
+<span id="xn-spec-device"></span><h2>Device<a class="headerlink" href="#device" title="Permalink to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Device</span></code> element describes a device attached to an xCORE Tile
+that is not connected directly to an xCONNECT Link.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id14">
+<span id="xn-spec-device-element-properties"></span><span id="xn-spec-device-element-properties"></span><table class="docutils align-default" id="id14">
+<caption><span class="caption-number">Table 34 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Device</span></code> element</span><a class="headerlink" href="#id14" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>An identifier that names the device</p></td>
+</tr>
+<tr class="row-odd"><td><p>NodeId</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>The identifier for the node that the device is connected to</p></td>
+</tr>
+<tr class="row-even"><td><p>Tile</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The tile in the node that the device is connected to</p></td>
+</tr>
+<tr class="row-odd"><td><p>Class</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>The class of the device</p></td>
+</tr>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>The type of the device (class dependent)</p></td>
+</tr>
+<tr class="row-odd"><td><p>PageSize</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The program page size of the device</p></td>
+</tr>
+<tr class="row-even"><td><p>SectorSize</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The erase sector size of the device</p></td>
+</tr>
+<tr class="row-odd"><td><p>NumPages</p></td>
+<td><p>Yes</p></td>
+<td><p>Integer</p></td>
+<td><p>The number of pages in the device</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following attribute values for the attribute name are recognised:
+<code class="docutils literal notranslate"><span class="pre">Class</span></code>:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">SPIFlash</span></code></dt><dd><p>Device is SPI flash memory</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SQIFlash</span></code></dt><dd><p>Device is QuadSPI flash memory</p>
+</dd>
+</dl>
+<p>Use the Type attribute to identify the model of the flash device.</p>
+<section id="attribute">
+<span id="xn-spec-attribute"></span><h3>Attribute<a class="headerlink" href="#attribute" title="Permalink to this heading">#</a></h3>
+<p>An <code class="docutils literal notranslate"><span class="pre">Attribute</span></code> element describes one aspect of a
+<a class="reference internal" href="#xn-spec-device"><span class="std std-ref">~~Device~~</span></a>.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id15">
+<span id="xn-spec-attribute-element-properties"></span><span id="xn-spec-attribute-element-properties"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">Table 35 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">Attribute</span></code> element</span><a class="headerlink" href="#id15" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Specifies an attribute of the device.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Specifies a value associated with the attribute.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following attribute names for the device are supported:
+class <code class="docutils literal notranslate"><span class="pre">SPIFlash</span></code>:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SPI_MISO</span></code></dt><dd><p>SPI Master In Slave Out signal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SPI_SS</span></code></dt><dd><p>SPI Slave Select signal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SPI_CLK</span></code></dt><dd><p>SPI Clock signal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SPI_MOSI</span></code></dt><dd><p>SPI Master Out Slave In signal.</p>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Attribute</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_SPI_MISO&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="s2">&quot;PORT_SPI_MISO&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>The following attribute names for the device are supported:
+class <code class="docutils literal notranslate"><span class="pre">SQIFlash</span></code>:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SQI_CS</span></code></dt><dd><p>QuadSPI Chip Select signal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SQI_SCLK</span></code></dt><dd><p>QuadSPI Clock signal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PORT_SQI_SIO</span></code></dt><dd><p>QuadSPI In/Out signal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">QE_REGISTER</span></code></dt><dd><p>This is  optional and only required for devices which do not support JEDEC SFDP. Valid values are <code class="docutils literal notranslate"><span class="pre">flash_qe_location_status_reg_0</span></code> and <code class="docutils literal notranslate"><span class="pre">flash_qe_location_status_reg_1</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">QE_BIT</span></code></dt><dd><p>This is  optional and only required for devices which do not support JEDEC SFDP. Valid values are <code class="docutils literal notranslate"><span class="pre">flash_qe_bit_0</span></code> through to <code class="docutils literal notranslate"><span class="pre">flash_qe_bit_7</span></code>.</p>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Attribute</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_SIO&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_SIO&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p><strong>Flash device example</strong></p>
+<p>The following example shows the complete description of a flash device.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">ExternalDevices</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">Device</span> <span class="n">NodeId</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Tile</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">Class</span><span class="o">=</span><span class="s2">&quot;SQIFlash&quot;</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;bootFlash&quot;</span> <span class="n">Type</span><span class="o">=</span><span class="s2">&quot;S25FL116K&quot;</span> <span class="n">PageSize</span><span class="o">=</span><span class="s2">&quot;256&quot;</span> <span class="n">SectorSize</span><span class="o">=</span><span class="s2">&quot;4096&quot;</span> <span class="n">NumPages</span><span class="o">=</span><span class="s2">&quot;16384&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">Attribute</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_CS&quot;</span>   <span class="n">Value</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_CS&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">Attribute</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_SCLK&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_SCLK&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">Attribute</span> <span class="n">Name</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_SIO&quot;</span>  <span class="n">Value</span><span class="o">=</span><span class="s2">&quot;PORT_SQI_SIO&quot;</span><span class="o">/&gt;</span>
+  <span class="o">&lt;/</span><span class="n">Device</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">ExternalDevices</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="jtagchain">
+<span id="xn-spec-jtag-device"></span><h2>JTAGChain<a class="headerlink" href="#jtagchain" title="Permalink to this heading">#</a></h2>
+<p>The JTAGChain element describes a device in the JTAG chain. The order of
+these elements defines their order in the JTAG chain.</p>
+<div class="table-wrapper colwidths-given docutils container" id="id16">
+<span id="xn-spec-jtagchain-element-properties"></span><span id="xn-spec-jtagchain-element-properties"></span><table class="docutils align-default" id="id16">
+<caption><span class="caption-number">Table 36 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">JTAGChain</span></code> element</span><a class="headerlink" href="#id16" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>JTAGSpeed</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>Sets the JTAG clock speed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="jtagdevice">
+<h3>JTAGDevice<a class="headerlink" href="#jtagdevice" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper colwidths-given docutils container" id="id17">
+<span id="xn-spec-jtagdevice-element-properties"></span><span id="xn-spec-jtagdevice-element-properties"></span><table class="docutils align-default" id="id17">
+<caption><span class="caption-number">Table 37 </span><span class="caption-text">XN <code class="docutils literal notranslate"><span class="pre">JTAGDevice</span></code> element</span><a class="headerlink" href="#id17" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NodeID</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>A valid node identifier.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;!-- N1 comes before N2 in the JTAG chain --&gt;
+&lt;JTAGDevice NodeId=&quot;N1&quot;&gt;
+&lt;JTAGDevice NodeId=&quot;N2&quot;&gt;
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../xsim-trace.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">XSIM trace output</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../xe.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">XMOS executable (XE) file format</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">XN specification</a><ul>
+<li><a class="reference internal" href="#network-elements">Network elements</a></li>
+<li><a class="reference internal" href="#declaration">Declaration</a></li>
+<li><a class="reference internal" href="#package">Package</a></li>
+<li><a class="reference internal" href="#node">Node</a><ul>
+<li><a class="reference internal" href="#tile">Tile</a></li>
+<li><a class="reference internal" href="#port">Port</a></li>
+<li><a class="reference internal" href="#boot">Boot</a></li>
+<li><a class="reference internal" href="#source">Source</a></li>
+<li><a class="reference internal" href="#bootee">Bootee</a></li>
+<li><a class="reference internal" href="#bit">Bit</a></li>
+<li><a class="reference internal" href="#link">Link</a></li>
+<li><a class="reference internal" href="#service">Service</a></li>
+<li><a class="reference internal" href="#chanend">Chanend</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xn-spec-link">Link</a><ul>
+<li><a class="reference internal" href="#linkendpoint">LinkEndpoint</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#device">Device</a><ul>
+<li><a class="reference internal" href="#attribute">Attribute</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#jtagchain">JTAGChain</a><ul>
+<li><a class="reference internal" href="#jtagdevice">JTAGDevice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/scripts/furo.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/tabs.js"></script>
+    </body>
+</html>

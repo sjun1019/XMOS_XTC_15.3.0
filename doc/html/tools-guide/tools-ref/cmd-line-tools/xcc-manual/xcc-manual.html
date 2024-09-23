@@ -1,0 +1,1450 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="XOBJDUMP" href="../xobjdump-manual/xobjdump-manual.html" /><link rel="prev" title="XSIM" href="../xsim-manual/xsim-manual.html" />
+
+    <link rel="shortcut icon" href="../../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>XCC - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../index.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../index.html">Command line tools</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="xcc">
+<span id="xcc-manual"></span><h1>XCC<a class="headerlink" href="#xcc" title="Permalink to this heading">#</a></h1>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcc</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span><span class="o">|-</span><span class="n">S</span><span class="o">|-</span><span class="n">E</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">O</span><span class="o">&lt;</span><span class="n">level</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">W</span><span class="o">&lt;</span><span class="n">warn</span><span class="o">&gt;...</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="o">&lt;</span><span class="nb">dir</span><span class="o">&gt;...</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">L</span><span class="o">&lt;</span><span class="nb">dir</span><span class="o">&gt;...</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="o">&lt;</span><span class="n">macro</span><span class="o">&gt;</span><span class="p">[</span><span class="o">=&lt;</span><span class="n">defn</span><span class="o">&gt;</span><span class="p">]]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="o">&lt;</span><span class="n">option</span><span class="o">&gt;...</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">target</span><span class="o">=&lt;</span><span class="n">platform</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">mcmodel</span><span class="o">=&lt;</span><span class="n">model</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">outfile</span><span class="o">&gt;</span><span class="p">]</span> <span class="n">infile</span>
+</pre></div>
+</div>
+<p>Only the most useful options are listed here; see below for the remainder.</p>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p>XCC is the compiler driver tool and drives the underlying XC, C and C++ language compilers,
+the assembler and the linker.</p>
+<p>XCC will normally run all the steps to take a set of source files and produce
+an executable file (.xe), which may be run on the simulator (using <code class="docutils literal notranslate"><span class="pre">xsim</span></code>), run on
+a target (using <code class="docutils literal notranslate"><span class="pre">xrun</span></code>) or converted to a format to be stored on flash memory
+(using <code class="docutils literal notranslate"><span class="pre">xflash</span></code>).</p>
+<p>The linker is invoked multiple times to produce an Elf executable for each tile
+which are combined into the final <a class="reference internal" href="../../formats/xe.html#xe-format"><span class="std std-ref">XE file</span></a>.</p>
+<p>Options such as <a class="reference internal" href="#cmdoption-xcc-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a>, <a class="reference internal" href="#cmdoption-xcc-S"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> and <a class="reference internal" href="#cmdoption-xcc-E"><code class="xref std std-option docutils literal notranslate"><span class="pre">-E</span></code></a> prevent certain compilation
+and linkage steps running, and instead produce an intermediate output.</p>
+<p>A target platform description file conforming to the
+<a class="reference internal" href="../../formats/xn-spec/xn-spec.html#xn-spec"><span class="std std-ref">XN specification</span></a> must be specified. This is done via
+<span class="target" id="index-0"></span><a class="reference internal" href="#envvar-XCC_DEFAULT_TARGET"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">XCC_DEFAULT_TARGET</span></code></a>, <a class="reference internal" href="#cmdoption-xcc-target"><code class="xref std std-option docutils literal notranslate"><span class="pre">-target</span></code></a> or listed as one of
+the input files.</p>
+<p>During compilation of a program, the compiler generates a temporary
+header file named <code class="file docutils literal notranslate"><span class="pre">platform.h</span></code> that contains variable and macro
+definitions, as defined by the target XN file, which include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Declarations of variables of type <code class="docutils literal notranslate"><span class="pre">tileref</span></code> (see <a class="reference internal" href="../../formats/xn-spec/xn-spec.html#xn-spec-declaration"><span class="std std-ref">Declaration</span></a>).</p></li>
+<li><p>Macro definitions of port names (see <a class="reference internal" href="../../formats/xn-spec/xn-spec.html#xn-spec-port"><span class="std std-ref">Port</span></a>).</p></li>
+</ul>
+</div></blockquote>
+<p>Many options are passed directly through to the tool performing the
+processing step. For instance, some options directly influence the behaviour
+of the compiler or the linker.</p>
+<p>For the most part, the order you use for the options doesn’t matter. Order
+does matter when you use several options of the same kind; for example, if you
+specify <a class="reference internal" href="#cmdoption-xcc-L"><code class="xref std std-option docutils literal notranslate"><span class="pre">-L</span></code></a> more than once, the directories are searched in the order
+specified. In other cases, such as with <a class="reference internal" href="#cmdoption-xcc-O"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a> repeated usage will
+result in the rightmost usage to take precedence.</p>
+<p>Many options have negative forms (for example, <code class="docutils literal notranslate"><span class="pre">-fno-&lt;option&gt;</span></code>).</p>
+<p>A space between an option and its argument is permitted.</p>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading">#</a></h2>
+<section id="overall-options">
+<h3>Overall Options<a class="headerlink" href="#overall-options" title="Permalink to this heading">#</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-x">
+<span class="sig-name descname"><span class="pre">-x</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;language&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-x" title="Permalink to this definition">#</a></dt>
+<dd><p>Overrides default handling for the following input files. This option
+applies to all following input files until the next <a class="reference internal" href="#cmdoption-xcc-x"><code class="xref std std-option docutils literal notranslate"><span class="pre">-x</span></code></a> option.
+Supported values for <cite>language</cite> are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c++</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assembler</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assembler-with-cpp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xn</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xscope</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">none</span></code> (turn off language specification)</p></li>
+</ul>
+</div></blockquote>
+<p>Default handling of the input files is determined by their suffix:</p>
+<div class="table-wrapper colwidths-given docutils container" id="id1">
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">File extensions recognized by XCC and their meaning</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 45.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Type of File</p></th>
+<th class="head"><p>Preprocessed by XCC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.xc</span></code></p></td>
+<td><p>XC source code</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.c</span></code></p></td>
+<td><p>C source code</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.cpp</span></code></p></td>
+<td><p>CPP source code (for compatability, the extensions <code class="docutils literal notranslate"><span class="pre">cc</span></code>, <code class="docutils literal notranslate"><span class="pre">cp</span></code>, <code class="docutils literal notranslate"><span class="pre">c++</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">cxx</span></code> are also recognized)</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.S</span></code></p></td>
+<td><p>Assembly code</p></td>
+<td><p>Y</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.xscope</span></code></p></td>
+<td><p><a class="reference internal" href="../../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE configuration file</span></a></p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.xn</span></code></p></td>
+<td><p>xCORE Network Description</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.xi</span></code></p></td>
+<td><p>XC source code</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.i</span></code></p></td>
+<td><p>C source code</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.ii</span></code></p></td>
+<td><p>C++ source code</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.s</span></code></p></td>
+<td><p>Assembly code</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-even"><td><p><em>other</em></p></td>
+<td><p>Object file .o be given to the linker</p></td>
+<td><p>N</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-std">
+<span class="sig-name descname"><span class="pre">-std</span></span><span class="sig-prename descclassname"><span class="pre">=&lt;standard&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-std" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the language variant for the following input C or C++
+file. Supported values for <code class="docutils literal notranslate"><span class="pre">&lt;standard&gt;</span></code> are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">c89</span></code></dt><dd><p>ISO C89</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gnu89</span></code></dt><dd><p>ISO C89 with GNU extensions</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">c99</span></code></dt><dd><p>ISO C99</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gnu99</span></code></dt><dd><p>ISO C99 with GNU extensions (default for C programs)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">c++98</span></code></dt><dd><p>ISO C++ (1998)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gnu++98</span></code></dt><dd><p>ISO C++ (1998) with GNU extensions (default for C++ programs)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fsubword-select">
+<span class="sig-name descname"><span class="pre">-fsubword-select</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-fsubword-select" title="Permalink to this definition">#</a></dt>
+<dd><p>In XC, allows selecting on channel inputs where the size of
+the destination variable is less than 32 bits.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-target">
+<span class="sig-name descname"><span class="pre">-target</span></span><span class="sig-prename descclassname"><span class="pre">=&lt;platform&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-target" title="Permalink to this definition">#</a></dt>
+<dd><p>Convenience mechanism for specifying a pre-canned target platform. The
+platform configuration must be specified in the file
+<code class="file docutils literal notranslate"><em><span class="pre">platform</span></em><span class="pre">.xn</span></code>, which is searched for in the paths specified by the
+<span class="target" id="index-1"></span><a class="reference internal" href="#envvar-XCC_TARGET_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">XCC_TARGET_PATH</span></code></a> environment variable.</p>
+<p>The use of this option is not recommended for long-lived projects due to
+the likelihood of the target platform changing in an uncontrolled fashion.
+It is best practice to specify a platform explicitly by defining and
+supplying a target platform as one of the xcc input files. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xcc my_target.xn main.c
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-mcmodel">
+<span class="sig-name descname"><span class="pre">-mcmodel</span></span><span class="sig-prename descclassname"><span class="pre">=&lt;model&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-mcmodel" title="Permalink to this definition">#</a></dt>
+<dd><p>Select <a class="reference internal" href="../../../../prog-guide/prog-ref/memory-models.html#memory-models"><span class="std std-ref">memory model</span></a>:
+<code class="docutils literal notranslate"><span class="pre">small</span></code>, <code class="docutils literal notranslate"><span class="pre">large</span></code>, or <code class="docutils literal notranslate"><span class="pre">hybrid</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-foverlay">
+<span class="sig-name descname"><span class="pre">-foverlay</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-foverlay" title="Permalink to this definition">#</a></dt>
+<dd><p>Enable support for memory overlays. Functions marked as overlay roots are
+placed in external memory and are loaded on demand at runtime. The option
+should be passed when compiling and linking. An overlay runtime should be
+supplied in the application.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-0">
+<span class="sig-name descname"><span class="pre">-foverlay</span></span><span class="sig-prename descclassname"><span class="pre">=flash</span></span><a class="headerlink" href="#cmdoption-xcc-0" title="Permalink to this definition">#</a></dt>
+<dd><p>Enable support for memory overlays linking in the flash overlay runtime.
+Overlays are only enabled on tiles which boot from flash.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-1">
+<span class="sig-name descname"><span class="pre">-foverlay</span></span><span class="sig-prename descclassname"><span class="pre">=syscall</span></span><a class="headerlink" href="#cmdoption-xcc-1" title="Permalink to this definition">#</a></dt>
+<dd><p>Enable support for memory overlays linking in the syscall overlay runtime.
+Overlay are enabled on all tiles. Overlays are loaded from a host machine
+using a system call.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fxscope">
+<span class="sig-name descname"><span class="pre">-fxscope</span></span><span class="sig-prename descclassname"><span class="pre">[=link|uart]</span></span><a class="headerlink" href="#cmdoption-xcc-fxscope" title="Permalink to this definition">#</a></dt>
+<dd><p>Enable support for tracing using xSCOPE (defaults to link, uart is not supported).
+The XN file of the target must contain an xSCOPE link. The option should be passed
+both when compiling and linking. This is an alternative to passing an
+<a class="reference internal" href="../../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE configuration file</span></a>, and is equivalent to a
+config file containing only
+<code class="samp docutils literal notranslate"><span class="pre">&lt;xSCOPEconfig</span> <span class="pre">ioDest=&quot;link&quot;</span> <span class="pre">ioMode=&quot;none&quot;</span> <span class="pre">enabled=&quot;true&quot;&gt;</span></code>. Thus, this flag
+can be used to enable xSCOPE and the <a class="reference internal" href="../../xscope/xscope-target-library.html#lib-xscope"><span class="std std-ref">xSCOPE target library</span></a> without writing an xSCOPE
+configuration file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fcmdline-buffer-bytes">
+<span class="sig-name descname"><span class="pre">-fcmdline-buffer-bytes</span></span><span class="sig-prename descclassname"><span class="pre">=&lt;n&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-fcmdline-buffer-bytes" title="Permalink to this definition">#</a></dt>
+<dd><p>Add a buffer of size &lt;n&gt; bytes to be used to hold command line arguments.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-pass-exit-codes">
+<span class="sig-name descname"><span class="pre">-pass-exit-codes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-pass-exit-codes" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the numerically highest error code produced by any phase of
+compilation. (By default XCC returns 1 if any phase of the compiler
+returns non-success, otherwise it returns 0.)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-c" title="Permalink to this definition">#</a></dt>
+<dd><p>Compiles or assembles the source files, producing an object file
+for each source file, but does not link/map. By default the object
+filename is formed by replacing the source file suffix with <code class="docutils literal notranslate"><span class="pre">.o</span></code>
+(for example, <code class="file docutils literal notranslate"><em><span class="pre">a</span></em><span class="pre">.c</span></code> produces <code class="file docutils literal notranslate"><em><span class="pre">a</span></em><span class="pre">.o</span></code>).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-S">
+<span id="cmdoption-xcc-s"></span><span class="sig-name descname"><span class="pre">-S</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-S" title="Permalink to this definition">#</a></dt>
+<dd><p>Stops after compilation proper, producing an assembly code file for
+each nonassembly input file specified. By default the assembly
+filename is formed by replacing the source file suffix with .s.</p>
+<p>Input files not requiring compilation are ignored.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-E">
+<span id="cmdoption-xcc-e"></span><span class="sig-name descname"><span class="pre">-E</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-E" title="Permalink to this definition">#</a></dt>
+<dd><p>Preprocesses the source files only, outputting the preprocessed
+source to stdout.</p>
+<p>Input files not requiring preprocessing are ignored.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-o">
+<span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-o" title="Permalink to this definition">#</a></dt>
+<dd><p>Places output in <code class="file docutils literal notranslate"><span class="pre">file</span></code>.</p>
+<p>If <a class="reference internal" href="#cmdoption-xcc-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-o</span></code></a> is not specified, the executable file is placed in
+<code class="file docutils literal notranslate"><span class="pre">a.xe</span></code>, the object file for <code class="file docutils literal notranslate"><em><span class="pre">source</span></em><span class="pre">.suffix</span></code> in <code class="file docutils literal notranslate"><em><span class="pre">source</span></em><span class="pre">.o</span></code>,
+its assembly code file in <code class="file docutils literal notranslate"><em><span class="pre">source</span></em><span class="pre">.s</span></code>, and all preprocessed
+C/C++/XC source on standard output.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-v">
+<span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-v" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints (on standard error) the commands executed at each stage of
+compilation. Also prints the version number of XCC, the
+preprocessor and the compiler proper.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-2">
+<span id="cmdoption-xcc"></span><span class="sig-name descname"><span class="pre">-###</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-2" title="Permalink to this definition">#</a></dt>
+<dd><p>The same as <a class="reference internal" href="#cmdoption-xcc-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> except that the commands are not executed and
+all command arguments are quoted.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-help">
+<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-help" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints a description of the supported command line options. If
+<a class="reference internal" href="#cmdoption-xcc-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> is also specified, <a class="reference internal" href="#cmdoption-xcc-help"><code class="xref std std-option docutils literal notranslate"><span class="pre">--help</span></code></a> is also passed to the
+subprocesses invoked by XCC.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-version" title="Permalink to this definition">#</a></dt>
+<dd><p>Displays the version number and copyrights.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-save-temps">
+<span class="sig-name descname"><span class="pre">-save-temps</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-save-temps" title="Permalink to this definition">#</a></dt>
+<dd><p>Save intermediate files to current directory. Where possible, files are
+named based on the source file. The generated file <code class="file docutils literal notranslate"><span class="pre">platform.h</span></code> is
+always written with the same name, and therefore parallel builds with this
+option enabled should be avoided.</p>
+<p>This option is not forwarded to xmap; see <a class="reference internal" href="#cmdoption-xcc-Xmapper"><code class="xref std std-option docutils literal notranslate"><span class="pre">-Xmapper</span></code></a> if this is the
+desired behaviour.</p>
+</dd></dl>
+
+</section>
+<section id="warning-options">
+<span id="xcc-manual-warning-options"></span><h3>Warning Options<a class="headerlink" href="#warning-options" title="Permalink to this heading">#</a></h3>
+<p>Many specific warnings can be controlled with options beginning
+<code class="docutils literal notranslate"><span class="pre">-W</span></code>. Each of the following options has a negative form beginning
+<code class="docutils literal notranslate"><span class="pre">-Wno-</span></code> to turn off warnings.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fsyntax-only">
+<span class="sig-name descname"><span class="pre">-fsyntax-only</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-fsyntax-only" title="Permalink to this definition">#</a></dt>
+<dd><p>Checks the code for syntax errors only, then exits.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-w">
+<span class="sig-name descname"><span class="pre">-w</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-w" title="Permalink to this definition">#</a></dt>
+<dd><p>Turns off all warning messages.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wbidirectional-buffered-port">
+<span id="cmdoption-xcc-wbidirectional-buffered-port"></span><span class="sig-name descname"><span class="pre">-Wbidirectional-buffered-port</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wbidirectional-buffered-port" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns about the use of buffered ports not qualified with either <code class="docutils literal notranslate"><span class="pre">in</span></code> or <code class="docutils literal notranslate"><span class="pre">out</span></code>.
+This warning is enabled by default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wchar-subscripts">
+<span id="cmdoption-xcc-wchar-subscripts"></span><span class="sig-name descname"><span class="pre">-Wchar-subscripts</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wchar-subscripts" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if an array subscript has type char.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wcomment">
+<span id="cmdoption-xcc-wcomment"></span><span class="sig-name descname"><span class="pre">-Wcomment</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wcomment" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a comment-start sequence <code class="docutils literal notranslate"><span class="pre">/*</span></code> appears in a <code class="docutils literal notranslate"><span class="pre">/*</span></code>
+comment, or if a backslash-newline appears in a <code class="docutils literal notranslate"><span class="pre">//</span></code> comment.
+This is default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wimplicit-int">
+<span id="cmdoption-xcc-wimplicit-int"></span><span class="sig-name descname"><span class="pre">-Wimplicit-int</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wimplicit-int" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a declaration does not specify a type. In C also warns
+about function declarations with no return type.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wmain">
+<span id="cmdoption-xcc-wmain"></span><span class="sig-name descname"><span class="pre">-Wmain</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wmain" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if the type of <code class="docutils literal notranslate"><span class="pre">main</span></code> is not a function with external linkage
+returning <code class="docutils literal notranslate"><span class="pre">int</span></code>. In XC also warns if main does not take zero
+arguments. In C also warns if <code class="docutils literal notranslate"><span class="pre">main</span></code> does not take either zero or
+two arguments of appropriate type.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wmissing-braces">
+<span id="cmdoption-xcc-wmissing-braces"></span><span class="sig-name descname"><span class="pre">-Wmissing-braces</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wmissing-braces" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if an aggregate or union initializer is not fully bracketed.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wparentheses">
+<span id="cmdoption-xcc-wparentheses"></span><span class="sig-name descname"><span class="pre">-Wparentheses</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wparentheses" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if parentheses are omitted when there is an assignment in a
+context where a truth value is expected or if operators are nested
+whose precedence people often find confusing.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wreturn-type">
+<span id="cmdoption-xcc-wreturn-type"></span><span class="sig-name descname"><span class="pre">-Wreturn-type</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wreturn-type" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a function is defined with a return type that defaults to
+<code class="docutils literal notranslate"><span class="pre">int</span></code> or if a return statement returns no value in a function
+whose return type is not <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wswitch-default">
+<span id="cmdoption-xcc-wswitch-default"></span><span class="sig-name descname"><span class="pre">-Wswitch-default</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wswitch-default" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement does not have a <code class="docutils literal notranslate"><span class="pre">default</span></code> case.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wswitch-fallthrough">
+<span id="cmdoption-xcc-wswitch-fallthrough"></span><span class="sig-name descname"><span class="pre">-Wswitch-fallthrough</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wswitch-fallthrough" title="Permalink to this definition">#</a></dt>
+<dd><p>(XC only) Warns if a case in a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement with at least one
+statement can have control fall through to the following case.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wtiming">
+<span id="cmdoption-xcc-wtiming"></span><span class="sig-name descname"><span class="pre">-Wtiming</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wtiming" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if timing constraints are not satisfied. This is default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wtiming-syntax">
+<span id="cmdoption-xcc-wtiming-syntax"></span><span class="sig-name descname"><span class="pre">-Wtiming-syntax</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wtiming-syntax" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns about invalid syntax in timing scripts. This is default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wunused-function">
+<span id="cmdoption-xcc-wunused-function"></span><span class="sig-name descname"><span class="pre">-Wunused-function</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wunused-function" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a static function is declared but not defined or a
+non-inline static function is unused.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wunused-parameter">
+<span id="cmdoption-xcc-wunused-parameter"></span><span class="sig-name descname"><span class="pre">-Wunused-parameter</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wunused-parameter" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a function parameter is unused except for its
+declaration.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wunused-variable">
+<span id="cmdoption-xcc-wunused-variable"></span><span class="sig-name descname"><span class="pre">-Wunused-variable</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wunused-variable" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a local variable or non-constant static variable is unused
+except for its declaration.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wunused">
+<span id="cmdoption-xcc-wunused"></span><span class="sig-name descname"><span class="pre">-Wunused</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wunused" title="Permalink to this definition">#</a></dt>
+<dd><p>Same as <a class="reference internal" href="#cmdoption-xcc-Wunused-function"><code class="xref std std-option docutils literal notranslate"><span class="pre">-Wunused-function</span></code></a>, <a class="reference internal" href="#cmdoption-xcc-Wunused-variable"><code class="xref std std-option docutils literal notranslate"><span class="pre">-Wunused-variable</span></code></a> and
+<code class="docutils literal notranslate"><span class="pre">-Wno-unused-parameter</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wall">
+<span id="cmdoption-xcc-wall"></span><span class="sig-name descname"><span class="pre">-Wall</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wall" title="Permalink to this definition">#</a></dt>
+<dd><p>Turns on all of the above <code class="docutils literal notranslate"><span class="pre">-W</span></code> options.</p>
+</dd></dl>
+
+<p>The following <code class="docutils literal notranslate"><span class="pre">-W...</span></code> options are not implied by <a class="reference internal" href="#cmdoption-xcc-Wall"><code class="xref std std-option docutils literal notranslate"><span class="pre">-Wall</span></code></a>.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wextra">
+<span id="cmdoption-xcc-wextra"></span><span id="cmdoption-xcc-W"></span><span class="sig-name descname"><span class="pre">-Wextra</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">-W</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wextra" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints extra warning messages for the following:</p>
+<ul class="simple">
+<li><p>A function can return either with or without a value (C, C++
+only).</p></li>
+<li><p>An expression statement or left-hand side of a comma expression
+contains no side effects. This warning can be suppressed by casting
+the unused expression to <code class="docutils literal notranslate"><span class="pre">void</span></code> (C, C++ only).</p></li>
+<li><p>An unsigned value is compared against zero with <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>.</p></li>
+<li><p>Storage-class specifiers like <code class="docutils literal notranslate"><span class="pre">static</span></code> are not the first
+things in a declaration (C, C++ only).</p></li>
+<li><p>A comparison such as <code class="docutils literal notranslate"><span class="pre">x&lt;=y&lt;=z</span></code> appears (XC only).</p></li>
+<li><p>The return type of a function has a redundant qualifier such as
+<code class="docutils literal notranslate"><span class="pre">const</span></code>.</p></li>
+<li><p>Warns about unused arguments if <code class="docutils literal notranslate"><span class="pre">-Wall</span></code> or <code class="docutils literal notranslate"><span class="pre">-Wunused</span></code> is
+also specified.</p></li>
+<li><p>A comparison between signed and unsigned values could produce an
+incorrect result when the signed value is converted to unsigned.
+(Not warned if <code class="docutils literal notranslate"><span class="pre">-Wno-sign-compare</span></code> is also specified.)</p></li>
+<li><p>An aggregate has an initializer that does not initialize all
+members.</p></li>
+<li><p>An initialized field without side effects is overridden when
+using designated initializers (C, C++ only).</p></li>
+<li><p>A function parameter is declared without a type specifier in
+K&amp;R-style functions (C, C++ only).</p></li>
+<li><p>An empty body occurs in an <code class="docutils literal notranslate"><span class="pre">if</span></code> or <code class="docutils literal notranslate"><span class="pre">else</span></code> statement (C, C++
+only).</p></li>
+<li><p>A pointer is compared against integer zero with <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>. (C, C++ only).</p></li>
+<li><p>An enumerator and a non-enumerator both appear in a conditional
+expression. (C++ only).</p></li>
+<li><p>A non-static reference or non-static const enumerator and a
+non-enumerator both appear in a conditional expression (C++ only).</p></li>
+<li><p>Ambiguous virtual bases (C++ only).</p></li>
+<li><p>Subscripting an array which has been declared <code class="docutils literal notranslate"><span class="pre">register</span></code> (C++
+only).</p></li>
+<li><p>Taking the address of a variable which has been declared
+<code class="docutils literal notranslate"><span class="pre">register</span></code> (C++ only).</p></li>
+<li><p>A base class is not initialized in a derived class’ copy
+constructor (C++ only).</p></li>
+</ul>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wconversion">
+<span id="cmdoption-xcc-wconversion"></span><span class="sig-name descname"><span class="pre">-Wconversion</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wconversion" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a negative integer constant expression is implicitly
+converted to an unsigned type.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wdiv-by-zero">
+<span id="cmdoption-xcc-wdiv-by-zero"></span><span class="sig-name descname"><span class="pre">-Wdiv-by-zero</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wdiv-by-zero" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns about compile-time integer division by zero. This is
+default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wfloat-equal">
+<span id="cmdoption-xcc-wfloat-equal"></span><span class="sig-name descname"><span class="pre">-Wfloat-equal</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wfloat-equal" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if floating point values are used in equality comparisons.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wlarger-than-len">
+<span id="cmdoption-xcc-wlarger-than-len"></span><span class="sig-name descname"><span class="pre">-Wlarger-than-&lt;len&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wlarger-than-len" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if an object of larger than <cite>len</cite> bytes is defined.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wpadded">
+<span id="cmdoption-xcc-wpadded"></span><span class="sig-name descname"><span class="pre">-Wpadded</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wpadded" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a structure contains padding. (It may be possible to
+rearrange the fields of the structure to reduce padding and thus
+make the structure smaller.)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wreinterpret-alignment">
+<span id="cmdoption-xcc-wreinterpret-alignment"></span><span class="sig-name descname"><span class="pre">-Wreinterpret-alignment</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wreinterpret-alignment" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns when a reinterpret cast moves to a larger alignment.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wshadow">
+<span id="cmdoption-xcc-wshadow"></span><span class="sig-name descname"><span class="pre">-Wshadow</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wshadow" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a local variable shadows another local variable, parameter
+or global variable or if a built-in function is shadowed.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wsign-compare">
+<span id="cmdoption-xcc-wsign-compare"></span><span class="sig-name descname"><span class="pre">-Wsign-compare</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wsign-compare" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if a comparison between signed and unsigned values could
+produce an incorrect result when the signed value is converted to
+unsigned.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wsystem-headers">
+<span id="cmdoption-xcc-wsystem-headers"></span><span class="sig-name descname"><span class="pre">-Wsystem-headers</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wsystem-headers" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints warning messages for constructs found in system header
+files. This is not default. See <a class="reference internal" href="#xcc-manual-directory-options"><span class="std std-ref">Directory Options</span></a>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wundef">
+<span id="cmdoption-xcc-wundef"></span><span class="sig-name descname"><span class="pre">-Wundef</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wundef" title="Permalink to this definition">#</a></dt>
+<dd><p>Warns if an undefined macro is used in a <code class="docutils literal notranslate"><span class="pre">#if</span></code> directive.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Werror">
+<span id="cmdoption-xcc-werror"></span><span class="sig-name descname"><span class="pre">-Werror</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Werror" title="Permalink to this definition">#</a></dt>
+<dd><p>Treat all warnings as errors.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-3">
+<span class="sig-name descname"><span class="pre">-Werror</span></span><span class="sig-prename descclassname"><span class="pre">=&lt;option&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-3" title="Permalink to this definition">#</a></dt>
+<dd><p>Turns a warning message into an error. The option should be one of
+the warning options to the compiler that can be prefixed with
+<code class="docutils literal notranslate"><span class="pre">-W</span></code>.</p>
+<p>By default, the flag <code class="docutils literal notranslate"><span class="pre">-Werror=timing-syntax</span></code> is set. Turning this
+warning into an error implies that timing warnings (<code class="docutils literal notranslate"><span class="pre">-Wtiming</span></code>)
+are also errors and vice versa.</p>
+</dd></dl>
+
+</section>
+<section id="debugging-options">
+<span id="xcc-manual-debugging-options"></span><h3>Debugging Options<a class="headerlink" href="#debugging-options" title="Permalink to this heading">#</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-g">
+<span class="sig-name descname"><span class="pre">-g</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-g" title="Permalink to this definition">#</a></dt>
+<dd><p>Produces debugging information.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fresource-checks">
+<span class="sig-name descname"><span class="pre">-fresource-checks</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-fresource-checks" title="Permalink to this definition">#</a></dt>
+<dd><p>Produces code in the executable that traps if a resource allocation
+fails. This causes resource errors to be detected as early as
+possible.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fverbose-asm">
+<span class="sig-name descname"><span class="pre">-fverbose-asm</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-fverbose-asm" title="Permalink to this definition">#</a></dt>
+<dd><p>Produces extra compilation information as comments in intermediate
+assembly files.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-dumpmachine">
+<span class="sig-name descname"><span class="pre">-dumpmachine</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-dumpmachine" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints the target machine and exit.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-dumpversion">
+<span class="sig-name descname"><span class="pre">-dumpversion</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-dumpversion" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints the compiler version and exit.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-print-multi-lib">
+<span class="sig-name descname"><span class="pre">-print-multi-lib</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-print-multi-lib" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints the mapping from multilib directory names to compiler
+switches that enable them. The directory name is seperated from the
+switches by ‘<code class="docutils literal notranslate"><span class="pre">;</span></code>’, and each switch starts with a ‘<code class="docutils literal notranslate"><span class="pre">&#64;</span></code>’ instead
+of the ‘<code class="docutils literal notranslate"><span class="pre">-</span></code>’, without spaces between multiple switches.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-print-targets">
+<span class="sig-name descname"><span class="pre">-print-targets</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-print-targets" title="Permalink to this definition">#</a></dt>
+<dd><p>Lists the target platforms (XN files) found via <span class="target" id="index-2"></span><a class="reference internal" href="#envvar-XCC_TARGET_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">XCC_TARGET_PATH</span></code></a>,
+excluding those in folders with name <code class="file docutils literal notranslate"><span class="pre">.deprecated</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-print-boards">
+<span class="sig-name descname"><span class="pre">-print-boards</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-print-boards" title="Permalink to this definition">#</a></dt>
+<dd><p>Same as <a class="reference internal" href="#cmdoption-xcc-print-targets"><code class="xref std std-option docutils literal notranslate"><span class="pre">-print-targets</span></code></a>, but only lists target platforms with the &lt;
+Type&gt; element set to “Board”.</p>
+</dd></dl>
+
+</section>
+<section id="optimization-options">
+<span id="xcc-manual-optimization-options"></span><h3>Optimization Options<a class="headerlink" href="#optimization-options" title="Permalink to this heading">#</a></h3>
+<p>Turning on optimization makes the compiler attempt to improve
+performance and/or code size at the expense of compilation time and
+the ability to debug the program.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-O0">
+<span id="cmdoption-xcc-o0"></span><span class="sig-name descname"><span class="pre">-O0</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-O0" title="Permalink to this definition">#</a></dt>
+<dd><p>Do not optimize. This is the default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-O">
+<span id="cmdoption-xcc-O1"></span><span id="cmdoption-xcc-o1"></span><span class="sig-name descname"><span class="pre">-O</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">-O1</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-O" title="Permalink to this definition">#</a></dt>
+<dd><p>Optimize. Attempts to reduce execution time and code size without
+performing any optimizations that take a large amount of
+compilation time.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-O2">
+<span id="cmdoption-xcc-o2"></span><span class="sig-name descname"><span class="pre">-O2</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-O2" title="Permalink to this definition">#</a></dt>
+<dd><p>Optimize more. None of these optimizations involve a space-speed
+tradeoff.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-O3">
+<span id="cmdoption-xcc-o3"></span><span class="sig-name descname"><span class="pre">-O3</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-O3" title="Permalink to this definition">#</a></dt>
+<dd><p>Optimize even more. These optimizations may involve a space-speed
+tradeoff; high performance is preferred to small code size.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Os">
+<span id="cmdoption-xcc-os"></span><span class="sig-name descname"><span class="pre">-Os</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Os" title="Permalink to this definition">#</a></dt>
+<dd><p>Optimize for the smallest code size possible.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-fschedule">
+<span class="sig-name descname"><span class="pre">-fschedule</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-fschedule" title="Permalink to this definition">#</a></dt>
+<dd><p>Attempt to reorder instructions to increase performance. This is
+not default at any optimization level.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-funroll-loops">
+<span class="sig-name descname"><span class="pre">-funroll-loops</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-funroll-loops" title="Permalink to this definition">#</a></dt>
+<dd><p>Unroll loops with small iteration counts.
+This is enabled at -O2 and above.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-finline-functions">
+<span class="sig-name descname"><span class="pre">-finline-functions</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-finline-functions" title="Permalink to this definition">#</a></dt>
+<dd><p>Integrate simple functions into their callers.
+This is enabled at -O2 and above and also at -Os.</p>
+</dd></dl>
+
+</section>
+<section id="preprocessor-options">
+<h3>Preprocessor Options<a class="headerlink" href="#preprocessor-options" title="Permalink to this heading">#</a></h3>
+<p>The following options control the preprocessor.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-4">
+<span class="sig-name descname"><span class="pre">-E</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-4" title="Permalink to this definition">#</a></dt>
+<dd><p>Preprocesses only, then exit.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-D">
+<span id="cmdoption-xcc-d"></span><span class="sig-name descname"><span class="pre">-D</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;name&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-D" title="Permalink to this definition">#</a></dt>
+<dd><p>Predefines <cite>name</cite> as a macro with definition 1.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-5">
+<span class="sig-name descname"><span class="pre">-D</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;name=definition&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-5" title="Permalink to this definition">#</a></dt>
+<dd><p>Tokenizes and preprocesses the contents of <cite>definition</cite> as if it
+appeared in a <code class="docutils literal notranslate"><span class="pre">#define</span></code> directive.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-U">
+<span id="cmdoption-xcc-u"></span><span class="sig-name descname"><span class="pre">-U</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;name&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-U" title="Permalink to this definition">#</a></dt>
+<dd><p>Removes any previous definition of <cite>name</cite>.</p>
+<p><a class="reference internal" href="#cmdoption-xcc-D"><code class="xref std std-option docutils literal notranslate"><span class="pre">-D</span></code></a> and <a class="reference internal" href="#cmdoption-xcc-U"><code class="xref std std-option docutils literal notranslate"><span class="pre">-U</span></code></a> options are processed in the order given on the
+command line.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-MD">
+<span id="cmdoption-xcc-md"></span><span class="sig-name descname"><span class="pre">-MD</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-MD" title="Permalink to this definition">#</a></dt>
+<dd><p>Outputs to a file a rule suitable for <strong class="command">make</strong> describing the
+dependencies of the source file. The default name of the dependency
+file is determined based on whether the <a class="reference internal" href="#cmdoption-xcc-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-o</span></code></a> option is specified.
+If <a class="reference internal" href="#cmdoption-xcc-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-o</span></code></a> is specified, the filename is the basename of the
+argument to <a class="reference internal" href="#cmdoption-xcc-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-o</span></code></a> with the suffix <code class="docutils literal notranslate"><span class="pre">.d</span></code>. If <a class="reference internal" href="#cmdoption-xcc-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">-o</span></code></a> is not
+specified, the filename is the basename of the input file with the
+suffix <code class="docutils literal notranslate"><span class="pre">.d</span></code>. The name of the file may be overriden with <a class="reference internal" href="#cmdoption-xcc-MF"><code class="xref std std-option docutils literal notranslate"><span class="pre">-MF</span></code></a>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-MMD">
+<span id="cmdoption-xcc-mmd"></span><span class="sig-name descname"><span class="pre">-MMD</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-MMD" title="Permalink to this definition">#</a></dt>
+<dd><p>The same as <a class="reference internal" href="#cmdoption-xcc-MD"><code class="xref std std-option docutils literal notranslate"><span class="pre">-MD</span></code></a> expect that dependencies on system headers are
+ignored.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-MF">
+<span id="cmdoption-xcc-mf"></span><span class="sig-name descname"><span class="pre">-MF</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-MF" title="Permalink to this definition">#</a></dt>
+<dd><p>Write dependency information to <code class="file docutils literal notranslate"><span class="pre">file</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-MP">
+<span id="cmdoption-xcc-mp"></span><span class="sig-name descname"><span class="pre">-MP</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-MP" title="Permalink to this definition">#</a></dt>
+<dd><p>Emits phony targets for each dependency of the source file. Each
+phony target depends on nothing. These dummy rules work around
+errors <code class="docutils literal notranslate"><span class="pre">make</span></code> gives if header files are removed without updating
+the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> to match.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-MT">
+<span id="cmdoption-xcc-mt"></span><span class="sig-name descname"><span class="pre">-MT</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-MT" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the target of the rule emitted by dependency
+generation.</p>
+</dd></dl>
+
+</section>
+<section id="mapper-options">
+<h3>Mapper Options<a class="headerlink" href="#mapper-options" title="Permalink to this heading">#</a></h3>
+<p>The following options control the mapper and its linker.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-l">
+<span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;library&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-l" title="Permalink to this definition">#</a></dt>
+<dd><p>Searches the library library when linking. The linker searches and
+processes libraries and object files in the order specified. The
+actual library name searched for is <code class="file docutils literal notranslate"><span class="pre">lib</span><em><span class="pre">library</span></em><span class="pre">.a</span></code>.</p>
+<p>The directories searched include any specified with <a class="reference internal" href="#cmdoption-xcc-L"><code class="xref std std-option docutils literal notranslate"><span class="pre">-L</span></code></a>.</p>
+<p>Libraries are archive files whose members are object files. The
+linker scans the archive for its members which define symbols that
+have so far been referenced but not defined.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-nostartfiles">
+<span class="sig-name descname"><span class="pre">-nostartfiles</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-nostartfiles" title="Permalink to this definition">#</a></dt>
+<dd><p>Do not link with the system startup files.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-nodefaultlibs">
+<span class="sig-name descname"><span class="pre">-nodefaultlibs</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-nodefaultlibs" title="Permalink to this definition">#</a></dt>
+<dd><p>Do not link with the system libraries.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-nostdlib">
+<span class="sig-name descname"><span class="pre">-nostdlib</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-nostdlib" title="Permalink to this definition">#</a></dt>
+<dd><p>Do not link with the system startup files or system libraries.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-6">
+<span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-6" title="Permalink to this definition">#</a></dt>
+<dd><p>Removes all symbol table and relocation information from the
+executable.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-default-clkblk">
+<span class="sig-name descname"><span class="pre">-default-clkblk</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;clk&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-default-clkblk" title="Permalink to this definition">#</a></dt>
+<dd><p>Use <cite>clk</cite> as the default clock block. The clock block may be
+specified by its name in <code class="docutils literal notranslate"><span class="pre">&lt;xs1.h&gt;</span></code> or by its resource
+number.</p>
+<p>The startup code turns on the default clock block, configures it to
+be clocked off the reference clock with no divide and puts it into
+a running state. Ports declared in XC are initially attached to the
+default clock block. If this option is unspecified, the default
+clock block is set to <code class="docutils literal notranslate"><span class="pre">XS1_CLKBLK_REF</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Wm-option">
+<span id="cmdoption-xcc-wm-option"></span><span class="sig-name descname"><span class="pre">-Wm,&lt;option&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-Wm-option" title="Permalink to this definition">#</a></dt>
+<dd><p>Passes <cite>option</cite> as an option to the linker/mapper. If <cite>option</cite>
+contains commas, it is split into multiple options at the commas.</p>
+<p>To view the full set of advanced mapper options, type
+<strong class="command">xmap --help</strong>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-Xmapper">
+<span id="cmdoption-xcc-xmapper"></span><span class="sig-name descname"><span class="pre">-Xmapper</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;option&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-Xmapper" title="Permalink to this definition">#</a></dt>
+<dd><p>Passes <cite>option</cite> as an option to the linker/mapper. To pass an option
+that takes an argument use <a class="reference internal" href="#cmdoption-xcc-Xmapper"><code class="xref std std-option docutils literal notranslate"><span class="pre">-Xmapper</span></code></a> twice.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-report">
+<span class="sig-name descname"><span class="pre">-report</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xcc-report" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints a summary of resource usage.</p>
+</dd></dl>
+
+</section>
+<section id="directory-options">
+<span id="xcc-manual-directory-options"></span><h3>Directory Options<a class="headerlink" href="#directory-options" title="Permalink to this heading">#</a></h3>
+<p>The following options specify directories to search for header
+files and libraries.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-I">
+<span id="cmdoption-xcc-i"></span><span class="sig-name descname"><span class="pre">-I</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;dir&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-I" title="Permalink to this definition">#</a></dt>
+<dd><p>Adds <code class="file docutils literal notranslate"><span class="pre">dir</span></code> to the list of directories to be searched for header
+files.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-isystem">
+<span class="sig-name descname"><span class="pre">-isystem</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;dir&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-isystem" title="Permalink to this definition">#</a></dt>
+<dd><p>Searches <code class="file docutils literal notranslate"><span class="pre">dir</span></code> for header files after all directories specified by
+<a class="reference internal" href="#cmdoption-xcc-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a>. Marks it as a system directory.</p>
+<p>The compiler suppresses warnings for header files in system
+directories.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-iquote">
+<span class="sig-name descname"><span class="pre">-iquote</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;dir&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-iquote" title="Permalink to this definition">#</a></dt>
+<dd><p>Searches <code class="file docutils literal notranslate"><span class="pre">dir</span></code> only for header files requested with
+<code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;file&quot;</span></code> (not with <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;file&gt;</span></code>)
+before all directories specified by <a class="reference internal" href="#cmdoption-xcc-I"><code class="xref std std-option docutils literal notranslate"><span class="pre">-I</span></code></a> and before the system
+directories.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xcc-L">
+<span class="sig-name descname"><span class="pre">-L</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;dir&gt;</span></span><a class="headerlink" href="#cmdoption-xcc-L" title="Permalink to this definition">#</a></dt>
+<dd><p>Adds <code class="file docutils literal notranslate"><span class="pre">dir</span></code> to the list of directories to be searched for by
+<a class="reference internal" href="#cmdoption-xcc-l"><code class="xref std std-option docutils literal notranslate"><span class="pre">-l</span></code></a>.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="environment">
+<span id="xcc-manual-environment-variables"></span><h2>Environment<a class="headerlink" href="#environment" title="Permalink to this heading">#</a></h2>
+<p>The following environment variables affect the operation of XCC.
+Multiple paths are separated by an OS-specific path separator
+(’<code class="docutils literal notranslate"><span class="pre">;</span></code>’ for Windows, ‘<code class="docutils literal notranslate"><span class="pre">:</span></code>’ for Mac and Linux).</p>
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_INCLUDE_PATH">
+<span class="sig-name descname"><span class="pre">XCC_INCLUDE_PATH</span></span><a class="headerlink" href="#envvar-XCC_INCLUDE_PATH" title="Permalink to this definition">#</a></dt>
+<dd><p>A list of directories to be searched as if specified with <code class="docutils literal notranslate"><span class="pre">-I</span></code>,
+but after any paths given with <code class="docutils literal notranslate"><span class="pre">-I</span></code> options on the command line.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_XC_INCLUDE_PATH">
+<span class="sig-name descname"><span class="pre">XCC_XC_INCLUDE_PATH</span></span><a class="headerlink" href="#envvar-XCC_XC_INCLUDE_PATH" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_C_INCLUDE_PATH">
+<span class="sig-name descname"><span class="pre">XCC_C_INCLUDE_PATH</span></span><a class="headerlink" href="#envvar-XCC_C_INCLUDE_PATH" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_CPLUS_INCLUDE_PATH">
+<span class="sig-name descname"><span class="pre">XCC_CPLUS_INCLUDE_PATH</span></span><a class="headerlink" href="#envvar-XCC_CPLUS_INCLUDE_PATH" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_ASSEMBLER_INCLUDE_PATH">
+<span class="sig-name descname"><span class="pre">XCC_ASSEMBLER_INCLUDE_PATH</span></span><a class="headerlink" href="#envvar-XCC_ASSEMBLER_INCLUDE_PATH" title="Permalink to this definition">#</a></dt>
+<dd><p>Each of these environment variables applies only when preprocessing
+files of the named language. The variables specify lists of
+directories to be searched as if specified with <code class="docutils literal notranslate"><span class="pre">-isystem</span></code>, but
+after any paths given with <code class="docutils literal notranslate"><span class="pre">-isystem</span></code> options on the command
+line.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_LIBRARY_PATH">
+<span class="sig-name descname"><span class="pre">XCC_LIBRARY_PATH</span></span><a class="headerlink" href="#envvar-XCC_LIBRARY_PATH" title="Permalink to this definition">#</a></dt>
+<dd><p>A list of directories to be searched as if specified with <code class="docutils literal notranslate"><span class="pre">-L</span></code>,
+but after any paths given with <code class="docutils literal notranslate"><span class="pre">-L</span></code> on the command line.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_DEVICE_PATH">
+<span class="sig-name descname"><span class="pre">XCC_DEVICE_PATH</span></span><a class="headerlink" href="#envvar-XCC_DEVICE_PATH" title="Permalink to this definition">#</a></dt>
+<dd><p>A list of directories to be searched for device configuration
+files.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_TARGET_PATH">
+<span class="sig-name descname"><span class="pre">XCC_TARGET_PATH</span></span><a class="headerlink" href="#envvar-XCC_TARGET_PATH" title="Permalink to this definition">#</a></dt>
+<dd><p>A list of directories to be searched for target configuration
+files. See <a class="reference internal" href="#cmdoption-xcc-target"><code class="xref std std-option docutils literal notranslate"><span class="pre">-target</span></code></a>, <a class="reference internal" href="#cmdoption-xcc-print-targets"><code class="xref std std-option docutils literal notranslate"><span class="pre">-print-targets</span></code></a> and
+<a class="reference internal" href="#cmdoption-xcc-print-boards"><code class="xref std std-option docutils literal notranslate"><span class="pre">-print-boards</span></code></a>.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_EXEC_PREFIX">
+<span class="sig-name descname"><span class="pre">XCC_EXEC_PREFIX</span></span><a class="headerlink" href="#envvar-XCC_EXEC_PREFIX" title="Permalink to this definition">#</a></dt>
+<dd><p>If set, subprograms executed by the compiler are prefixed with the
+value of this environment variable. No directory seperater is added
+when the prefix is combined with the name of a subprogram. The
+prefix is not applied when executing the assembler or the mapper.</p>
+</dd></dl>
+
+<dl class="std envvar">
+<dt class="sig sig-object std" id="envvar-XCC_DEFAULT_TARGET">
+<span class="sig-name descname"><span class="pre">XCC_DEFAULT_TARGET</span></span><a class="headerlink" href="#envvar-XCC_DEFAULT_TARGET" title="Permalink to this definition">#</a></dt>
+<dd><p>The default target platform, to be located as if specified with
+<a class="reference internal" href="#cmdoption-xcc-target"><code class="xref std std-option docutils literal notranslate"><span class="pre">-target</span></code></a>. The default target platform is used if no target is
+specified with <a class="reference internal" href="#cmdoption-xcc-target"><code class="xref std std-option docutils literal notranslate"><span class="pre">-target</span></code></a> and no XN file is provided as an input
+file.</p>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../xobjdump-manual/xobjdump-manual.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">XOBJDUMP</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../xsim-manual/xsim-manual.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">XSIM</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">XCC</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#overall-options">Overall Options</a></li>
+<li><a class="reference internal" href="#warning-options">Warning Options</a></li>
+<li><a class="reference internal" href="#debugging-options">Debugging Options</a></li>
+<li><a class="reference internal" href="#optimization-options">Optimization Options</a></li>
+<li><a class="reference internal" href="#preprocessor-options">Preprocessor Options</a></li>
+<li><a class="reference internal" href="#mapper-options">Mapper Options</a></li>
+<li><a class="reference internal" href="#directory-options">Directory Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/scripts/furo.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/tabs.js"></script>
+    </body>
+</html>

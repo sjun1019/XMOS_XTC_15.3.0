@@ -1,0 +1,3 @@
+/Users/lsj/XMOS_XTC_15.3.0/examples/ExampleXCommonCMake/build/CMakeFiles/example.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/ExampleXCommonCMake/build/CMakeFiles/edit_cache.dir
+/Users/lsj/XMOS_XTC_15.3.0/examples/ExampleXCommonCMake/build/CMakeFiles/rebuild_cache.dir

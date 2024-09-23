@@ -1,0 +1,1523 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="xSCOPE host library" href="xscope-host-library.html" /><link rel="prev" title="xSCOPE performance figures" href="xscope-performance.html" />
+
+    <link rel="shortcut icon" href="../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>xSCOPE target library - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../cmd-line-tools/index.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xburn-manual/xburn-manual.html">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cmd-line-tools/xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="index.html">xSCOPE</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="xscope-target-library">
+<span id="lib-xscope"></span><h1>xSCOPE target library<a class="headerlink" href="#xscope-target-library" title="Permalink to this heading">#</a></h1>
+<p>The xSCOPE target library is used for communication between the host and the target over the fast xSCOPE transport.
+It can be used for data logging and targeted profiling.</p>
+<p>The xSCOPE target library is automatically linked if your application is built with xSCOPE (see <a class="reference internal" href="xscope-command-line-options.html#xscope-command-line-options-xcc"><span class="std std-ref">xcc options</span></a>), so just include the header:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;xscope.h&gt;</span>
+</pre></div>
+</div>
+<p>Including this also makes the probes which were specified in the <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> available to the program.</p>
+<p>This library is not accessible if a program is not built with xSCOPE support.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>This file contains functions to access xSCOPE. Example: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;platform.h&gt;</span>
+<span class="c1">#include &lt;xscope.h&gt;</span>
+<span class="c1">#include &lt;xccompat.h&gt;</span>
+
+<span class="n">void</span> <span class="n">xscope_user_init</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">xscope_register</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">XSCOPE_CONTINUOUS</span><span class="p">,</span> <span class="s2">&quot;Continuous Value 1&quot;</span><span class="p">,</span> <span class="n">XSCOPE_UINT</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">par</span> <span class="p">{</span>
+    <span class="n">on</span> <span class="n">tile</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">xscope_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+ </p>
+<p>This example defines a probe “Continuous Value 1”, then sends 100 numbers
+as records over that probe.</p>
+</section>
+<section id="configuration-api">
+<h2>Configuration API<a class="headerlink" href="#configuration-api" title="Permalink to this heading">#</a></h2>
+<p>The configuration API is an alternative mechanism of configuring xSCOPE to <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a>.</p>
+<p>For most purposes, the <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> should be preferred over using this, as it is a richer,
+less error-prone mechanism. They can also be used in combination, such as defining the probes with a config file,
+but using this interface for the more advanced functionality.</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.xscope_EventType">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973de"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_EventType</span></span></span><a class="headerlink" href="#c.xscope_EventType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Kind of event that an xSCOPE probe can receive. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_EventType.XSCOPE_STARTSTOP">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973deaf4561d6bd882179f06e91de757530eb6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_STARTSTOP</span></span></span><a class="headerlink" href="#c.xscope_EventType.XSCOPE_STARTSTOP" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Start/Stop - Event gets a start and stop value representing a block of execution. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_EventType.XSCOPE_CONTINUOUS">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea1027a1b29cb89e5325b6bbbc7d2291f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_CONTINUOUS</span></span></span><a class="headerlink" href="#c.xscope_EventType.XSCOPE_CONTINUOUS" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Continuous - Only gets an event start, single timestamped “ping”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_EventType.XSCOPE_DISCRETE">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea21d07c9cbff2f8637b39c75e95d08172"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_DISCRETE</span></span></span><a class="headerlink" href="#c.xscope_EventType.XSCOPE_DISCRETE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Discrete - Event generates a discrete block following on from the previous event. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_EventType.XSCOPE_STATEMACHINE">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea9a7b287940891e8bccce274c0a98a5d2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_STATEMACHINE</span></span></span><a class="headerlink" href="#c.xscope_EventType.XSCOPE_STATEMACHINE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>State Machine - Create a new event state for every new data value. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_EventType.XSCOPE_HISTOGRAM">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea0efea6c9930c6d70606f3075a8b5e04a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_HISTOGRAM</span></span></span><a class="headerlink" href="#c.xscope_EventType.XSCOPE_HISTOGRAM" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973deaf4561d6bd882179f06e91de757530eb6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_STARTSTOP</span></span></span><br /></dt>
+<dd><p>Start/Stop - Event gets a start and stop value representing a block of execution. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea1027a1b29cb89e5325b6bbbc7d2291f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_CONTINUOUS</span></span></span><br /></dt>
+<dd><p>Continuous - Only gets an event start, single timestamped “ping”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea21d07c9cbff2f8637b39c75e95d08172"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_DISCRETE</span></span></span><br /></dt>
+<dd><p>Discrete - Event generates a discrete block following on from the previous event. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea9a7b287940891e8bccce274c0a98a5d2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_STATEMACHINE</span></span></span><br /></dt>
+<dd><p>State Machine - Create a new event state for every new data value. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea0efea6c9930c6d70606f3075a8b5e04a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_HISTOGRAM</span></span></span><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973deaf4561d6bd882179f06e91de757530eb6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_STARTSTOP</span></span></span><br /></dt>
+<dd><p>Start/Stop - Event gets a start and stop value representing a block of execution. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea1027a1b29cb89e5325b6bbbc7d2291f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_CONTINUOUS</span></span></span><br /></dt>
+<dd><p>Continuous - Only gets an event start, single timestamped “ping”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea21d07c9cbff2f8637b39c75e95d08172"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_DISCRETE</span></span></span><br /></dt>
+<dd><p>Discrete - Event generates a discrete block following on from the previous event. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea9a7b287940891e8bccce274c0a98a5d2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_STATEMACHINE</span></span></span><br /></dt>
+<dd><p>State Machine - Create a new event state for every new data value. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a38d83f088cf5ee07a22403942d8973dea0efea6c9930c6d70606f3075a8b5e04a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_HISTOGRAM</span></span></span><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.xscope_UserDataType">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_UserDataType</span></span></span><a class="headerlink" href="#c.xscope_UserDataType" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>C data types an xSCOPE probe can receive. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_UserDataType.XSCOPE_NONE">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a4001aab097f3151d22b8a2068d0e84a1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_NONE</span></span></span><a class="headerlink" href="#c.xscope_UserDataType.XSCOPE_NONE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>No user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_UserDataType.XSCOPE_UINT">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a7aaac7a869a13f2d82420c6cef37d009"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_UINT</span></span></span><a class="headerlink" href="#c.xscope_UserDataType.XSCOPE_UINT" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Unsigned int user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_UserDataType.XSCOPE_INT">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a4642afe6cbac135b618917c49d55e03d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_INT</span></span></span><a class="headerlink" href="#c.xscope_UserDataType.XSCOPE_INT" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Signed int user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_UserDataType.XSCOPE_FLOAT">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a10254dcc076724cbfff006abb19e9b8d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_FLOAT</span></span></span><a class="headerlink" href="#c.xscope_UserDataType.XSCOPE_FLOAT" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Floating point user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a4001aab097f3151d22b8a2068d0e84a1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_NONE</span></span></span><br /></dt>
+<dd><p>No user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a7aaac7a869a13f2d82420c6cef37d009"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_UINT</span></span></span><br /></dt>
+<dd><p>Unsigned int user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a4642afe6cbac135b618917c49d55e03d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_INT</span></span></span><br /></dt>
+<dd><p>Signed int user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a10254dcc076724cbfff006abb19e9b8d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_FLOAT</span></span></span><br /></dt>
+<dd><p>Floating point user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a4001aab097f3151d22b8a2068d0e84a1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_NONE</span></span></span><br /></dt>
+<dd><p>No user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a7aaac7a869a13f2d82420c6cef37d009"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_UINT</span></span></span><br /></dt>
+<dd><p>Unsigned int user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a4642afe6cbac135b618917c49d55e03d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_INT</span></span></span><br /></dt>
+<dd><p>Signed int user data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8a10254dcc076724cbfff006abb19e9b8d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_FLOAT</span></span></span><br /></dt>
+<dd><p>Floating point user data. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.xscope_IORedirectionMode">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_IORedirectionMode</span></span></span><a class="headerlink" href="#c.xscope_IORedirectionMode" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Methods of I/O redirection over the xSCOPE connection. </p>
+<p>This applies to all write syscalls. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_IORedirectionMode.XSCOPE_IO_NONE">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2ea4b430f8507155ed81d027a32c192bb92"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_IO_NONE</span></span></span><a class="headerlink" href="#c.xscope_IORedirectionMode.XSCOPE_IO_NONE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Output is not redirected. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_IORedirectionMode.XSCOPE_IO_BASIC">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2eac8325d99bbcd1011654dd6a08724f371"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_IO_BASIC</span></span></span><a class="headerlink" href="#c.xscope_IORedirectionMode.XSCOPE_IO_BASIC" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Output is redirected over xSCOPE. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.xscope_IORedirectionMode.XSCOPE_IO_TIMED">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2ea59ce1d57e05c03dc41ce9899b2ca243a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_IO_TIMED</span></span></span><a class="headerlink" href="#c.xscope_IORedirectionMode.XSCOPE_IO_TIMED" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Output is redirected over xSCOPE, with prepended timestamp. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2ea4b430f8507155ed81d027a32c192bb92"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_IO_NONE</span></span></span><br /></dt>
+<dd><p>I/O is not redirected. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2eac8325d99bbcd1011654dd6a08724f371"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_IO_BASIC</span></span></span><br /></dt>
+<dd><p>Basic I/O redirection. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c">
+<span class="target" id="xscope_8h_1abd0991cde1e434c9226a066fa23e8f2ea59ce1d57e05c03dc41ce9899b2ca243a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">XSCOPE_IO_TIMED</span></span></span><br /></dt>
+<dd><p>Timed I/O redirection. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_user_init">
+<span class="target" id="xscope_8h_1aec3c13fac47d67d1e8da9084ab4e5e67"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_user_init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_user_init" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>User-implemented function to allow xSCOPE event registration. </p>
+<p>This allows the code on the device to synchronize with the host. This may be defined anywhere in the application code and (if present) will be called before main(). It can be used to register probes which can then be used later in the application with the other functions defined in this header.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A weak stub version of this function is defined, but it is intended to be overridden by a user implementation. </p>
+</div>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_register">
+<span class="target" id="xscope_8h_1a18743657d5e48d84f1eeb04c15b3df67"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_register</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">num_probes</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_register" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Registers the trace probes with the host system. </p>
+<p>First parameter is the number of probes that will be registered. Further parameters are in groups of four.<ol class="loweralpha simple">
+<li><p>event type (<a class="reference internal" href="#xscope_8h_1a38d83f088cf5ee07a22403942d8973de"><span class="std std-ref">xscope_EventType</span></a>)</p></li>
+<li><p>probe name</p></li>
+<li><p>user data type (<a class="reference internal" href="#xscope_8h_1a17b912e94f63b5b7a4f2e657dbed4ea8"><span class="std std-ref">xscope_UserDataType</span></a>)</p></li>
+<li><p>user data name.</p></li>
+</ol>
+</p>
+<p>This must be called from inside the <a class="reference internal" href="#xscope_8h_1aec3c13fac47d67d1e8da9084ab4e5e67"><span class="std std-ref">xscope_user_init()</span></a> function.</p>
+<p>Examples: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>xscope_register(1, XSCOPE_DISCRETE, &quot;A probe&quot;, XSCOPE_UINT, &quot;value&quot;); ``
+xscope_register(2, XSCOPE_CONTINUOUS, &quot;Probe&quot;, XSCOPE_FLOAT, &quot;Level&quot;,
+                   XSCOPE_STATEMACHINE, &quot;State machine&quot;, XSCOPE_NONE, &quot;no name&quot;);
+</pre></div>
+</div>
+ 
+Note that the ‘id’ of each of these probes is implicit, starting from 0 and incrementing by 1 for each additional probe registered. In the above example:</p>
+<p><ul class="simple">
+<li><p>“A probe” would have id 0.</p></li>
+<li><p>”Probe” would have id 1.</p></li>
+<li><p>”State machine” would have id 2.</p></li>
+</ul>
+</p>
+<p>If an<span> <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> </span> file is specified on the compile line, that takes priority, so this call will be ignored.</p>
+<p>For these reasons, it is recommended to not use this function, and instead use the<span> <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> </span> on the command line to allocate probes. xSCOPE config file probe IDs are available as preprocessor constants in the compiled program. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_probes</strong> – Number of probes that will be specified.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_enable">
+<span class="target" id="xscope_8h_1a19a8c09add8e43f5b2881cb03a65d419"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_enable</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_enable" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Enable the xSCOPE event capture on the local xCORE tile. </p>
+<p>This is not necessary if an<span> <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> </span> is used to enable xSCOPE. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_disable">
+<span class="target" id="xscope_8h_1ac6a19495935388fce01c7ee19d5f6c7d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_disable</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_disable" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Disable the xSCOPE event capture on the local xCORE tile. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_config_io">
+<span class="target" id="xscope_8h_1a9fb6cac7a66689c90708e1e6d110962a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_config_io</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_config_io" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Configures xSCOPE I/O redirection. </p>
+<p>This is not necessary if an<span> <a class="reference internal" href="../formats/config-xscope.html#config-xscope-format"><span class="std std-ref">xSCOPE config file</span></a> </span> is used to enable xSCOPE io. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> – I/O redirection mode. See <a class="reference internal" href="#xscope_8h_1abd0991cde1e434c9226a066fa23e8f2e"><span class="std std-ref">xscope_IORedirectionMode</span></a> </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_ping">
+<span class="target" id="xscope_8h_1a3be713ff7872f148c79b1785da9f360f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_ping</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_ping" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Generate an xSCOPE ping system timestamp event. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_char">
+<span class="target" id="group__xscope__trace__functions_1ga8918b999f613089525395a4d94138c68"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_char</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_char" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type char. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (char). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_short">
+<span class="target" id="group__xscope__trace__functions_1ga94d863b33435a1a4d5db6c1d2ca7fe3a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_short</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">short</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_short" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type short. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (short). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_int">
+<span class="target" id="group__xscope__trace__functions_1ga8f51b9f10879d55b19056b74da98beca"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_int" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type int. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_longlong">
+<span class="target" id="group__xscope__trace__functions_1gaa1e631fad5c96e4c428ce19ea477e458"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_longlong</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_longlong" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type long long. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (long long). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_float">
+<span class="target" id="group__xscope__trace__functions_1ga6e1811bdef7228e8397f4207e682c496"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_float</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_float" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type float. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (float). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_double">
+<span class="target" id="group__xscope__trace__functions_1gac71337f037d41b65ac923f0911d5f261"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_double</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_double" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type double. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (double). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_bytes">
+<span class="target" id="group__xscope__trace__functions_1ga6026180490124096ed400c416541d0c9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_bytes</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_bytes" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe with a byte array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>size</strong> – User data size. </p></li>
+<li><p><strong>data</strong> – User data bytes (char[]). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_start">
+<span class="target" id="group__xscope__trace__functions_1ga6cd0e428bc12a3c89b67623ecb127c1e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_start</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_start" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_stop">
+<span class="target" id="group__xscope__trace__functions_1gaeffc2d39dc027f3ce6ef11269c9510cb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_stop</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_stop" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_start_int">
+<span class="target" id="group__xscope__trace__functions_1ga1d3c5ffd78710d88ef1eb0f6abc7914e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_start_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_start_int" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe and capture a value of type int. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_stop_int">
+<span class="target" id="group__xscope__trace__functions_1ga70eccf544191b031e662d395e64d4414"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_stop_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_stop_int" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe and capture a value of type int. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_char">
+<span class="target" id="group__xscope__trace__functions_1ga5d1fc58afd10c912db0c39fe9ecf065d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_char</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_char" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type char with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (char). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_short">
+<span class="target" id="group__xscope__trace__functions_1ga6c67a75af9f19f8b38454e772146639f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_short</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">short</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_short" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type short with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (short). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_int">
+<span class="target" id="group__xscope__trace__functions_1ga1a6c210c16577933f1e702f2dc610b18"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_int" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type int with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_longlong">
+<span class="target" id="group__xscope__trace__functions_1gaa6404bf08f4ea13ff23ce53843d7a12a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_longlong</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_longlong" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type long long with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (long long). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_float">
+<span class="target" id="group__xscope__trace__functions_1gaf5c7a9d615989a0e70893305e2f8c996"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_float</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_float" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type float with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (float). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_double">
+<span class="target" id="group__xscope__trace__functions_1ga827e8d1cdb918404df3a770cf7769211"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_double</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_double" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type double with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (double). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_bytes">
+<span class="target" id="group__xscope__trace__functions_1ga299a6f6a7e6b276eecd7f55730f0e8e4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_bytes</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_bytes" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe with a byte array with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>size</strong> – User data size. </p></li>
+<li><p><strong>data</strong> – User data bytes (char[]). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_start">
+<span class="target" id="group__xscope__trace__functions_1ga7f25bd8df53998db24bdbc124208116c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_start</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_start" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe with logical core info. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_stop">
+<span class="target" id="group__xscope__trace__functions_1ga1cb8397517802d5447936abeb4461705"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_stop</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_stop" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe with logical core info. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_start_int">
+<span class="target" id="group__xscope__trace__functions_1gad24f45c1bf8119b07aa959f018d66c53"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_start_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_start_int" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe with logical core info and capture a value of type int For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_core_stop_int">
+<span class="target" id="group__xscope__trace__functions_1gaee0d3fda66e96fce126635e67c4d99ad"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_stop_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_core_stop_int" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe with logical core info and capture a value of type int For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_mode_lossless">
+<span class="target" id="xscope_8h_1a6f9b72aa8201bddf3320b846f38cee21"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_mode_lossless</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_mode_lossless" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Put xSCOPE into a lossless mode where timing is no longer guaranteed. </p>
+<p>If the logical core tries to send an xSCOPE packet which the xTAG does not have buffers for, then the logical core will wait until the xTAG does have buffers, stalling for a non-deterministic amount of time. <div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#xscope_8h_1a668b35611be9a55318eb7a88ca217798"><span class="std std-ref">xscope_mode_lossy</span></a> </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_mode_lossy">
+<span class="target" id="xscope_8h_1a668b35611be9a55318eb7a88ca217798"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_mode_lossy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_mode_lossy" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Put xSCOPE into a lossy mode where timing is not impacted, but data is lossy. </p>
+<p>This is the default xSCOPE mode. If the logical core tries to send an xSCOPE packet which the xTAG does not have buffers for, then the entire packet will be dropped. <div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#xscope_8h_1a6f9b72aa8201bddf3320b846f38cee21"><span class="std std-ref">xscope_mode_lossless</span></a> </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_data_from_host">
+<span class="target" id="xscope_8h_1aba5da2bfb9b49f18ee9618ae1de219e4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_data_from_host</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">c</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">256</span></span><span class="p"><span class="pre">]</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_data_from_host" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Receive data from the host over xSCOPE. </p>
+<p>This function receives an xSCOPE packet from the host and puts the data contained within it into the supplied buffer. See<span> <a class="reference internal" href="../../tutorials/working-with-targets/intro.html#working-with-targets-example-host-communication"><span class="std std-ref">Example host program and target programs</span></a> </span> for an example. <div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#xscope_8h_1af5565b648140a86ed7f482f92fc24374"><span class="std std-ref">xscope_connect_data_from_host</span></a> </p>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> – The xSCOPE chanend which has been configured with xscope_connect_data_from_host </p></li>
+<li><p><strong>buf</strong> – The user-supplied buffer to fill with data from the host </p></li>
+<li><p><strong>n</strong> – A pointer(c) or reference(xc) to an int which will be filled with the number of bytes put into the buffer </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_connect_data_from_host">
+<span class="target" id="xscope_8h_1af5565b648140a86ed7f482f92fc24374"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_connect_data_from_host</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">from_host</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_connect_data_from_host" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Connect to the xSCOPE chanend to receive data packets from the host. </p>
+<p>Note that it is only possible to use this function once in the system, as there is only a single xSCOPE chanend available to receive from the host. i.e. it can only be called on a single tile. See<span> <a class="reference internal" href="../../tutorials/working-with-targets/intro.html#working-with-targets-example-host-communication"><span class="std std-ref">Example host program and target programs</span></a> </span> for an example. <div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#xscope_8h_1aba5da2bfb9b49f18ee9618ae1de219e4"><span class="std std-ref">xscope_data_from_host</span></a> </p>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>from_host</strong> – The chanend to receive on, obtained using the xscope_host_data() call from a multi-tile main. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.xscope_probe">
+<span class="target" id="xscope_8h_1a2ec389cdbcf05a361546292b5d2cd4fa"></span><span class="pre">__attribute__((deprecated))</span><span class="w"> </span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_probe</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.xscope_probe" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</section>
+<section id="tracing-api">
+<h2>Tracing API<a class="headerlink" href="#tracing-api" title="Permalink to this heading">#</a></h2>
+<p>The tracing API is the mechanism to actually send event data to the host for a particular probe. It uses the high-speed xSCOPE link.</p>
+<p>The ‘id’ for each of these functions is the id of the probe that the data is being sent on, which is either:</p>
+<ul class="simple">
+<li><p>A preprocessor definition for <strong>config file probes</strong>, as explained in <a class="reference internal" href="../formats/config-xscope.html#xscope-autogen-header"><span class="std std-ref">Auto-generated header file</span></a></p></li>
+<li><p>Implicit for <strong>dynamically defined probes</strong>, as explained in <a class="reference internal" href="#c.xscope_register" title="xscope_register"><code class="xref c c-func docutils literal notranslate"><span class="pre">xscope_register()</span></code></a></p></li>
+</ul>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__xscope__trace__functions"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">xscope_trace_functions</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga8918b999f613089525395a4d94138c68"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_char</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type char. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (char). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga94d863b33435a1a4d5db6c1d2ca7fe3a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_short</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">short</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type short. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (short). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga8f51b9f10879d55b19056b74da98beca"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type int. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gaa1e631fad5c96e4c428ce19ea477e458"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_longlong</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type long long. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (long long). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga6e1811bdef7228e8397f4207e682c496"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_float</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type float. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (float). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gac71337f037d41b65ac923f0911d5f261"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_double</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type double. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (double). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga6026180490124096ed400c416541d0c9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_bytes</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe with a byte array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>size</strong> – User data size. </p></li>
+<li><p><strong>data</strong> – User data bytes (char[]). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga6cd0e428bc12a3c89b67623ecb127c1e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_start</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gaeffc2d39dc027f3ce6ef11269c9510cb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_stop</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga1d3c5ffd78710d88ef1eb0f6abc7914e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_start_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe and capture a value of type int. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga70eccf544191b031e662d395e64d4414"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_stop_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe and capture a value of type int. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga5d1fc58afd10c912db0c39fe9ecf065d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_char</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type char with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (char). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga6c67a75af9f19f8b38454e772146639f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_short</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">short</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type short with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (short). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga1a6c210c16577933f1e702f2dc610b18"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type int with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gaa6404bf08f4ea13ff23ce53843d7a12a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_longlong</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type long long with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (long long). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gaf5c7a9d615989a0e70893305e2f8c996"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_float</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type float with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (float). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga827e8d1cdb918404df3a770cf7769211"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_double</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe of type double with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (double). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga299a6f6a7e6b276eecd7f55730f0e8e4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_bytes</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Send a trace event for the specified xSCOPE probe with a byte array with logical core info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>size</strong> – User data size. </p></li>
+<li><p><strong>data</strong> – User data bytes (char[]). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga7f25bd8df53998db24bdbc124208116c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_start</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe with logical core info. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1ga1cb8397517802d5447936abeb4461705"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_stop</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe with logical core info. </p>
+<p>For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gad24f45c1bf8119b07aa959f018d66c53"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_start_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Start a trace block for the specified xSCOPE probe with logical core info and capture a value of type int For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__xscope__trace__functions_1gaee0d3fda66e96fce126635e67c4d99ad"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xscope_core_stop_int</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Stop a trace block for the specified xSCOPE probe with logical core info and capture a value of type int For use with XSCOPE_STARTSTOP probes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – xSCOPE probe id. </p></li>
+<li><p><strong>data</strong> – User data value (int). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="xscope-host-library.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">xSCOPE host library</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="xscope-performance.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">xSCOPE performance figures</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">xSCOPE target library</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#configuration-api">Configuration API</a></li>
+<li><a class="reference internal" href="#tracing-api">Tracing API</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    </body>
+</html>

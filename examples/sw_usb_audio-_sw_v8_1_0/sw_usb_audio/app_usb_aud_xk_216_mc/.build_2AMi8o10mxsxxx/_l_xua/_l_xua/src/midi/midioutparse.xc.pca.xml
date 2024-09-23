@@ -1,0 +1,11 @@
+<preCompilationAnalysis file="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/midi/midioutparse.xc">
+<fDef name="breakEvent" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/midi/midioutparse.xc" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="midi_out_parse" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fCall name="breakEvent" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_xua/lib_xua/src/midi/midioutparse.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="midi_out_parse" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+</preCompilationAnalysis>

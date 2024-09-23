@@ -1,0 +1,507 @@
+<preCompilationAnalysis file="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc">
+<fDef name="neg_s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="delay_microseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_milliseconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="delay_seconds" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="dsp_abs_s32_to_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_abs_s32_to_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_add_s32_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_add_u32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_denormalise_and_saturate_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_denormalise_and_saturate_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_div_s32_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_div_s32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_div_u32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_eq_s32_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_eq_u32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_exponential_average_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="3"/>
+<fDef name="dsp_gte_s32_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_gte_u32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_math_cos" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="dsp_math_cosh" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="dsp_math_sinh" global="true" noreturn="false" doNotSpecialize="true" numParams="1"/>
+<fDef name="dsp_mul_s32_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_mul_s32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_mul_u32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_neg_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_normalise_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_normalise_s64" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_normalise_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_normalise_u64" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_s64_to_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_sqrt_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_sub_s32_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_sub_u32_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="2"/>
+<fDef name="dsp_u32_to_s32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fDef name="dsp_u64_to_u32" global="true" noreturn="false" doNotSpecialize="false" numParams="1"/>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="delay_ticks_longlong" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_math_sin" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_math_sinh_" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_math_sinh" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="0"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_math_sinh_" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_math_cosh" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="intval"><intval isSigned="true" val="1"/></value>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_bfp_clz_uint64" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_bfp_clz_uint64" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_abs_s32_to_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_abs_s32_to_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_u32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="dsp_sub_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_add_s32_s32" global="true" numArgs="2">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_sub_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="dsp_sub_u32_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_sub_u32_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_add_s32_s32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_u32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_div_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="dsp_div_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_div_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="neg_s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="dsp_div_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_div_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="neg_s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_div_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="dsp_div_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_div_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="neg_s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="1" caller="dsp_div_s32_s32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_div_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_div_s32_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_div_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="dsp_div_s32_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_neg_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="s32_to_u32" global="false" unit="/Users/lsj/XMOS_XTC_15.3.0/examples/sw_usb_audio-_sw_v8_1_0/lib_dsp/lib_dsp/src/dsp_fast_float.xc" numArgs="1">
+  <arg num="0">
+    <passThroughArg param="0" caller="dsp_div_s32_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_div_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <passThroughArg param="1" caller="dsp_div_s32_u32" global="true"/>
+    <values>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_u32_to_s32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_sqrt_calc_exp" global="true" numArgs="4">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="2">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="3">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_sqrt30_xs2" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_sqrt30_xs2" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_u32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="__builtin_clz" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_u32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_normalise_u32" global="true" numArgs="1">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+<fCall name="dsp_add_u32_u32" global="true" numArgs="2">
+  <arg num="0">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+  <arg num="1">
+    <values>
+      <value type="unknown"/>
+    </values>
+  </arg>
+</fCall>
+</preCompilationAnalysis>

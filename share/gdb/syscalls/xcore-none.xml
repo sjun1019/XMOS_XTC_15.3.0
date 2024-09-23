@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE syscalls_info SYSTEM "gdb-syscalls.dtd">
+<!-- Copyright (C) 2022-2022 Free Software Foundation, Inc.
+
+     Copying and distribution of this file, with or without modification,
+     are permitted in any medium without royalty provided the copyright
+     notice and this notice are preserved.  -->
+<syscalls_info>
+    <syscall name="exit" number="0" groups="process"/>
+    <syscall name="printc" number="1"/>
+    <syscall name="printint" number="2"/>
+    <syscall name="open" number="3" groups="descriptor,file"/>
+    <syscall name="close" number="4" groups="descriptor"/>
+    <syscall name="read" number="5" groups="descriptor"/>
+    <syscall name="write" number="6" groups="descriptor"/>
+    <syscall name="done" number="7" groups="process"/>
+    <syscall name="lseek" number="8" groups="process"/>
+    <syscall name="rename" number="9" groups="file"/>
+    <syscall name="time" number="10"/>
+    <syscall name="remove" number="11" groups="file"/>
+    <syscall name="system" number="12"/>
+    <syscall name="argv" number="13"/>
+
+    <syscall name="is_simulation" number="99"/>
+    <syscall name="plugins" number="100"/>
+    <syscall name="load_image" number="101"/>
+</syscalls_info>

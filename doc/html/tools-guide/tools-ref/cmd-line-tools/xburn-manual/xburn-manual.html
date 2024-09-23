@@ -1,0 +1,843 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="XMAKE" href="../xmake-manual/xmake-manual.html" /><link rel="prev" title="XFLASH" href="../xflash-manual/xflash-manual.html" />
+
+    <link rel="shortcut icon" href="../../../../_static/x-favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>XBURN - XMOS XTC Tools v15.3</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #1399DB;
+  --color-brand-content: #1399DB;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">XMOS XTC Tools v15.3</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/x-logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">XMOS XTC Tools v15.3</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><!-- This html element presents a list of pdfs that can be generated -->
+<!-- We expect pdfs to be in a folder called pdf alongside the folder called html -->
+
+<!-- TODO: generate this list using JS only for real pdfs that exist -->
+
+<!-- pathto(root_doc) set by sphinx for each page, but root doc has # -->
+
+<div id="pdf_linker">
+    <script>
+        function openPDF(url) {
+            if (url=="--select--") {
+                return;
+            }
+            window.location.href = url;
+        }
+    </script>
+    PDFs:
+    <select title="Link to generated pdfs" onchange="openPDF(value);">
+        <option>--select--</option>
+        
+        <option
+            title="xtc_tools_introduction_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_introduction_v15.3.pdf"
+        >
+            XMOS XTC Tools - Introduction
+        </option> 
+        
+        <option
+            title="xtc_tools_installation_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_installation_v15.3.pdf"
+        >
+            XMOS XTC Tools - Installation
+        </option> 
+        
+        <option
+            title="xtc_tools_guide_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_tools_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Tools Guide
+        </option> 
+        
+        <option
+            title="xtc_prog_guide_v15.3.pdf"
+            value="../../../../index.html/../../pdf/xtc_prog_guide_v15.3.pdf"
+        >
+            XMOS XTC Tools - Programming Guide
+        </option> 
+        
+    </select>
+</div>
+<div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../installation/index.html">Installation guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/system-requirements/requirements.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/install-tools/install.html">Installation instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/install-tools/install_prerequisites.html">Installation of required third-party tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation/install-configure/getting-started.html">Configuring the command-line environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../index.html">Tools guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/single-tile.html">A single-tile program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/multi-tile.html">Targeting multiple tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/switch-setup.html">Communicating between tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/fast-printf.html">Using xSCOPE for fast “printf debugging”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/debug.html">Debugging with XGDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../quick-start/build-system.html">Build system</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../vscode-guide/index.html">Using VS Code</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../vscode-guide/example/index.html">Building an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vscode-guide/next-steps/index.html">Using VS Code with a real project</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tools and target features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/describe-a-target-platform/platform.html">Describe a target platform</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../tutorials/working-with-targets/index.html">Working with targets</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#key-target-based-features">Key target-based features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#xtag">xTAG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#host-tools">Host tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#target-interaction">Target interaction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#host-io">Host-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#xscope-apis">xSCOPE APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#user-supplied-host-program">User-supplied host program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#sample-based-profiling-of-the-target-program">Sample-based profiling of the target program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#target-errors-and-warnings">Target errors and warnings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../tutorials/working-with-targets/intro.html#command-examples">Command examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/design-with-flash/flash.html">Design and manufacture systems with flash memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/safeguard-ip/safeguard.html">Safeguard IP and device authenticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/add-flash-support/flash.html">Add support for a new flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/lpddr.html">Using LPDDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/swmem.html">Using software-defined memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/args-and-ret-codes.html">How to use arguments and return codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/using-xsim.html">Using XSIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/understanding-xe-structure.html">Understanding XE files and how they are loaded</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../index.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../index.html">Command line tools</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../xrun-manual/xrun-manual.html">XRUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xsim-manual/xsim-manual.html">XSIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xcc-manual/xcc-manual.html">XCC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xobjdump-manual/xobjdump-manual.html">XOBJDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xgdb-manual/xgdb-manual.html">XGDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xgdbserver-manual/xgdbserver-manual.html">XGDBSERVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xflash-manual/xflash-manual.html">XFLASH</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">XBURN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../xmake-manual/xmake-manual.html">XMAKE</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../formats/index.html">File formats and data descriptions</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/xe.html">XMOS executable (XE) file format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/xn-spec/xn-spec.html">XN specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/xsim-trace.html">XSIM trace output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../formats/config-xscope.html">xSCOPE config file</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../xscope/index.html">xSCOPE</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-command-line-options.html">xSCOPE command line options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-performance.html">xSCOPE performance figures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-target-library.html">xSCOPE target library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xscope/xscope-host-library.html">xSCOPE host library</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../libraries/index.html">Libraries</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/lib-xcore-api/lib-xcore-api.html">lib_xcore</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-api.html">lib_xs1</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-defines-xs3a.html">XS3 definitions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../libraries/libxs1/lib-xs1-defines-xs2a.html">XS2 definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libflash-api/libflash-api.html">libflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libquadflash-api/libquadflash-api.html">libquadflash API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libflash-included-devices/libflash-devices.html">List of devices natively supported by libflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/libquadflash-included-devices/libquadflash-devices.html">List of devices natively supported by libquadflash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../libraries/lib-otp-api/lib-otp-api.html">lib_otp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../xcommon_cmake.html">XCommon CMake build system</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../xcommon/index.html">XCOMMON build system</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../xcommon/using-makefiles.html">Using the XCOMMON build system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../xcommon/makefile-libraries.html">Using XMOS Makefiles to create binary libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../transitioning/index.html">Transitioning from older tools releases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../prog-guide/index.html">Programming guide</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../prog-guide/arch-hw-guide/index.html">Architecture &amp; hardware guide</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../prog-guide/quick-start/index.html">Quick start</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../prog-guide/quick-start/prog-model.html">The multicore programming model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../prog-guide/quick-start/c-programming-guide/index.html">Programming an XCORE tile with C and lib_xcore</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/index.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-in-c-xc.html">Programming in C/XC</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/calling-between-c-xc/calling.html">Calling between C/C++ and XC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xc-imp-defined-behavior/xc-imp.html">XC implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/c-imp-defined-behavior/c-imp.html">C implementation-defined behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/c-lang-ref/clangref.html">C and C++ language reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xcc-pragma-directives/pragmas.html">XCC pragma directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/cheat.html">XC to C cheat sheet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/memory-models.html">Memory models</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-in-asm.html">Programming in assembly</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/inline-assembly/inline-assembly.html">Inline assembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/assembly-for-xmos-xs1-abi/assembly-for-abi.html">Make assembly programs compatible with the XMOS XS1 ABI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/assembly-manual/assembly.html">Assembly programming manual</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../prog-guide/prog-ref/programming-xs1-devices.html">Programming for XCORE Devices</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-data-types/datatypes.html">xcore data types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-port-to-pin-map/portmap.html">xcore port-to-pin mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../prog-guide/prog-ref/xs1-abi/abi.html">XCORE 32-bit application binary interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="xburn">
+<span id="xburn-manual"></span><h1>XBURN<a class="headerlink" href="#xburn" title="Permalink to this heading">#</a></h1>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xburn</span> <span class="n">xe</span><span class="o">-</span><span class="n">file</span>
+<span class="n">xburn</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p>XBURN creates OTP images, and programs images into the OTP memory of xCORE devices.</p>
+<p>Usage of the form <strong class="command">xburn a.xe</strong> burns the application in <code class="docutils literal notranslate"><span class="pre">a.xe</span></code> directly into
+OTP. This is typically undesirable as it’s an irreversible process, meaning that the
+application cannot be removed or upgraded, and OTP memory space is limited and cannot
+accommodate large applications.</p>
+<p>Instead, XBURN is most commonly used to provision a device for secure boot and set the
+overall security configuration of the system. Secure boot typically works in conjunction
+with XFLASH - a small bootloader is installed to OTP memory which enforces signature
+verification of upgradable software loaded from flash memory. This bootloader is installed
+into OTP using the XBURN option <code class="docutils literal notranslate"><span class="pre">--lock</span></code>, which burns an executable generated by XBURN
+rather than one specified from an external file.</p>
+<p>For more advanced use cases, XBURN exposes <a class="reference internal" href="#xburn-csv-format"><span class="std std-ref">low-level programming</span></a>
+of individual OTP rows with supplementary data as required by the application, such as
+device-unique IDs. This can be read back at runtime using the <a class="reference internal" href="../../libraries/lib-otp-api/lib-otp-api.html#lib-otp-api"><span class="std std-ref">OTP library</span></a>.</p>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading">#</a></h2>
+<section id="overall-options">
+<h3>Overall Options<a class="headerlink" href="#overall-options" title="Permalink to this heading">#</a></h3>
+<p>The following options are used to specify the OTP image and security register contents.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-arg-xe-file">
+<span class="sig-name descname"><span class="pre">&lt;xe-file&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-arg-xe-file" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies bootable images to be constructed from the loadable segments from
+<em>xe-file</em> and a <a class="reference internal" href="#xburn-manual-default-security-bits-table"><span class="std std-ref">default set of security bits</span></a>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-arg-otp-file">
+<span class="sig-name descname"><span class="pre">&lt;otp-file&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-arg-otp-file" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the OTP segments from <em>otp-file</em> which includes the security register value.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-arg-csv-file">
+<span class="sig-name descname"><span class="pre">&lt;csv-file&gt;</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-arg-csv-file" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies OTP <code class="docutils literal notranslate"><span class="pre">tile,address,value</span></code> tuples from <em>csv-file</em>. This may be anything from a
+handful of special values to program for device provisioning or identification, to a
+complete OTP specification generated using <code class="docutils literal notranslate"><span class="pre">--dump-otp-spec</span></code>.</p>
+<p>See <a class="reference internal" href="#xburn-csv-format"><span class="std std-ref">CSV Format</span></a>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-version" title="Permalink to this definition">#</a></dt>
+<dd><p>Displays the version number and copyrights.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-help">
+<span id="cmdoption-xburn-h"></span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-help" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints a description of the supported command-line options.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s advised to consistently use a single version of XBURN on a given device. Bootloader images
+and redundancy mechanisms may subtly change between releases of the XTC Tools. By consistently
+using only a single version, any (perhaps accidental) double-programming attempt will generally
+behave as a no-op, whereas a difference in content to be programmed may cause irreversible
+damage to the device.</p>
+</div>
+</section>
+<section id="target-options">
+<h3>Target Options<a class="headerlink" href="#target-options" title="Permalink to this heading">#</a></h3>
+<p>The following options are used to specify the target hardware platform.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-list-devices">
+<span id="cmdoption-xburn-l"></span><span class="sig-name descname"><span class="pre">--list-devices</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-list-devices" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints an enumerated list of all JTAG adapters connected to the
+host and the devices on each JTAG chain, in the form:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Name</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Adapter</span> <span class="pre">ID</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Devices</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">--</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">----------</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">-------</span></code></div>
+</div>
+<p>The adapters are ordered by their serial numbers.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-id">
+<span class="sig-name descname"><span class="pre">--id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;id&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-id" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the adapter connected to the target hardware.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-adapter-id">
+<span class="sig-name descname"><span class="pre">--adapter-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;serial-number&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-adapter-id" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the serial number of the adapter connected to the target hardware.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-jtag-speed">
+<span class="sig-name descname"><span class="pre">--jtag-speed</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;n&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-jtag-speed" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the divider for the JTAG clock to n. The corresponding JTAG clock speed is
+<span class="math notranslate nohighlight">\(25/(n+2)\)</span> MHz. The default value is 0 (12.5 MHz).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-spi-div">
+<span class="sig-name descname"><span class="pre">--spi-div</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;n&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-spi-div" title="Permalink to this definition">#</a></dt>
+<dd><p>Sets the divider used in the AES Module for the SPI clock to <em>n</em>. The corresponding
+SPI clock speed is set to <span class="math notranslate nohighlight">\(100/(2*n)\)</span> MHz. The default value is 20 (2.5MHz).</p>
+<p>This option is only valid with <code class="docutils literal notranslate"><span class="pre">--lock</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="security-options">
+<h3>Security Options<a class="headerlink" href="#security-options" title="Permalink to this heading">#</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-genkey">
+<span class="sig-name descname"><span class="pre">--genkey</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;keyfile&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-genkey" title="Permalink to this definition">#</a></dt>
+<dd><p>Outputs to &lt;keyfile&gt; two 128-bit keys used for authentication and decryption. The keys are generated using the open-source library <code class="docutils literal notranslate"><span class="pre">crypto++</span></code>.</p>
+<p>This option does not perform any programming or target interactions.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-lock">
+<span class="sig-name descname"><span class="pre">--lock</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;keyfile&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-lock" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the <a class="reference internal" href="../../../tutorials/safeguard-ip/safeguard.html#safeguard-ip-aes-module"><span class="std std-ref">XCORE AES boot module</span></a> and a
+<a class="reference internal" href="#xburn-manual-default-security-bits-table"><span class="std std-ref">default set of security bits</span></a>.</p>
+</dd></dl>
+
+</section>
+<section id="security-register-options">
+<h3>Security Register Options<a class="headerlink" href="#security-register-options" title="Permalink to this heading">#</a></h3>
+<p>The following options are used to specify the contents of the OTP security register,
+overriding the default options for burning XE images, OTP images and the AES module,
+as given in <a class="reference internal" href="#xburn-manual-default-security-bits-table"><span class="std std-ref">Default security bits written by XBURN</span></a>.</p>
+<div class="table-wrapper docutils container" id="id1">
+<span id="xburn-manual-default-security-bits-table"></span><span id="xburn-manual-default-security-bits-table"></span><table class="docutils align-default" id="id1">
+<caption><span class="caption-number">Table 13 </span><span class="caption-text">Default security bits written by XBURN</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Security Bit</p></th>
+<th class="head"><p>XE Image</p></th>
+<th class="head"><p>OTP Image</p></th>
+<th class="head"><p>AES Module (<code class="docutils literal notranslate"><span class="pre">--lock</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OTP Boot</p></td>
+<td><p>Enabled</p></td>
+<td rowspan="5"><p>As per OTP image file</p></td>
+<td><p>Enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p>JTAG Access</p></td>
+<td><p>Enabled</p></td>
+<td><p>Disabled</p></td>
+</tr>
+<tr class="row-even"><td><p>Plink Access</p></td>
+<td><p>Enabled</p></td>
+<td><p>Enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p>Global Debug</p></td>
+<td><p>Enabled</p></td>
+<td><p>Disabled</p></td>
+</tr>
+<tr class="row-even"><td><p>Master Lock</p></td>
+<td><p>Disabled</p></td>
+<td><p>Enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p>Secure Config Access</p></td>
+<td><p>Enabled</p></td>
+<td></td>
+<td><p>Enabled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following options support both the prefixes <code class="docutils literal notranslate"><span class="pre">--enable-...</span></code> and <code class="docutils literal notranslate"><span class="pre">--disable-...</span></code> to either enable or disable the feature.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-enable-otp-boot">
+<span class="sig-name descname"><span class="pre">--enable-otp-boot</span></span><span class="sig-prename descclassname"> <span class="pre">/</span> <span class="pre">--disable-otp-boot</span></span><a class="headerlink" href="#cmdoption-xburn-enable-otp-boot" title="Permalink to this definition">#</a></dt>
+<dd><p>Enables/disables boot from OTP.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-enable-jtag">
+<span class="sig-name descname"><span class="pre">--enable-jtag</span></span><span class="sig-prename descclassname"> <span class="pre">/</span> <span class="pre">--disable-jtag</span></span><a class="headerlink" href="#cmdoption-xburn-enable-jtag" title="Permalink to this definition">#</a></dt>
+<dd><p>Enables/disables JTAG access. Once disabled, it is not possible to gain debug access to the
+device or to read the OTP.</p>
+<p>This option does not disable boundary scan.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-enable-global-debug">
+<span class="sig-name descname"><span class="pre">--enable-global-debug</span></span><span class="sig-prename descclassname"> <span class="pre">/</span> <span class="pre">--disable-global-debug</span></span><a class="headerlink" href="#cmdoption-xburn-enable-global-debug" title="Permalink to this definition">#</a></dt>
+<dd><p>Enables/disables the device from participating in global debug. Disabling global debug
+prevents the tiles from entering debug using the global debug pin.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-enable-master-lock">
+<span class="sig-name descname"><span class="pre">--enable-master-lock</span></span><span class="sig-prename descclassname"> <span class="pre">/</span> <span class="pre">--disable-master-lock</span></span><a class="headerlink" href="#cmdoption-xburn-enable-master-lock" title="Permalink to this definition">#</a></dt>
+<dd><p>Enables/disables the OTP master lock. No further modification of the OTP is permitted. Programming is disabled.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-enable-secure-config-access">
+<span class="sig-name descname"><span class="pre">--enable-secure-config-access</span></span><span class="sig-prename descclassname"> <span class="pre">/</span> <span class="pre">--disable-secure-config-access</span></span><a class="headerlink" href="#cmdoption-xburn-enable-secure-config-access" title="Permalink to this definition">#</a></dt>
+<dd><p>Enables/disables access to the security register.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>xcore.ai devices do not support the usage style of progressively setting more security
+bits to upgrade the device’s security in phases by rewriting the security register.
+The security register can only be burned once on xcore.ai, so must be programmed with
+the intended final configuration from the start. This diverges from the behaviour of
+XCORE-200 and previous devices which do allow progressively setting more bits.</p>
+</div>
+</section>
+<section id="programming-options">
+<h3>Programming Options<a class="headerlink" href="#programming-options" title="Permalink to this heading">#</a></h3>
+<p>By default, XBURN writes the specified OTP images to the target platform.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-force">
+<span id="cmdoption-xburn-f"></span><span class="sig-name descname"><span class="pre">--force</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-force" title="Permalink to this definition">#</a></dt>
+<dd><p>Do not prompt for interactive confirmation before writing the OTP. This is not default.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-outfile">
+<span id="cmdoption-xburn-o"></span><span class="sig-name descname"><span class="pre">--outfile</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;otp-file&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;otp-file&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-outfile" title="Permalink to this definition">#</a></dt>
+<dd><p>Place output in &lt;otp-file&gt;, disabling programming.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-dump-otp-images">
+<span class="sig-name descname"><span class="pre">--dump-otp-images</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-dump-otp-images" title="Permalink to this definition">#</a></dt>
+<dd><p>Dump the OTP images in separate binary files, disabling programming.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-dump-otp-spec">
+<span class="sig-name descname"><span class="pre">--dump-otp-spec</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-dump-otp-spec" title="Permalink to this definition">#</a></dt>
+<dd><p>Dump the OTP images to CSV specification, disabling programming.</p>
+<p>The CSV file can be edited by hand and/or provided to XBURN for programming
+later in a second pass. If the CSV file has been unmodified, programming in a
+second pass is identical to single pass behaviour.</p>
+<p>See <a class="reference internal" href="#xburn-csv-format"><span class="std std-ref">CSV Format</span></a>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-make-exec">
+<span class="sig-name descname"><span class="pre">--make-exec</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;xe-file&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-make-exec" title="Permalink to this definition">#</a></dt>
+<dd><p>Place an executable in &lt;xe-file&gt; that when run on an xCORE device performs the
+specified OTP burning operation; disables programming.</p>
+<p>The XE file can be run later using XRUN.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-target-file">
+<span class="sig-name descname"><span class="pre">--target-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;xn-file&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-target-file" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies &lt;xn-file&gt; as the target platform.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-target">
+<span class="sig-name descname"><span class="pre">--target</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;platform&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-target" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies a target platform. The platform configuration must be specified in the file
+<em>platform</em>  <code class="docutils literal notranslate"><span class="pre">.xn</span></code>, which is searched for in the paths specified by the <span class="target" id="index-0"></span><a class="reference internal" href="../xcc-manual/xcc-manual.html#envvar-XCC_DEVICE_PATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">XCC_DEVICE_PATH</span></code></a>
+environment variable.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-read">
+<span class="sig-name descname"><span class="pre">--read</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-xburn-read" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints the entire contents of the OTP.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-xburn-size-limit">
+<span class="sig-name descname"><span class="pre">--size-limit</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;n&gt;</span></span><a class="headerlink" href="#cmdoption-xburn-size-limit" title="Permalink to this definition">#</a></dt>
+<dd><p>Limits the amounts of OTP memory written to the first <em>n</em> bytes of the OTP.
+If the image doesn’t fit within the specified limit an error will be given.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="csv-format">
+<span id="xburn-csv-format"></span><h2>CSV Format<a class="headerlink" href="#csv-format" title="Permalink to this heading">#</a></h2>
+<p>XBURN supports OTP programming from a CSV format specification. This is an advanced
+option that can be used for programming additional supplementary data out-of-band,
+with respect to the majority of OTP memory which is typically occupied by the AES Module
+generated by XBURN. This option can be used for provisioning of device serial numbers or
+similar information. Providing a CSV file to XBURN during programming will result in
+the tool incorporating the OTP data records in the CSV file into the overall image
+that will be programmed.</p>
+<p>XBURN can also generate a complete CSV specification of all OTP data instead of
+directly programming it. This is done using the <code class="docutils literal notranslate"><span class="pre">--dump-otp-spec</span></code> option, and
+the resulting file can be provided later to XBURN to perform the actual programming
+of the device.</p>
+<p>The CSV format is provided in the form <code class="docutils literal notranslate"><span class="pre">tile,address,value</span></code> where each row programs
+a 32-bit word of OTP memory. The <code class="docutils literal notranslate"><span class="pre">tile</span></code> field is typically <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> indicating <code class="docutils literal notranslate"><span class="pre">tile[0]</span></code>
+or <code class="docutils literal notranslate"><span class="pre">tile[1]</span></code>, but may also be the character <code class="docutils literal notranslate"><span class="pre">*</span></code> to apply to all tiles in the system.
+The address provided is a word address, so programming two adjacent 32-bit words requires
+incrementing the address by 1.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mh">0x1FE</span><span class="p">,</span><span class="mh">0xFFFF0000</span>
+<span class="mi">1</span><span class="p">,</span><span class="mh">0x1FE</span><span class="p">,</span><span class="mh">0xFFFF0001</span>
+<span class="o">*</span><span class="p">,</span><span class="mh">0x1FF</span><span class="p">,</span><span class="mh">0xDEADBEEF</span>
+</pre></div>
+</div>
+<p>xcore.ai example: sets OTP virtual address <code class="docutils literal notranslate"><span class="pre">0x1FE</span></code> to <code class="docutils literal notranslate"><span class="pre">0xFFFF0000</span></code> on <code class="docutils literal notranslate"><span class="pre">tile[0]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">0xFFFF0001</span></code> on <code class="docutils literal notranslate"><span class="pre">tile[1]</span></code> and address <code class="docutils literal notranslate"><span class="pre">0x1FF</span></code> to <code class="docutils literal notranslate"><span class="pre">0xDEADBEEF</span></code> on both tiles.
+This programs two words at the end of each tile’s OTP, using eight physical rows
+when accounting for hardware redundancy.</p>
+</div></blockquote>
+<p>Due to physical implementation details of each device, the format between the XCORE-200
+family and xcore.ai family have a few differences. XCORE-200 considers addresses to be
+physical addresses, with redundant records expressed explicitly within the CSV file.
+On xcore.ai the addresses are considered to be ‘virtual’ addresses where hardware
+redundancy is always enabled, and therefore the redundant records are not specified
+explicitly in the CSV file.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span><span class="mh">0x7FE</span><span class="p">,</span><span class="mh">0xFFFF0000</span>
+<span class="mi">1</span><span class="p">,</span><span class="mh">0x7FE</span><span class="p">,</span><span class="mh">0xFFFF0001</span>
+<span class="o">*</span><span class="p">,</span><span class="mh">0x7FF</span><span class="p">,</span><span class="mh">0xDEADBEEF</span>
+</pre></div>
+</div>
+<p>XCORE-200 example: sets OTP physical address <code class="docutils literal notranslate"><span class="pre">0x7FE</span></code> to <code class="docutils literal notranslate"><span class="pre">0xFFFF0000</span></code> on <code class="docutils literal notranslate"><span class="pre">tile[0]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">0xFFFF0001</span></code> on <code class="docutils literal notranslate"><span class="pre">tile[1]</span></code> and address <code class="docutils literal notranslate"><span class="pre">0x7FF</span></code> to <code class="docutils literal notranslate"><span class="pre">0xDEADBEEF</span></code> on both tiles.
+This programs two words at the end of each tile’s OTP, using four physical rows,
+with two rows used in each physical OTP.</p>
+</div></blockquote>
+<p>If exporting a CSV specification on the XCORE-200 family using <code class="docutils literal notranslate"><span class="pre">--dump-otp-spec</span></code>,
+an optional fourth CSV column will be present on some rows indicating that the executable
+(typically the AES Module) participates in the software redundancy mechanism used to
+improve yield. This column is currently unused by the xcore.ai family.</p>
+<p>An example use case for the XCORE-200 family is provided in the tools release under
+the <code class="docutils literal notranslate"><span class="pre">examples/ExampleBurning/XCORE-200</span></code> directory. The script provided serves as a
+replacement for the retired XBURN <code class="docutils literal notranslate"><span class="pre">--serial-number</span></code>, <code class="docutils literal notranslate"><span class="pre">--board-id</span></code> and <code class="docutils literal notranslate"><span class="pre">--mac-address</span></code>
+options, and will generate a CSV file that can be provided to XBURN to provision the
+device with those values.</p>
+<p>For a visual confirmation of the effect of the provided CSV entries, the option
+<code class="docutils literal notranslate"><span class="pre">--dump-otp-images</span></code> can be provided to XBURN and the resulting images viewed in
+a hex editor.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The CSV format allows programming any OTP region with no restrictions.
+It requires reasonable knowledge of the OTP memory map of the target
+device family to manipulate it correctly. See your device’s datasheet
+for more information.</p>
+<p>Be careful when using this option, particularly to ensure that the
+provided CSV doesn’t instruct XBURN to corrupt or overwrite existing
+data structures, such as the AES Module. It’s advisable to program
+custom application data towards the end of the OTP array as this area
+is unused by XBURN internally. The contiguous block at the start of
+the OTP array is reserved for boot functions.</p>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../xmake-manual/xmake-manual.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">XMAKE</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../xflash-manual/xflash-manual.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">XFLASH</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, XMOS Ltd
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Jul 24, 2024</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">XBURN</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#overall-options">Overall Options</a></li>
+<li><a class="reference internal" href="#target-options">Target Options</a></li>
+<li><a class="reference internal" href="#security-options">Security Options</a></li>
+<li><a class="reference internal" href="#security-register-options">Security Register Options</a></li>
+<li><a class="reference internal" href="#programming-options">Programming Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#csv-format">CSV Format</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/scripts/furo.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/tabs.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
